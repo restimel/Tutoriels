@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Worker compatibility</title>
+	<style>
+		section{
+			padding-left: 15px;
+		}
+		#result > div > header{
+			font-weight: bold;
+		}
+		#Status{
+			color:red;
+		}
+		footer{
+			margin-top: 2em;
+			font-size: 0.5em;
+			font-style: italic;
+		}
+	</style>
+</head>
+<body>
+<aside id="Status">Loading</aside>
+<aside id="browser"></aside>
+<hr>
+<div id="result"></div>
+
+<script>
+	document.getElementById("browser").innerHTML="Browser: "+navigator.appName+"<br>Version: "+navigator.appVersion+"<br>Platform: "+navigator.platform+"<br>userAgent:"+navigator.userAgent;
+	var elemStatus=document.getElementById("Status");
+	elemStatus.textContent="calculating";
+</script>
+
+<script src="note.js"></script>
+<script src="test1.js"></script>
+<script src="test2.js"></script>
+
+<script>
+	refresh();
+	elemStatus.textContent="analyzing";
+	elemStatus.style.color="orange";
+	setTimeout(function(){
+		refresh();
+		elemStatus.textContent="done";
+		elemStatus.style.color="green";
+	},2000);
+</script>
+
+<footer>Because some features are more or less important and they are evaluated with the same ponderation, these notations are not to compare browsers but to watch their lack of support about features surrounding Web-Workers.</footer>
+</body>
+</html>
