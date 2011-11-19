@@ -12,6 +12,7 @@ if(window.SharedWorker){
 	//important pour démarrer la réception des messages sur ce port
 	w.port.start();
 	
+	w.port.postMessage("Bonjour"); //envoi d'un message
 }else{
 	elem.textContent="Votre navigateur ne supporte pas les shared-workers ☹";
 }
