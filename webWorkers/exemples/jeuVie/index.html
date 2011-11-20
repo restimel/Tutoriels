@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>le Jeu de la Vie</title>
+	<style>
+		canvas{
+			border: 1px solid #000000;
+			z-index:1;
+		}
+		aside{
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			z-index:2;
+		}
+		fieldset{
+			background-color: rgba(100,120,250,0.4);
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" onmousedown="cliqueCanvas(event);"></canvas>
+
+	<aside>
+		<fieldset>
+			<legend>Information</legend>
+			Snapshot: <output id="outputSnapshot" value="0">0</output><br>
+			Temps: <output id="outputTemps"></output><br>
+			Divers: <output id="outputDivers"></output><br>
+		</fieldset>
+
+		<fieldset>
+			<legend>Canvas</legend>
+			Largeur: <input type="range" id="canvasWidth" value="70" min="1" max="100" onchange="sizeCanvas()">%<br>
+			Hauteur: <input type="range" id="canvasHeight" value="90" min="1" max="100" onchange="sizeCanvas()">%<br>
+		</fieldset>
+
+		<fieldset>
+			<legend>Grille</legend>
+			Largeur: <input type="number" id="grilleWidth" value="100" min="1" onchange="generateGrille()"><br>
+			Hauteur: <input type="number" id="grilleHeight" value="100" min="1" onchange="generateGrille()"><br>
+			%Vivant: <input type="range" id="grilleVivant" value="10" min="0" max="100">%<br>
+		</fieldset>
+
+		<fieldset>
+			<legend>Commandes</legend>
+			<button onclick="generateNext()">Next</button><br>
+			auto-Next: <input type="checkbox" id="commandAuto" onchange="requestAutoNext()"><br>
+			delais: <input type="number" id="commandDelay" value="1" min="0.1">s<br>
+			<hr>
+			Nb de workers: <input type="number" id="commandWorker" value="0" min="0" onchange="prepareWorker()"><br>
+		</fieldset>
+	</aside>
+
+
+	<script src="./affichageJDV.js"></script>
+	<script src="./jeuVie.js"></script>
+	<script src="./calculJDV.js"></script>
+</body>
+</html>
