@@ -42,10 +42,19 @@ function calculNext(data,xMin,yMin,xMax,yMax){
 	return next;
 }
 
-if(self.onmessage){
+if(self.postMessage){
 	self.onmessage=function(event){
 		var data=event.data;
-		var next = calculNext(data.grille,data.xMin,data.yMin,data.xMax,data.yMax);
-		postMessage({next:next,xMin:data.xMin,yMin:data.yMin,xMax:data.xMax,yMax:data.yMax});
-	}
+		switch(data.cmd){
+			case "test":
+				postMessage({cmd:"test",response:"reponse"});
+				break;
+			case "calcul":
+				var next = calculNext(data.grille,data.xMin,data.yMin,data.xMax,data.yMax);
+				postMessage({cmd:"calcul",next:next,xMin:data.xMin,yMin:data.yMin,xMax:data.xMax,yMax:data.yMax});
+				break;
+			default:
+				postMessage({cmd:"alert",message:"Worker: "+data.cmd+"("+data+") → commande inconnue"});
+		}
+	};
 }

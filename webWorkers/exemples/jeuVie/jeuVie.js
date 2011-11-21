@@ -41,7 +41,7 @@ function generateNext(){
 		//////////TODO temp
 		console.log("TODO(generateNext): faire le dcoupage par tache et la gestion worker");
 		infoCalcul.enCours = 1;
-		listeWorkers[0].postMessage({grille:grille,xMin:0,yMin:0,xMax:grille.length,yMax:grille[0].length});
+		listeWorkers[0].postMessage({cmd:"calcul",grille:grille,xMin:0,yMin:0,xMax:grille.length,yMax:grille[0].length});
 		//////////TODO
 	}else{
 		//méthode sans worker
@@ -98,9 +98,10 @@ function prepareWorker(){
 	if(nb>0){
 		//il faut créer des workers suplémentaires
 		while(nb--){
-			w=new Worker("calculJDV.js");
+			w=new Worker("./calculJDV.js");
 			w.onmessage=workerOnmessage;
 			w.onerror=function(e){alert(e.message);};
+			w.postMessage({cmd:"test"});
 			listeWorkers.push(w);
 		}
 	}else{
@@ -116,21 +117,33 @@ function prepareWorker(){
 	listener onmessage du worker
 */
 function workerOnmessage(event){
-	var data=event.data,
-		x=data.xMin,
-		lx=data.xMax,
-		y=data.yMin,
-		ly=data.yMax,
-		nxt=data.next;
-	do{
-		y=data.yMin;
-		do{
-			grille[x][y]=nxt[x][y];
-		}while(++y<ly);
-	}while(++x<lx);
-	infoCalcul.enCours--;
-	if(infoCalcul.enCours===0){
-		finishNext();
+	var data=event.data;
+	switch(data.cmd){
+		case "calcul":
+			var x=data.xMin,
+				lx=data.xMax,
+				y=data.yMin,
+				ly=data.yMax,
+				nxt=data.next;
+			do{
+				y=data.yMin;
+				do{
+					grille[x][y]=nxt[x][y];
+				}while(++y<ly);
+			}while(++x<lx);
+			infoCalcul.enCours--;
+			if(infoCalcul.enCours===0){
+				finishNext();
+			}
+			break;
+		case "test":
+				console.log("Worker: "+data.response);
+				break;
+		case "alert":
+				alert(data.message);
+				break;
+		default:
+			alert("Commande inconnue: "+data.cmd);
 	}
 }
 
