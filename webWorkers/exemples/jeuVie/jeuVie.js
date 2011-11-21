@@ -20,8 +20,13 @@ function finishNext(){
 		afficheGrille(grille);
 		document.getElementById("outputDivers").value="";
 	}
-	document.getElementById("outputTemps").value=(Date.now()-infoCalcul.time)+"ms";
+
+	var d=Date.now()-infoCalcul.time;
 	document.getElementById("outputSnapshot").value = ++nbSnapshot;
+	document.getElementById("outputTemps").value=d+"ms";
+	var moyenne = document.getElementById("outputTmpsMoyen");
+	moyenne.value=((parseFloat(moyenne.value)||0)*(nbSnapshot-1)+d)/nbSnapshot+"ms";
+
 }
 
 

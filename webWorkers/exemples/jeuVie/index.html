@@ -25,31 +25,36 @@
 	<aside>
 		<fieldset>
 			<legend>Information</legend>
-			Snapshot: <output id="outputSnapshot" value="0">0</output><br>
+			Snapshot: <output id="outputSnapshot" value="0">0</output><button title="Reset" style="float:right" onclick="this.previousSibling.value=nbSnapshot=0;">R</button><br>
 			Temps: <output id="outputTemps"></output><br>
+			Temps moyen: <output id="outputTmpsMoyen"></output><br>
 			Divers: <output id="outputDivers"></output><br>
 		</fieldset>
 
 		<fieldset>
 			<legend>Canvas</legend>
-			Largeur: <input type="range" id="canvasWidth" value="70" min="1" max="100" onchange="sizeCanvas()">%<br>
-			Hauteur: <input type="range" id="canvasHeight" value="90" min="1" max="100" onchange="sizeCanvas()">%<br>
+			<form oninput="oWidth.value=iWidth.value+'%';oHeight.value=iHeight.value+'%';">
+			Largeur: <input type="range" id="canvasWidth" name="iWidth" value="70" min="1" max="100" onchange="sizeCanvas()" /><output name="oWidth">70%</output><br>
+			Hauteur: <input type="range" id="canvasHeight" name="iHeight" value="90" min="1" max="100" onchange="sizeCanvas()" /><output name="oHeight">90%</output><br>
+			</form>
 		</fieldset>
 
 		<fieldset>
 			<legend>Grille</legend>
-			Largeur: <input type="number" id="grilleWidth" value="100" min="1" onchange="generateGrille()"><br>
-			Hauteur: <input type="number" id="grilleHeight" value="100" min="1" onchange="generateGrille()"><br>
-			%Vivant: <input type="range" id="grilleVivant" value="10" min="0" max="100">%<br>
+			<form oninput="oVivant.value=iVivant.value+'%';">
+			Largeur: <input type="number" id="grilleWidth" value="100" min="1" onchange="generateGrille()" /><br>
+			Hauteur: <input type="number" id="grilleHeight" value="100" min="1" onchange="generateGrille()" /><br>
+			%Vivant: <input type="range" id="grilleVivant" value="10" min="0" max="100" name="iVivant" /><output name="oVivant">10%</output><br>
+			</form>
 		</fieldset>
 
 		<fieldset>
 			<legend>Commandes</legend>
 			<button onclick="generateNext()">Next</button><br>
-			auto-Next: <input type="checkbox" id="commandAuto" onchange="requestAutoNext()"><br>
-			delais: <input type="number" id="commandDelay" value="1" min="0.1">s<br>
+			auto-Next: <input type="checkbox" id="commandAuto" onchange="requestAutoNext()" /><br>
+			delais: <input type="number" id="commandDelay" value="1" min="0.1" />s<br>
 			<hr>
-			Nb de workers: <input type="number" id="commandWorker" value="0" min="0" onchange="prepareWorker()"><br>
+			Nb de workers: <input type="number" id="commandWorker" value="0" min="0" onchange="prepareWorker()" /><br>
 		</fieldset>
 	</aside>
 
