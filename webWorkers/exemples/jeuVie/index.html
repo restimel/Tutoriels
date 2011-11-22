@@ -33,19 +33,15 @@
 
 		<fieldset>
 			<legend>Canvas</legend>
-			<form oninput="oWidth.value=iWidth.value+'%';oHeight.value=iHeight.value+'%';">
-			Largeur: <input type="range" id="canvasWidth" name="iWidth" value="70" min="1" max="100" onchange="sizeCanvas()" /><output name="oWidth">70%</output><br>
-			Hauteur: <input type="range" id="canvasHeight" name="iHeight" value="90" min="1" max="100" onchange="sizeCanvas()" /><output name="oHeight">90%</output><br>
-			</form>
+			Largeur: <input type="range" id="canvasWidth" value="70" min="1" max="100" onchange="sizeCanvas();this.nextSibling.value=this.value+'%';" /><output>70%</output><br>
+			Hauteur: <input type="range" id="canvasHeight" value="90" min="1" max="100" onchange="sizeCanvas();this.nextSibling.value=this.value+'%';" /><output>90%</output><br>
 		</fieldset>
 
 		<fieldset>
 			<legend>Grille</legend>
-			<form oninput="oVivant.value=iVivant.value+'%';">
 			Largeur: <input type="number" id="grilleWidth" value="100" min="1" onchange="generateGrille()" /><br>
 			Hauteur: <input type="number" id="grilleHeight" value="100" min="1" onchange="generateGrille()" /><br>
-			%Vivant: <input type="range" id="grilleVivant" value="10" min="0" max="100" name="iVivant" /><output name="oVivant">10%</output><br>
-			</form>
+			%Vivant: <input type="range" id="grilleVivant" value="10" min="0" max="100" onchange="this.nextSibling.value=this.value+'%';" /><output>10%</output><br>
 		</fieldset>
 
 		<fieldset>

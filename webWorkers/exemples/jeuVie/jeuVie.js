@@ -38,16 +38,46 @@ function generateNext(){
 	infoCalcul.identifiantOld=grille.toString();
 
 	if(listeWorkers.length){
-		//méthode avec Workers
-		infoCalcul.enCours = listeWorkers.length;
-		for(var i=0,li=listeWorkers.length; i<li; i++){
-			//TODO faire le découpage des taches
+		//méthode avec Workers: découpage de la grille
+
+		var nbX, //nombre de morceau par largeur
+			nbY, //nombre de morceau par hauteur
+			nbW=infoCalcul.enCours = listeWorkers.length; //nombre total de workers et donc de morceaux
+		var w=grille.length, //largeur de la grille
+			h=grille[0].length, //hauteur de la grille
+			nX=0, //largeur d'un morceau
+			nY=0, //hauteur d'un morceau
+			q=Infinity, //qutotien actuel de nbX/nbY
+			p=w<h?w/h:h/w, //quotient idéal de x/y
+			x=1, //nombre temporaire de morceau en largeur
+			y, //nombre temporaire de morceau en hauteur
+			lx=Math.sqrt(nbW); //nombre de morceau max en largeur
+		do{
+			if(nbW%x===0){
+				y=nbW/x;
+				if(Math.abs(p-x/y)<q){
+					nbX=x;
+					nbY=y;
+					q=Math.abs(p-x/y);
+				}else{
+					break;
+				}
+			}
+		}while(++x<=lx);
+		if(w>h){ //ré-affectation des vrais valeurs nbX,nbY
+			x=nbX;
+			nbX=nbY;
+			nbY=x;
 		}
-		//////////TODO temp
-		console.log("TODO(generateNext): faire le dcoupage par tache et la gestion worker");
-		infoCalcul.enCours = 1;
-		listeWorkers[0].postMessage({cmd:"calcul",grille:grille,xMin:0,yMin:0,xMax:grille.length,yMax:grille[0].length});
-		//////////TODO
+		//calcul du nombre de cellules par morceau
+		nX=Math.ceil(w/nbX);
+		nY=Math.ceil(h/nbY);
+		//lancement des workers
+		for(var i=0; i<nbW; i++){
+			x=i%nbX;
+			y=(i-x)/nbX;
+			listeWorkers[0].postMessage({cmd:"calcul",grille:grille,xMin:x*nX,yMin:y*nY,xMax:Math.min((x+1)*nX,w),yMax:Math.min((y+1)*nY,h)});
+		}
 	}else{
 		//méthode sans worker
 		grille=calculNext(grille,0,0,grille.length,grille[0].length);
@@ -65,7 +95,7 @@ function requestAutoNext(){
 		if(document.getElementById("outputDivers").value!==""){
 			commandAuto.checked=false;
 		}else{
-			setTimeout(requestAutoNext,document.getElementById("commandDelay").valueAsNumber*1000);
+			setTimeout(requestAutoNext,document.getElementById("commandDelay").value*1000);
 		}
 	}
 }
@@ -75,9 +105,9 @@ function requestAutoNext(){
 */
 function generateGrille(){
 	var oldGrille=grille;
-	var x=0,lox=oldGrille.length, lx=document.getElementById("grilleWidth").valueAsNumber,
-		y=0,loy=oldGrille[0].length, ly=document.getElementById("grilleHeight").valueAsNumber,
-		prob=document.getElementById("grilleVivant").valueAsNumber/100;
+	var x=0,lox=oldGrille.length, lx=document.getElementById("grilleWidth").value*1,
+		y=0,loy=oldGrille[0].length, ly=document.getElementById("grilleHeight").value*1,
+		prob=document.getElementById("grilleVivant").value/100;
 	grille = [];
 	do{
 		grille[x] = [];
@@ -99,7 +129,7 @@ function generateGrille(){
 */
 function prepareWorker(){
 	var w,
-		nb=document.getElementById("commandWorker").valueAsNumber-listeWorkers.length;
+		nb=document.getElementById("commandWorker").value-listeWorkers.length;
 	if(nb>0){
 		//il faut créer des workers suplémentaires
 		while(nb--){
