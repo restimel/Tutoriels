@@ -177,6 +177,9 @@ function workerOnmessage(event){
 		case "alert":
 				alert(data.message);
 				break;
+		case "ready":
+				console.log(Date.now()-infoCalcul.time);
+				break;
 		default:
 			alert("Commande inconnue: "+data.cmd);
 	}

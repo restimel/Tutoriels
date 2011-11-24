@@ -50,6 +50,7 @@ if(self.postMessage){
 				postMessage({cmd:"test",response:"reponse"});
 				break;
 			case "calcul":
+				postMessage({cmd:"ready"});
 				var next = calculNext(data.grille,data.xMin,data.yMin,data.xMax,data.yMax);
 				postMessage({cmd:"calcul",next:next,xMin:data.xMin,yMin:data.yMin,xMax:data.xMax,yMax:data.yMax});
 				break;
