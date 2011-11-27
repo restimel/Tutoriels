@@ -29,29 +29,20 @@ function finishNext(){
 
 }
 
-
-/**
-	 Permet de générer l'état suivant de la grille
-*/
-function generateNext(){
-	infoCalcul.time=Date.now();
-	infoCalcul.identifiantOld=grille.toString();
-
-	if(listeWorkers.length){
-		//méthode avec Workers: découpage de la grille
-
-		var nbX, //nombre de morceau par largeur
-			nbY, //nombre de morceau par hauteur
-			nbW=infoCalcul.enCours = listeWorkers.length; //nombre total de workers et donc de morceaux
-		var w=grille.length, //largeur de la grille
-			h=grille[0].length, //hauteur de la grille
-			nX=0, //largeur d'un morceau
-			nY=0, //hauteur d'un morceau
-			q=Infinity, //qutotien actuel de nbX/nbY
-			p=w<h?w/h:h/w, //quotient idéal de x/y
-			x=1, //nombre temporaire de morceau en largeur
-			y, //nombre temporaire de morceau en hauteur
-			lx=Math.sqrt(nbW); //nombre de morceau max en largeur
+function precalculDecoupage(){
+	var nbX, //nombre de morceau par largeur
+		nbY, //nombre de morceau par hauteur
+		nbW = listeWorkers.length, //nombre total de workers et donc de morceaux
+		w=grille.length, //largeur de la grille
+		h=grille[0].length, //hauteur de la grille
+		nX=0, //largeur d'un morceau
+		nY=0, //hauteur d'un morceau
+		q=Infinity, //qutotien actuel de nbX/nbY
+		p=w<h?w/h:h/w, //quotient idéal de x/y
+		x=1, //nombre temporaire de morceau en largeur
+		y, //nombre temporaire de morceau en hauteur
+		lx=Math.sqrt(nbW); //nombre de morceau max en largeur
+	if(nbW){
 		do{
 			if(nbW%x===0){
 				y=nbW/x;
@@ -69,9 +60,43 @@ function generateNext(){
 			nbX=nbY;
 			nbY=x;
 		}
+
 		//calcul du nombre de cellules par morceau
 		nX=Math.ceil(w/nbX);
 		nY=Math.ceil(h/nbY);
+
+		infoCalcul.nbCelX=nX;
+		infoCalcul.nbCelY=nY;
+		infoCalcul.nbMorceauX=nbX;
+		infoCalcul.nbMorceauY=nbY;
+	}else{
+		infoCalcul.nbCelX=w;
+		infoCalcul.nbCelY=h;
+		infoCalcul.nbMorceauX=1;
+		infoCalcul.nbMorceauY=1;
+	}
+}
+
+
+/**
+	 Permet de générer l'état suivant de la grille
+*/
+function generateNext(){
+	infoCalcul.time=Date.now();
+	infoCalcul.identifiantOld=grille.toString();
+
+	if(listeWorkers.length){
+		//méthode avec Workers: découpage de la grille
+
+
+		var w=grille.length, //largeur de la grille
+			h=grille[0].length, //hauteur de la grille
+			nbW=infoCalcul.enCours = listeWorkers.length, //nombre total de workers et donc de morceaux
+			nX=infoCalcul.nbCelX, //largeur d'un morceau
+			nY=infoCalcul.nbCelY, //hauteur d'un morceau
+			nbX=infoCalcul.nbMorceauX, //nombre de morceau par largeur
+			nbY=infoCalcul.nbMorceauY, //nombre de morceau par hauteur
+			x,y;
 		//lancement des workers
 		for(var i=0; i<nbW; i++){
 			x=i%nbX;
@@ -122,6 +147,7 @@ function generateGrille(){
 	}while(++x<lx);
 
 	afficheGrille(grille);
+	precalculDecoupage();
 }
 
 /**
@@ -146,6 +172,7 @@ function prepareWorker(){
 			w.terminate();
 		}
 	}
+	precalculDecoupage();
 }
 
 /**
@@ -178,7 +205,7 @@ function workerOnmessage(event){
 				alert(data.message);
 				break;
 		case "ready":
-				console.log(Date.now()-infoCalcul.time);
+				console.log("Ready: "+(Date.now()-infoCalcul.time));
 				break;
 		default:
 			alert("Commande inconnue: "+data.cmd);
