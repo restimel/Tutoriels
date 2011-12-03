@@ -14,6 +14,6 @@ if(self.Worker){
 
 }else{
   //le navigateur ne gère pas les workers dans un worker
-  postMessage("Votre navigateur ne supporte pas les Workers dans les Workers ?");
+  postMessage("Votre navigateur ne supporte pas les Workers dans les Workers ☹");
 }
 
