@@ -2,13 +2,13 @@ if(window.Worker){
 
 	var w=new Worker("worker.js");
 	w.onmessage=function(event){ //réception d'un message
-		alert("Avec succès:\n"+event.data); //lecture du message
 		console.debug(event.data);
 		console.log(event.data instanceof test); //pour vérifier le type (pour l'objet construit)
+		alert("Avec succès:\n"+event.data); //lecture du message
 	};
 	w.onerror=function(event){ //réception d'une erreur
-	alert("Avec erreur:\n"+event.message); //lecture du message
-	console.debug(event);
+		console.debug(event);
+		alert("Avec erreur:\n"+event.message); //lecture du message
 	};
 	w.postMessage("debut"); //envoi d'un message vers le worker
 
