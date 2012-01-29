@@ -7,7 +7,7 @@ document.body.appendChild(elem);
 if(window.SharedWorker){
 	var w = new SharedWorker("worker.js"); //création d'un Shared-worker
 	w.port.onmessage=function(e){ //Réception d'un message
-		elem.innerHTML+="<br>"+e.data;
+		elem.innerHTML+="<br />"+e.data;
 	};
 	w.port.postMessage("Bonjour"); //envoi d'un message
 }else{

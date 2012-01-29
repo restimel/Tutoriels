@@ -1,5 +1,5 @@
 function dialogue(event){
-	if(event.data == "Bonjour"){
+	if(event.data === "Bonjour"){
 		throw "J'aime pas dire bonjour"; //on crée volontairement une erreur
 	}
 }
