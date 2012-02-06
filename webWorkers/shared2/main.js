@@ -5,7 +5,6 @@ document.body.appendChild(elem);
 
 //utilisation du worker
 if(window.SharedWorker){
-
 	//Création de workers
 	var w1 = new SharedWorker("worker.js","monWorker"); //création d'un worker nommé "monWorker"
 	w1.port.onmessage=function(e){
@@ -21,10 +20,15 @@ if(window.SharedWorker){
 	w3.port.onmessage=function(e){
 		elem.innerHTML+="<br>W3 "+e.data;
 	};
+	var w4 = new SharedWorker("worker.js"); //création d'un worker
+	w4.port.onmessage=function(e){
+		elem.innerHTML+="<br>W4 "+e.data;
+	};
 
 	w1.port.postMessage("Bonjour");
 	w2.port.postMessage("Bonjour");
 	w3.port.postMessage("Bonjour");
+	w4.port.postMessage("Bonjour");
 	
 }else{
 	elem.textContent="Votre navigateur ne supporte pas les shared-workers ☹";
