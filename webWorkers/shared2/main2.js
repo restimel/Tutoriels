@@ -6,6 +6,11 @@ document.body.appendChild(elem);
 //utilisation du worker
 if(window.SharedWorker){
 	//Création de workers
+	var w0 = new SharedWorker("worker.js"); //création d'un worker
+	w0.port.onmessage=function(e){
+		elem.innerHTML+="<br>W0 "+e.data;
+	};
+	
 	var w1 = new SharedWorker("worker.js","monWorker"); //création d'un worker nommé "monWorker"
 	w1.port.onmessage=function(e){
 		elem.innerHTML+="<br>W1 "+e.data;
@@ -25,6 +30,7 @@ if(window.SharedWorker){
 		elem.innerHTML+="<br>W4 "+e.data;
 	};
 
+	w0.port.postMessage("Bonjour");
 	w1.port.postMessage("Bonjour");
 	w2.port.postMessage("Bonjour");
 	w3.port.postMessage("Bonjour");
