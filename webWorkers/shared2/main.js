@@ -1,5 +1,5 @@
 //Création d'une zone d'affichage
-var elem=document.createElement("output");
+var elem=document.createElement("div");
 elem.textContent="Log :";
 document.body.appendChild(elem);
 
@@ -11,7 +11,7 @@ if(window.SharedWorker){
 		elem.innerHTML+="<br>W1 "+e.data;
 	};
 
-	var w2 = new SharedWorker("worker.js","autreWorker"); //création d'un worker nommé "autreWorker"
+	var w2 = new SharedWorker("worker.js","worker2"); //création d'un worker nommé "autreWorker"
 	w2.port.onmessage=function(e){
 		elem.innerHTML+="<br>W2 "+e.data;
 	};

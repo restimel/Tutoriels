@@ -1,6 +1,6 @@
 //création du contexte
 var elem=document.createElement("output");
-elem.textContent="Log:";
+elem.value="Log:";
 document.body.appendChild(elem);
 
 //utilisation du worker

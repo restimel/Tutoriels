@@ -1,12 +1,12 @@
 //Création d'une zone d'affichage
-var elem=document.createElement("output");
+var elem=document.createElement("div");
 elem.textContent="Log :";
 document.body.appendChild(elem);
 
 //utilisation du worker
 if(window.SharedWorker){
 	//Création de workers
-	var w0 = new SharedWorker("worker.js"); //création d'un worker
+	var w0 = new SharedWorker("worker.js"); //création d'un worker non nommé
 	w0.port.onmessage=function(e){
 		elem.innerHTML+="<br>W0 "+e.data;
 	};
@@ -16,7 +16,7 @@ if(window.SharedWorker){
 		elem.innerHTML+="<br>W1 "+e.data;
 	};
 
-	var w2 = new SharedWorker("worker.js","autreWorker"); //création d'un worker nommé "autreWorker"
+	var w2 = new SharedWorker("worker.js","worker2"); //création d'un worker nommé "autreWorker"
 	w2.port.onmessage=function(e){
 		elem.innerHTML+="<br>W2 "+e.data;
 	};
@@ -25,7 +25,7 @@ if(window.SharedWorker){
 	w3.port.onmessage=function(e){
 		elem.innerHTML+="<br>W3 "+e.data;
 	};
-	var w4 = new SharedWorker("worker.js"); //création d'un worker
+	var w4 = new SharedWorker("worker.js"); //création d'un worker non nommé (se connecte au premier worker de même url) => w0 ou w1 si on enlève w0
 	w4.port.onmessage=function(e){
 		elem.innerHTML+="<br>W4 "+e.data;
 	};

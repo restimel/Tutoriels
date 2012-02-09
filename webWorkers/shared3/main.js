@@ -5,12 +5,13 @@ document.body.appendChild(elem);
 
 if(window.SharedWorker){
 
+	//création d'un shared-worker
 	var w = new SharedWorker("./worker.js");
 	w.port.addEventListener("message",function(e){ //réception d'un message
 		elem.innerHTML+="<br>"+e.data;
 	},false);
-	//important pour démarrer la réception des messages sur ce port
-	w.port.start();
+	
+	w.port.start(); //Très important pour démarrer la réception des messages sur ce port
 	
 	w.port.postMessage("Bonjour"); //envoi d'un message
 }else{
