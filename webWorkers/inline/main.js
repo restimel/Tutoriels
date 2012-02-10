@@ -19,7 +19,7 @@ if(window.Worker){
 
 	if(blob){
 		//le navigateur supporte les Blob
-		blob.append("onmessage=function(e){postMessage('Je réponds au message : '+e.data);};"); //code du worker
+		blob.append("onmessage = function(e){ postMessage('je réponds au message : ' + e.data); };"); //code du worker
 
 		//création de l'URL
 		var compatibleURL = window.URL || window.webkitURL || window.MozURL || window.mozURL || window.oURL || window.OURL || window.MsURL;
@@ -28,6 +28,7 @@ if(window.Worker){
 			alert("Désolé votre navigateur ne semble pas supporter la création d'URL à partir d'objet ☹");
 		}else{
 			var blobUrl = compatibleURL.createObjectURL(blob.getBlob()); //création de l'url à partir de l'objet
+
 
 			var worker = new Worker(blobUrl); //création du worker
 			worker.onmessage=function(e){
