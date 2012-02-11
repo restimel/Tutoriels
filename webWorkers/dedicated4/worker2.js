@@ -1,4 +1,4 @@
 addEventListener("message",function(event){
-	postMessage("C'est sympa de m'écrire");
+	postMessage("Merci de m'écrire");
 },false);
 

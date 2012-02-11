@@ -3,7 +3,7 @@ if(self.Worker){
 	var w=new Worker("worker2.js");
 	w.addEventListener("message",function(event){
 		//on transmet au parent (en modifiant le message)
-		postMessage('worker2 me dit de te dire que "'+event.data+'"');
+		postMessage('worker2 a ce message pour toi : "'+event.data+'"');
 	},false);
 
 	//on gère la communication avec le parent
@@ -14,6 +14,6 @@ if(self.Worker){
 
 }else{
   //le navigateur ne gère pas les workers dans un worker
-  postMessage("Votre navigateur ne supporte pas les Workers dans les Workers ?");
+  postMessage("Votre navigateur ne supporte pas les Workers dans les Workers ☹");
 }
 

@@ -253,16 +253,16 @@ if(typeof window.Worker !== "undefined"){
 			blob.append("onmessage=function(e){postMessage('je réponds au message : '+e.data);};");
 		}
 		
-		var URL = window.URL || window.webkitURL || window.MozURL || window.mozURL || window.oURL || window.OURL || window.MsURL;
-		if(URL){
-			if(URL.createObjectURL){
+		var compatibleURL = window.URL || window.webkitURL || window.MozURL || window.mozURL || window.oURL || window.OURL || window.MsURL;
+		if(compatibleURL){
+			if(compatibleURL.createObjectURL){
 				dWorker.set("createObjectURL",true);
 			}
 			if(!window.URL){
 				dWorker.set("createObjectURL",false); //URL works but not with the "official" one
 			}
 			if(blob){
-				var blobUrl = URL.createObjectURL(blob.getBlob());
+				var blobUrl = compatibleURL.createObjectURL(blob.getBlob());
 				var worker = new Worker(blobUrl);
 				worker.onmessage=function(e){
 					dWorker.set("inline",true);
