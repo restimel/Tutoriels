@@ -1,7 +1,7 @@
 //Création d'une zone d'affichage
 var elem=document.createElement("output");
 document.body.appendChild(elem);
-elem.textContent="Le jardinier ne travaille pas";
+elem.textContent="Le jardinier marche vers le potager";
 //Création d'un worker
 if(window.Worker){
 //le navigateur supporte les workers
