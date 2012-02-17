@@ -16,11 +16,11 @@ if(window.SharedWorker){
 		elem.innerHTML+="<br>W2 "+e.data;
 	};
 
-	var w3 = new SharedWorker(null,"monWorker"); //création d'un worker nommé "monWorker"
+	var w3 = new SharedWorker("","monWorker"); //création d'un worker nommé "monWorker"
 	w3.port.onmessage=function(e){
 		elem.innerHTML+="<br>W3 "+e.data;
 	};
-
+	
 	w1.port.postMessage("Bonjour");
 	w2.port.postMessage("Bonjour");
 	w3.port.postMessage("Bonjour");

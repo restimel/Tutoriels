@@ -5,12 +5,8 @@ document.body.appendChild(elem);
 
 //utilisation du worker
 if(window.SharedWorker){
+
 	//Création de workers
-	var w0 = new SharedWorker("worker.js"); //création d'un worker non nommé
-	w0.port.onmessage=function(e){
-		elem.innerHTML+="<br>W0 "+e.data;
-	};
-	
 	var w1 = new SharedWorker("worker.js","monWorker"); //création d'un worker nommé "monWorker"
 	w1.port.onmessage=function(e){
 		elem.innerHTML+="<br>W1 "+e.data;
@@ -21,16 +17,20 @@ if(window.SharedWorker){
 		elem.innerHTML+="<br>W2 "+e.data;
 	};
 
-	var w3 = new SharedWorker(null,"monWorker"); //création d'un worker nommé "monWorker"
-	w3.port.onmessage=function(e){
-		elem.innerHTML+="<br>W3 "+e.data;
-	};
+	try{
+		var w3 = new SharedWorker("","monWorker"); //création d'un worker nommé "monWorker" sans url
+		w3.port.onmessage=function(e){
+			elem.innerHTML+="<br>W3 "+e.data;
+		};
+	}catch(e){
+		elem.innerHTML+="<br>W3 n'a pu être créé : "+e.message;
+	}
+
 	var w4 = new SharedWorker("worker.js"); //création d'un worker non nommé (se connecte au premier worker de même url) => w0 ou w1 si on enlève w0
 	w4.port.onmessage=function(e){
 		elem.innerHTML+="<br>W4 "+e.data;
 	};
 
-	w0.port.postMessage("Bonjour");
 	w1.port.postMessage("Bonjour");
 	w2.port.postMessage("Bonjour");
 	w3.port.postMessage("Bonjour");
