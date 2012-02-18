@@ -185,7 +185,7 @@ if(typeof window.SharedWorker !== "undefined"){
 		//named workers
 		var sw5_3=new SharedWorker("sworker/worker2_4.js","first");
 		var sw5_4=new SharedWorker("sworker/worker2_4.js","second");
-		var sw5_5=new SharedWorker(null,"first");
+		var sw5_5=new SharedWorker("sworker/worker2_4.js","first");
 		sw5_3.port.onmessage=function(e){
 			var data=e.data;
 			if(data.msg === "counter"){
