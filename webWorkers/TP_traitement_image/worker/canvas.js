@@ -2,7 +2,7 @@
  * création de la zone d'interaction
  */
 var canvas_width = document.body.clientWidth - 100;
-var canvas_height = Math.round(canvas_width/2);
+var canvas_height = Math.round(canvas_width/3);
 //alert(canvas_height);
 
 //création d'un zone d'affichage pour les options liées au Canvas
@@ -131,12 +131,16 @@ function prepareFiltre(){
 	cellule.id = "filtre_"+uid;
 	
 	var progressBar = document.createElement("progress");
-	progressBar.max = 100;
+	progressBar.max = 200;
 	progressBar.id = "progress_"+uid;
 	cellule.appendChild(progressBar);
 
 	if(worker){
-		worker.postMessage({idFiltre:idFiltre,image:image1D,width:canvas.width,uid:uid++});
+		if(image1D instanceof Array){
+			worker.postMessage({idFiltre:idFiltre,image:image1D,width:canvas.width,uid:uid++});
+		}else{
+			worker.postMessage({idFiltre:idFiltre,image:JSON.stringify(image1D),width:canvas.width,uid:uid++});
+		}
 		worker = createNewWorker(); //on crée un nouveau worker afin de pouvoir lancer un 2e filtre en même temps.
 	}else{
 		var image2D = conversionImage(image1D,canvas.width); //prepare l'image en 2D (+RVB)
@@ -184,6 +188,8 @@ function zoomCanvas(uid){
 	var canvas = null;
 	function outZoom(){
 		document.getElementById("filtre_"+uid).appendChild(canvas);
+		canvas.style.width="";
+		canvas.style.height="";
 		elem_zoom.style.display = "none";
 	}
 	
@@ -191,6 +197,8 @@ function zoomCanvas(uid){
 		canvas = this;
 		elem_zoom.appendChild(this);
 		elem_zoom.style.display = "block";
+		canvas.style.width=Math.round(canvas_width/2)+"px";
+		canvas.style.height=Math.round(canvas_height/2)+"px";
 		elem_zoom.onmouseout = outZoom;
 	};
 }

@@ -7,14 +7,19 @@ function gestionMessage(event){
 	var data = event.data,
 		uid = data.uid;
 	self.postMessage({status:"start",uid:uid});
-	var image2D = conversionImage(data.image,data.width); //prepare l'image en 2D (+RVB)
+	var image1D = data.image;
+	if(typeof image1D === "string"){
+		image1D = JSON.parse(image1D);
+	}
+	var image2D = conversionImage(image1D,data.width, uid); //prepare l'image en 2D (+RVB)
 	image2D = appliquerFiltre(image2D, data.idFiltre, uid); //on applique le filtre à l'image
 	self.postMessage({status:"end",uid:uid,image:image2D}); //on envoit le résultat
 }
 
 self.onmessage = gestionMessage;
 
-function conversionImage(image1D,w){
+//permet de convertir un tableaude pixel 1D en 2D
+function conversionImage(image1D,w,uid){
 	//prepare l'image en 2D (+RVB)
 	var image2D = [],
 		i,
@@ -33,6 +38,9 @@ function conversionImage(image1D,w){
 		if(++x>=w){
 			x=0;
 			y++;
+			if(typeof window === "undefined"){ //dans le cas où on est dans un worker on envoit une mise à jour
+				self.postMessage({status:"update",uid:uid,progression:i*100/li});
+			}
 		}
 	}
 	
@@ -41,7 +49,7 @@ function conversionImage(image1D,w){
 
 //permet d'appliquer le filtre sur l'image
 function appliquerFiltre(image, idFiltre, uid){
-	var filtre = listeFiltre[idFiltre].filtre || [[]],
+	var filtre = (listeFiltre[idFiltre] && listeFiltre[idFiltre].filtre) || [[]], //récupère le filtre s'il existe ou alors génère un filtre vide
 		imgX, //position X sur l'image
 		imgY, //position Y sur l'image
 		imgMaxX = image.length, // largeur de l'image
@@ -62,7 +70,7 @@ function appliquerFiltre(image, idFiltre, uid){
 		
 	imageX:for(imgX = 0; imgX<imgMaxX; imgX++){
 		if(typeof window === "undefined"){ //dans le cas où on est dans un worker on envoit une mise à jour
-			self.postMessage({status:"update",uid:uid,progression:imgX*100/imgMaxX});
+			self.postMessage({status:"update",uid:uid,progression:100+imgX*100/imgMaxX});
 		}
 		imageFinale[imgX] = [];
 		imageY:for(imgY = 0; imgY<imgMaxY; imgY++){
