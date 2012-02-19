@@ -37,10 +37,10 @@ function conversionImage(image1D,w,uid){
 		image2D[x][y][2]=image1D[i++];
 		if(++x>=w){
 			x=0;
-			y++;
-			if(typeof window === "undefined"){ //dans le cas où on est dans un worker on envoit une mise à jour
+			if(typeof window === "undefined" && !(y%10)){ //dans le cas où on est dans un worker on envoit une mise à jour
 				self.postMessage({status:"update",uid:uid,progression:i*100/li});
 			}
+			y++
 		}
 	}
 	
@@ -69,7 +69,7 @@ function appliquerFiltre(image, idFiltre, uid){
 		imageFinale=[]; // liste des pixels finales
 		
 	imageX:for(imgX = 0; imgX<imgMaxX; imgX++){
-		if(typeof window === "undefined"){ //dans le cas où on est dans un worker on envoit une mise à jour
+		if(typeof window === "undefined" && !(imgX%10)){ //dans le cas où on est dans un worker on envoit une mise à jour
 			self.postMessage({status:"update",uid:uid,progression:100+imgX*100/imgMaxX});
 		}
 		imageFinale[imgX] = [];
