@@ -68,6 +68,7 @@ function appliquerFiltre(image, idFiltre, uid){
 		y, //index Y temporaire pour chercher le bon pixel dans l'image
 		imageFinale=[]; // liste des pixels finales
 	
+	//on parcourt tous les pixels de l'image
 	imageX:for(imgX = 0; imgX<imgMaxX; imgX++){
 		if(typeof window === "undefined" && !(imgX%10)){ //dans le cas où on est dans un worker on envoit une mise à jour
 			self.postMessage({status:"update",uid:uid,progression:100+imgX*100/imgMaxX});
@@ -77,21 +78,27 @@ function appliquerFiltre(image, idFiltre, uid){
 			sommeRouge = 0;
 			sommeVert = 0;
 			sommeBleu = 0;
+			
+			//on parcourt toutes les valeurs du filtre
 			filtreX:for(fltX = 0; fltX<fltMaxX; fltX++){
-				x = imgX + fltX + fltOffsetX;
+				x = imgX + fltX - fltOffsetX; //on calcule la valeur de x de l'image sur laquelle est appliqué le filtre
 				if( x < 0 || x >= imgMaxX){
+					//on est en dehors de l'image
 					continue filtreX;
 				}
 				filtreY:for(fltY = 0; fltY<fltMaxY; fltY++){
-					y = imgY + fltY + fltOffsetY;
+					y = imgY + fltY - fltOffsetY; //on calcule la valeur de y de l'image sur laquelle est appliqué le filtre
 					if( y < 0 || y >= imgMaxY){
+						//on est en dehors de l'image
 						continue filtreY;
 					}
+					//on effectue les sommes
 					sommeRouge += image[x][y][0] * filtre[fltX][fltY];
 					sommeVert += image[x][y][1] * filtre[fltX][fltY];
 					sommeBleu += image[x][y][2] * filtre[fltX][fltY];
 				}
 			}
+			//on affecte le résultat au pixel cible
 			imageFinale[imgX][imgY] = [sommeRouge, sommeVert, sommeBleu];
 		}
 	}
