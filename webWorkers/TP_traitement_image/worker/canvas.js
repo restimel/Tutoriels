@@ -1,7 +1,7 @@
 /*
  * création de la zone d'interaction
  */
-var canvas_width = document.body.clientWidth - 100;
+var canvas_width = document.body.clientWidth - 300;
 var canvas_height = Math.round(canvas_width/3);
 //alert(canvas_height);
 
@@ -12,15 +12,15 @@ document.body.appendChild(outils);
 //création du canvas
 var canvas = document.createElement("canvas");
 canvas.addEventListener("mousedown",function(event){
-		canvas.addEventListener("mousemove",draw,false);
-		draw(event);
-	},false);
+	canvas.addEventListener("mousemove",draw,false);
+	draw(event);
+},false);
 canvas.addEventListener("mouseup",function(event){
-		canvas.removeEventListener("mousemove",draw,false);
-	},false);
+	canvas.removeEventListener("mousemove",draw,false);
+},false);
 canvas.addEventListener("mouseout",function(event){
-		canvas.removeEventListener("mousemove",draw,false);
-	},false);
+	canvas.removeEventListener("mousemove",draw,false);
+},false);
 canvas.width = canvas_width;
 canvas.height = canvas_height;
 document.body.appendChild(canvas);
@@ -47,7 +47,8 @@ outils.appendChild(elem_reset);
 
 
 //Création d'une zone pour réaliser des traitements sur l'image
-var elem_zoneTraitement = document.createElement("div");
+var elem_zoneTraitement = document.createElement("aside");
+elem_zoneTraitement.className = "traitement";
 document.body.appendChild(elem_zoneTraitement);
 
 //ajout d'une liste de filtre
@@ -69,6 +70,12 @@ elem_zoneTraitement.appendChild(elem_result);
 var elem_zoom = document.createElement("div");
 elem_zoom.className = "zoom";
 elem_zoneTraitement.appendChild(elem_zoom);
+
+//création d'un canvas pour voir le résultat des filtres
+var elem_canvasZoom = document.createElement("canvas");
+elem_canvasZoom.width = canvas_width;
+elem_canvasZoom.height = canvas_height;
+elem_zoom.appendChild(elem_canvasZoom);
 
 /**
  * Fonctions de gestion du Canvas
@@ -156,11 +163,13 @@ function finalisationFiltre(image2D,uid){
 	canvas.width = canvas_width;
 	canvas.height = canvas_height;
 	canvas.className = "filteredCanvas";
-	canvas.onmouseover = zoomCanvas(uid);
-		
+
 	var elem=document.getElementById("filtre_"+uid);
 	elem.removeChild(elem.firstChild);
 	elem.appendChild(canvas);
+	
+	elem.parentNode.onmouseover = zoomCanvasOver;
+	elem.parentNode.onmouseout = zoomCanvasOut;
 	
 	var ctx = canvas.getContext("2d");
 	var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -184,23 +193,22 @@ function finalisationFiltre(image2D,uid){
 	ctx.putImageData(imageData,0,0);
 }
 
-function zoomCanvas(uid){
-	var canvas = null;
-	function outZoom(){
-		document.getElementById("filtre_"+uid).appendChild(canvas);
-		canvas.style.width="";
-		canvas.style.height="";
-		elem_zoom.style.display = "none";
+//permet d'afficher en plus grand un résultat
+function zoomCanvasOver(event){
+	var fcanvas = this.lastChild.firstChild;
+	if(fcanvas.nodeName !== "CANVAS"){
+		return false;
 	}
-	
-	return function (){
-		canvas = this;
-		elem_zoom.appendChild(this);
-		elem_zoom.style.display = "block";
-		canvas.style.width=Math.round(canvas_width/2)+"px";
-		canvas.style.height=Math.round(canvas_height/2)+"px";
-		elem_zoom.onmouseout = outZoom;
-	};
+	var ctx = fcanvas.getContext("2d"),
+	imageData = ctx.getImageData(0,0,canvas_width,canvas_height);
+	ctx = elem_canvasZoom.getContext("2d");
+	ctx.putImageData(imageData,0,0);
+	elem_zoom.style.display = "block";
+}
+
+//enlève l'affichage de résultat
+function zoomCanvasOut(event){
+	elem_zoom.style.display = "none";
 }
 
 /**

@@ -101,44 +101,70 @@ function draw(event){
  * Fonctions de gestion des filtres
  */
 var listeFiltre = [
-	{
-		nom:"Flou",
-		filtre:[
-				[1/10,1/10,1/10],
-				[1/10,2/10,1/10],
-				[1/10,1/10,1/10]
-			]
-	},
-	{
-		nom:"Flou plus grand",
-		filtre:[
-				[1/26,1/26,1/26,1/26,1/26],
-				[1/26,1/26,1/26,1/26,1/26],
-				[1/26,1/26,2/26,1/26,1/26],
-				[1/26,1/26,1/26,1/26,1/26],
-				[1/26,1/26,1/26,1/26,1/26]
-			]
-	},
-	{
-		nom:"Flou encore plus grand",
-		filtre:[
-				[1/50,1/50,1/50,1/50,1/50,1/50,1/50],
-				[1/50,1/50,1/50,1/50,1/50,1/50,1/50],
-				[1/50,1/50,1/50,1/50,1/50,1/50,1/50],
-				[1/50,1/50,1/50,2/50,1/50,1/50,1/50],
-				[1/50,1/50,1/50,1/50,1/50,1/50,1/50],
-				[1/50,1/50,1/50,1/50,1/50,1/50,1/50],
-				[1/50,1/50,1/50,1/50,1/50,1/50,1/50]
-			]
-	},
-	{
-		nom:"debug",
-		filtre:[
-				[-1,0,1],
-				[-1,0,1],
-				[-1,0,1]
-			]
-	}
+{
+	nom:"Flou (petit)",
+	filtre:[
+		[1/10,1/10,1/10],
+		[1/10,2/10,1/10],
+		[1/10,1/10,1/10]
+	]
+},
+{
+	nom:"Flou (moyen)",
+	filtre:[
+		[1/26,1/26,1/26,1/26,1/26],
+		[1/26,1/26,1/26,1/26,1/26],
+		[1/26,1/26,2/26,1/26,1/26],
+		[1/26,1/26,1/26,1/26,1/26],
+		[1/26,1/26,1/26,1/26,1/26]
+	]
+},
+{
+	nom:"Flou (grand)",
+	filtre:[
+		[1/50,1/50,1/50,1/50,1/50,1/50,1/50],
+		[1/50,1/50,1/50,1/50,1/50,1/50,1/50],
+		[1/50,1/50,1/50,1/50,1/50,1/50,1/50],
+		[1/50,1/50,1/50,2/50,1/50,1/50,1/50],
+		[1/50,1/50,1/50,1/50,1/50,1/50,1/50],
+		[1/50,1/50,1/50,1/50,1/50,1/50,1/50],
+		[1/50,1/50,1/50,1/50,1/50,1/50,1/50]
+	]
+},
+{
+	nom:"Flou Gaussien (moyen, σ=0.7)",
+	filtre:[
+		[0.0001,0.002,0.0055,0.002,0.0001],
+		[0.002,0.0422,0.1171,0.0422,0.002],
+		[0.0055,0.1171,0.3248,0.1171,0.0055],
+		[0.002,0.0422,0.1171,0.0422,0.002],
+		[0.0001,0.002,0.0055,0.002,0.0001]
+	]
+},
+{
+	nom:"Filtre de Laplace (petit)",
+	filtre:[
+		[-1,-1,-1],
+		[-1,8,-1],
+		[-1,-1,-1]
+	]
+},
+{
+	nom:"Sobel (vertical)",
+	filtre:[
+		[-1,0,1],
+		[-2,0,2],
+		[-1,0,1]
+	]
+},
+{
+	nom:"Sobel (horizontal)",
+	filtre:[
+		[-1,-2,-1],
+		[0,0,0],
+		[1,2,1]
+	]
+}
 ];
 
 //permet de préparer la liste des filtres disponibles
@@ -225,6 +251,7 @@ function appliquerFiltre(image, idFiltre){
 		x, //index X temporaire pour chercher le bon pixel dans l'image
 		y, //index Y temporaire pour chercher le bon pixel dans l'image
 		imageFinale=[]; // liste des pixels finales
+	
 	imageX:for(imgX = 0; imgX<imgMaxX; imgX++){
 		imageFinale[imgX] = [];
 		imageY:for(imgY = 0; imgY<imgMaxY; imgY++){
@@ -260,7 +287,7 @@ function finalisationFiltre(image2D,uid){
 	canvas.width = canvas_width;
 	canvas.height = canvas_height;
 	canvas.className = "filteredCanvas";
-		
+
 	var elem=document.getElementById("filtre_"+uid);
 	elem.removeChild(elem.firstChild);
 	elem.appendChild(canvas);
@@ -323,7 +350,7 @@ if(typeof(offset_X)==="undefined"){
 		if(window.scrollX){
 			ox += window.scrollX;
 		}
-		return event.clientX + ox -7; //l'origine du -7 est mystérieuse peut-être la bordure de la fenêtre
+		return event.clientX + ox -7;
 	}
 }
 
@@ -338,7 +365,7 @@ if(typeof(offset_Y)==="undefined"){
 		if(window.scrollY){
 			oy += window.scrollY;
 		}
-		return event.clientY + oy -7; //l'origine du -7 est mystérieuse peut-être la bordure de la fenêtre
+		return event.clientY + oy -7;
 	}
 }
 
@@ -351,5 +378,5 @@ ctx.fillStyle = elem_couleur.value;
 
 var uid = 0; //id unique pour identifier le traitement
 
-generateFilterList();
 erase();
+generateFilterList();

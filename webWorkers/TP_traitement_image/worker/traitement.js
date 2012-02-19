@@ -67,7 +67,7 @@ function appliquerFiltre(image, idFiltre, uid){
 		x, //index X temporaire pour chercher le bon pixel dans l'image
 		y, //index Y temporaire pour chercher le bon pixel dans l'image
 		imageFinale=[]; // liste des pixels finales
-		
+	
 	imageX:for(imgX = 0; imgX<imgMaxX; imgX++){
 		if(typeof window === "undefined" && !(imgX%10)){ //dans le cas où on est dans un worker on envoit une mise à jour
 			self.postMessage({status:"update",uid:uid,progression:100+imgX*100/imgMaxX});

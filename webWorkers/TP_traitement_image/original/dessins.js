@@ -2,7 +2,7 @@
 var elem_listeDessins = document.createElement("select");
 elem_listeDessins.onchange = drawImage;
 var option = document.createElement("option");
-option.textContent = "Choisir un dessin";
+option.textContent = "Ajouter un dessin";
 option.value = 0;
 elem_listeDessins.add(option);
 
@@ -13,12 +13,12 @@ elem_listeDessins.add(option);
 
 option = document.createElement("option");
 option.textContent = "sorciere";
-option.value = 2;
+option.value = 3;
 elem_listeDessins.add(option);
 
 option = document.createElement("option");
 option.textContent = "fille";
-option.value = 3;
+option.value = 4;
 elem_listeDessins.add(option);
 
 outils.appendChild(elem_listeDessins);
@@ -30,10 +30,10 @@ function drawImage(event){
 		case "1":
 			draw_HTML5();
 		break;
-		case "2":
+		case "3":
 			draw_sorciere();
 		break;
-		case "3":
+		case "4":
 			draw_fille();
 		break;
 	}
