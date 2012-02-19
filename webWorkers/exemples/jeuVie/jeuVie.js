@@ -101,7 +101,7 @@ function generateNext(){
 		for(var i=0; i<nbW; i++){
 			x=i%nbX;
 			y=(i-x)/nbX;
-			listeWorkers[0].postMessage({cmd:"calcul",grille:grille,xMin:x*nX,yMin:y*nY,xMax:Math.min((x+1)*nX,w),yMax:Math.min((y+1)*nY,h)});
+			listeWorkers[i].postMessage({cmd:"calcul",grille:grille,xMin:x*nX,yMin:y*nY,xMax:Math.min((x+1)*nX,w),yMax:Math.min((y+1)*nY,h)});
 		}
 	}else{
 		//méthode sans worker
