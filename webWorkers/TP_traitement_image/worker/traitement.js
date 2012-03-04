@@ -9,9 +9,11 @@ function gestionMessage(event){
 	self.postMessage({status:"start",uid:uid});
 	var image1D = data.image;
 	if(typeof image1D === "string"){
-		image1D = JSON.parse(image1D);
+			image1D = JSON.parse(image1D);
 	}
+	self.postMessage({status:"update",uid:uid,progression:0});
 	var image2D = conversionImage(image1D,data.width, uid); //prepare l'image en 2D (+RVB)
+	self.postMessage({status:"update",uid:uid,progression:100});
 	image2D = appliquerFiltre(image2D, data.idFiltre, uid); //on applique le filtre à l'image
 	self.postMessage({status:"end",uid:uid,image:image2D}); //on envoit le résultat
 }
@@ -37,13 +39,12 @@ function conversionImage(image1D,w,uid){
 		image2D[x][y][2]=image1D[i++];
 		if(++x>=w){
 			x=0;
-			if(typeof window === "undefined" && !(y%20)){ //dans le cas où on est dans un worker on envoit une mise à jour
+			y++;
+			if(!(y%30) && typeof window === "undefined"){ //dans le cas où on est dans un worker on envoit une mise à jour
 				self.postMessage({status:"update",uid:uid,progression:i*100/li});
 			}
-			y++
 		}
 	}
-	
 	return image2D;
 }
 
@@ -70,7 +71,7 @@ function appliquerFiltre(image, idFiltre, uid){
 	
 	//on parcourt tous les pixels de l'image
 	imageX:for(imgX = 0; imgX<imgMaxX; imgX++){
-		if(typeof window === "undefined" && !(imgX%10)){ //dans le cas où on est dans un worker on envoit une mise à jour
+		if(!(imgX%20) && typeof window === "undefined"){ //dans le cas où on est dans un worker on envoit une mise à jour
 			self.postMessage({status:"update",uid:uid,progression:100+imgX*100/imgMaxX});
 		}
 		imageFinale[imgX] = [];

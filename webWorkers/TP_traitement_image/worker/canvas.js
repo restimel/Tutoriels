@@ -143,11 +143,13 @@ function prepareFiltre(){
 	cellule.appendChild(progressBar);
 
 	if(worker){
-		if(image1D instanceof Array){
-			worker.postMessage({idFiltre:idFiltre,image:image1D,width:canvas.width,uid:uid++});
-		}else{
-			worker.postMessage({idFiltre:idFiltre,image:JSON.stringify(image1D),width:canvas.width,uid:uid++});
+		//if(image1D instanceof Array){
+		try{
+			worker.postMessage({idFiltre:idFiltre,image:image1D,width:canvas.width,uid:uid});
+		}catch(e){
+			worker.postMessage({idFiltre:idFiltre,image:JSON.stringify(image1D),width:canvas.width,uid:uid});
 		}
+		uid++;
 		worker = createNewWorker(); //on crée un nouveau worker afin de pouvoir lancer un 2e filtre en même temps.
 	}else{
 		var image2D = conversionImage(image1D,canvas.width); //prepare l'image en 2D (+RVB)
@@ -222,10 +224,15 @@ function createNewWorker(){
 			case "start": //surtout pour le debug
 				console.log("traitement commencé pour "+data.uid);
 			break;
+			case "debug": //debug
+console.log("debug...");				
+console.debug(data.debug);
+				break;
 			case "update":
 				var elem = document.getElementById("progress_"+data.uid);
 				if(elem){
 					elem.value = data.progression;
+					elem.textContent = Math.round(data.progression/2) +"%";
 				}
 			break;
 			case "end":
