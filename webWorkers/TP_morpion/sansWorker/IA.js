@@ -57,6 +57,7 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 			return coup;
 		}else{
 			if(coup) return meilleur;
+			else return 0;
 		}
 	}
 }

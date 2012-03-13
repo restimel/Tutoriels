@@ -5,36 +5,65 @@ var couleurTour = 1; //couleur dont c'est le tour
 var continueJeu = true; //permet d'indquer si le jeu est arrêté ou non
 
 var grille = [];
-for(var x=0;x<nx;x++){
-	grille[x]=[];
-	for(var y=0;y<ny;y++){
-		grille[x][y]=0;
-	}
-}
 
-//affichage de la grille de jeu
-var elemTable = document.createElement("table");
-var row,cel;
-for(y=0;y<ny;y++){
-	row=elemTable.insertRow(-1);
-	for(x=0;x<nx;x++){
-		cel = row.insertCell(-1);
-		cel.id = "grille"+x+"_"+y;
-		cel.onclick=setClick(x,y);
-		switch(grille[x][y]){
-			case 1:
-				cel.className = "noir";
-				break;
-			case 2:
-				cel.className = "blanc";
-				break;
-			case 0:
-			default:
-				cel.className = "empty";
+(function(){
+	var elemTable;
+	
+	var label = document.createElement("label");
+	label.textContent = "Largeur :";
+	var inputNX = document.createElement("input");
+	inputNX.type="number";
+	inputNX.min=1;
+	inputNX.value=nx;
+	inputNX.onchange=function(){nx=this.value;};
+	label.appendChild(inputNX);
+	document.body.appendChild(label);
+	
+	var btnStart = document.createElement("button");
+	btnStart.textContent = "Commencer";
+	btnStart.onclick=init;
+	document.body.appendChild(btnStart);
+	
+	document.body.appendChild(document.createElement("hr"));
+	
+	function init(){
+		for(var x=0;x<nx;x++){
+			grille[x]=[];
+			for(var y=0;y<ny;y++){
+				grille[x][y]=0;
+			}
 		}
-	}
-}
-document.body.appendChild(elemTable);
+		
+		//suppression de la grille précédente
+		if(elemTable){
+			document.body.removeChild(elemTable);
+		}
+
+		//affichage de la grille de jeu
+		elemTable = document.createElement("table");
+		var row,cel;
+		for(y=0;y<ny;y++){
+			row=elemTable.insertRow(-1);
+			for(x=0;x<nx;x++){
+				cel = row.insertCell(-1);
+				cel.id = "grille"+x+"_"+y;
+				cel.onclick=setClick(x,y);
+				switch(grille[x][y]){
+					case 1:
+						cel.className = "noir";
+						break;
+					case 2:
+						cel.className = "blanc";
+						break;
+					case 0:
+					default:
+						cel.className = "empty";
+				}
+			}
+		}
+		document.body.appendChild(elemTable);
+	};
+})();
 
 //permet de changer la couleur lors d'un coup
 function changeCouleur(x,y){
@@ -169,3 +198,4 @@ function verifVainqueur(x,y,vGrille){
 		return 0;
 	}
 }
+
