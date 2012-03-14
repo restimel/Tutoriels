@@ -2,68 +2,164 @@ var nx = 9; //nombre de cellules en largeur
 var ny = 9; //nombre de cellules en hauteur
 var nbAlligne = 5; //nombre de jetons à alligner pour gagner
 var couleurTour = 1; //couleur dont c'est le tour
-var continueJeu = true; //permet d'indquer si le jeu est arrêté ou non
+var continueJeu = false; //permet d'indquer si le jeu est arrêté ou non
 
-var grille = [];
+var iaProfondeurMax = 4; //indique la profondeur de recherche de l'IA
+var iaNoir = false; //indique si le joueur noir est une IA
+var iaBlanc = true; //indique si le joueur blanc est une IA
 
-(function(){
-	var elemTable;
-	
+var grille = []; //grille du jeu
+
+var elemTable; //element contenant les éléments d'affichage du jeu
+var elemIA; //element indiquant que l'ordinateur réfléchi
+
+//Affichage des éléments pour le paramétrage
+function affichageDOM(){
+	//Règles
+	var fieldset = document.createElement("fieldset");
+	var legend = document.createElement("legend");
+	legend.textContent = "Règles";
+	fieldset.appendChild(legend);
+
+	//NX
 	var label = document.createElement("label");
 	label.textContent = "Largeur :";
-	var inputNX = document.createElement("input");
-	inputNX.type="number";
-	inputNX.min=1;
-	inputNX.value=nx;
-	inputNX.onchange=function(){nx=this.value;};
-	label.appendChild(inputNX);
-	document.body.appendChild(label);
+	var input = document.createElement("input");
+	input.type="number";
+	input.min=1;
+	input.value=nx;
+	input.onchange=function(){nx=this.value;};
+	label.appendChild(input);
+	fieldset.appendChild(label);
+
+	//NY
+	label = document.createElement("label");
+	label.textContent = "Hauteur :";
+	input = document.createElement("input");
+	input.type="number";
+	input.min=1;
+	input.value=ny;
+	input.onchange=function(){ny=this.value;};
+	label.appendChild(input);
+	fieldset.appendChild(label);
+
+	//alligne
+	label = document.createElement("label");
+	label.textContent = "Nombre de jetons à alligner pour gagner :";
+	input = document.createElement("input");
+	input.type="number";
+	input.min=1;
+	input.value=nbAlligne;
+	input.onchange=function(){nbAlligne=this.value;};
+	label.appendChild(input);
+	fieldset.appendChild(label);
 	
+	document.body.appendChild(fieldset);
+	
+	//Pour l'IA
+	fieldset = document.createElement("fieldset");
+	legend = document.createElement("legend");
+	legend.textContent = "configuration de l'IA";
+	fieldset.appendChild(legend);
+
+	//IA noir?
+	label = document.createElement("label");
+	label.textContent = "Le joueur noir est un ordinateur :";
+	input = document.createElement("input");
+	input.type="checkbox";
+	input.checked=false;
+	input.onchange=function(){
+		iaNoir=this.checked;
+		iaToPlay(); //on vérifie si c'est au tour de l'IA de jouer
+	};
+	label.appendChild(input);
+	fieldset.appendChild(label);
+	
+	//IA blanc?
+	label = document.createElement("label");
+	label.textContent = "Le joueur blanc est un ordinateur :";
+	input = document.createElement("input");
+	input.type="checkbox";
+	input.checked=true;
+	input.onchange=function(){
+		iaBlanc=this.checked;
+		iaToPlay(); //on vérifie si c'est au tour de l'IA de jouer
+	};
+	label.appendChild(input);
+	fieldset.appendChild(label);
+	
+	//Profondeur
+	label = document.createElement("label");
+	label.textContent = "Profondeur de recherche :";
+	input = document.createElement("input");
+	input.type="number";
+	input.min=1;
+	input.value=iaProfondeurMax;
+	input.onchange=function(){iaProfondeurMax=this.value;};
+	label.appendChild(input);
+	fieldset.appendChild(label);
+	
+	document.body.appendChild(fieldset);
+
+	//bouton permettant de lancer la partie
 	var btnStart = document.createElement("button");
 	btnStart.textContent = "Commencer";
 	btnStart.onclick=init;
 	document.body.appendChild(btnStart);
 	
-	document.body.appendChild(document.createElement("hr"));
+	//Indicateur que l'ordinateur réfléchit
+	elementIA = document.createElement("div");
+	elementIA.textContent = "L'ordinateur est en train de réfléchir...";
+	elementIA.style.visibility = "hidden";
+	document.body.appendChild(elementIA);
 	
-	function init(){
-		for(var x=0;x<nx;x++){
-			grille[x]=[];
-			for(var y=0;y<ny;y++){
-				grille[x][y]=0;
-			}
-		}
-		
-		//suppression de la grille précédente
-		if(elemTable){
-			document.body.removeChild(elemTable);
-		}
 
-		//affichage de la grille de jeu
-		elemTable = document.createElement("table");
-		var row,cel;
-		for(y=0;y<ny;y++){
-			row=elemTable.insertRow(-1);
-			for(x=0;x<nx;x++){
-				cel = row.insertCell(-1);
-				cel.id = "grille"+x+"_"+y;
-				cel.onclick=setClick(x,y);
-				switch(grille[x][y]){
-					case 1:
-						cel.className = "noir";
-						break;
-					case 2:
-						cel.className = "blanc";
-						break;
-					case 0:
-					default:
-						cel.className = "empty";
-				}
+	document.body.appendChild(document.createElement("hr"));
+}
+
+window.addEventListener("load",affichageDOM,false);
+
+//Initialisation d'une partie
+function init(){
+	for(var x=0;x<nx;x++){
+		grille[x]=[];
+		for(var y=0;y<ny;y++){
+			grille[x][y]=0;
+		}
+	}
+	
+	//suppression de la grille précédente
+	if(elemTable){
+		document.body.removeChild(elemTable);
+	}
+
+	//affichage de la grille de jeu
+	elemTable = document.createElement("table");
+	var row,cel;
+	for(y=0;y<ny;y++){
+		row=elemTable.insertRow(-1);
+		for(x=0;x<nx;x++){
+			cel = row.insertCell(-1);
+			cel.id = "grille"+x+"_"+y;
+			cel.onclick=setClick(x,y);
+			switch(grille[x][y]){
+				case 1:
+					cel.className = "noir";
+					break;
+				case 2:
+					cel.className = "blanc";
+					break;
+				case 0:
+				default:
+					cel.className = "empty";
 			}
 		}
-		document.body.appendChild(elemTable);
-	};
-})();
+	}
+	document.body.appendChild(elemTable);
+	couleurTour = 1;
+	continueJeu = true;
+	iaToPlay(); //on vérifie si c'est au tour de l'IA de jouer
+};
 
 //permet de changer la couleur lors d'un coup
 function changeCouleur(x,y){
@@ -92,11 +188,19 @@ function joue(x,y){
 	}
 	
 	//est-ce que le prochain coup doit être joué par l'IA ?
-	if(continueJeu && couleurTour===2){
+	iaToPlay();
+}
+
+//est-ce que le prochain coup doit être joué par l'IA ?
+function iaToPlay(){
+	if(!continueJeu) return false;
+	if((couleurTour === 1 && iaNoir) || (couleurTour === 2 && iaBlanc)){
 		continueJeu = false; //pour empêcher un humain de jouer
+		elementIA.style.visibility = "visible";
 		setTimeout(function(){
-			rslt = iaJoue(grille,couleurTour);
+			var rslt = iaJoue(grille,couleurTour);
 			continueJeu = true;
+			elementIA.style.visibility = "hidden";
 			joue(rslt[0],rslt[1]);
 		},10); //au cas où deux ordi jouent ensemble et pour voir le coup pendant que l'IA réfléchi
 	}
