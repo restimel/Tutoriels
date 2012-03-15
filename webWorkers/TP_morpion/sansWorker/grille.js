@@ -1,5 +1,5 @@
-var nx = 9; //nombre de cellules en largeur
-var ny = 9; //nombre de cellules en hauteur
+var nx = 7; //nombre de cellules en largeur
+var ny = 7; //nombre de cellules en hauteur
 var nbAlligne = 5; //nombre de jetons à alligner pour gagner
 var couleurTour = 1; //couleur dont c'est le tour
 var continueJeu = false; //permet d'indquer si le jeu est arrêté ou non

@@ -89,14 +89,18 @@ function iaAnalyse(grille,x,y){
 	var couleur = grille[x][y];
 	var estimation = 0; //estimation pour toutes les directions
 	var compteur = 0; //compte le nombre de possibilité pour une direction
+	var centre = 0; //regarde si le jeton a de l'espace de chaque côté
 	var bonus = 0; //point bonus liée aux jetons alliés dans cette même direction
 	var i,j; //pour les coordonées temporaires
 	var pass=false; //permet de voir si on a passé la case étudiée
+	var pLiberte = 1; //pondération sur le nombre de liberté
+	var pBonus = 1; //pondération Bonus
+	var pCentre = 1; //pondération pour l'espace situé de chaque côté
 
 	//recherche horizontale
 	for(i=0;i<nx;i++){
 		if(i==x){
-			compteur++;
+			centre = compteur++;
 			pass=true;
 			continue;
 		}
@@ -120,7 +124,7 @@ function iaAnalyse(grille,x,y){
 	}
 	if(compteur>=nbAlligne){
 		//il est possible de gagner dans cette direction
-		estimation += compteur + bonus*10;
+		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs((compteur-1)/centre-0.5))*compteur*pcentre;
 	}
 	
 	//recherche verticale
@@ -129,7 +133,7 @@ function iaAnalyse(grille,x,y){
 	pass=false;
 	for(j=0;j<ny;j++){
 		if(j==y){
-			compteur++;
+			centre=compteur++;
 			pass=true;
 			continue;
 		}
@@ -153,11 +157,11 @@ function iaAnalyse(grille,x,y){
 	}
 	if(compteur>=nbAlligne){
 		//il est possible de gagner dans cette direction
-		estimation += compteur + bonus*10;
+		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs((compteur-1)/centre-0.5))*compteur*pcentre;
 	}
 	
 	//recherche diagonale (NO-SE)
-	compteur=1;
+	compteur=0;
 	bonus=0;
 	i=x;
 	j=y;
@@ -174,6 +178,7 @@ function iaAnalyse(grille,x,y){
 				i=0;
 		}
 	}
+	centre=compteur++;
 	i=x;
 	j=y;
 	while(++i<nx && ++j<ny){
@@ -191,11 +196,11 @@ function iaAnalyse(grille,x,y){
 	}
 	if(compteur>=nbAlligne){
 		//il est possible de gagner dans cette direction
-		estimation += compteur + bonus*10;
+		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs((compteur-1)/centre-0.5))*compteur*pcentre;
 	}
 	
 	//recherche diagonale (NE-SO)
-	compteur=1;
+	compteur=0;
 	bonus=0;
 	i=x;
 	j=y;
@@ -212,6 +217,7 @@ function iaAnalyse(grille,x,y){
 				i=0;
 		}
 	}
+	centre=compteur++;
 	i=x;
 	j=y;
 	while(++i<nx && j-->0){
@@ -229,7 +235,7 @@ function iaAnalyse(grille,x,y){
 	}
 	if(compteur>=nbAlligne){
 		//il est possible de gagner dans cette direction
-		estimation += compteur + bonus*10;
+		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs((compteur-1)/centre-0.5))*compteur*pcentre;
 	}
 	
 	return estimation;
