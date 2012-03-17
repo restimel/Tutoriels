@@ -2,14 +2,18 @@
 //demande à l'IA de jouer
 function iaJoue(grilleOrig,couleur){
 	var grille = copieGrille(grilleOrig);
-	return iaAlphaBeta(grille, couleur, iaProfondeurMax, -Infinity, Infinity);
+	return iaAlphaBeta(grille, couleur, 0, -Infinity, Infinity);
 }
 
 //fonction alphabeta
 function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
-	if(!profondeur){
+	if(profondeur === iaProfondeurMax){
 		//on a atteint la limite de profondeur de calcul
-		return iaEstimation(grille);
+		if(couleur === 1){
+			return iaEstimation(grille);
+		}else{
+			return -iaEstimation(grille);
+		}
 	}else{
 		var meilleur = -Infinity;
 		var estim;
@@ -25,13 +29,13 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 				//vérifie si le coup est gagnant
 				if(estim=verifVainqueur(x,y,grille)){
 					grille[x][y]=0; //restauration de la grille
-					if(profondeur===iaProfondeurMax){
+					if(!profondeur){
 						return [x,y];
 					}else{
 						return Infinity;
 					}
 				}
-				estim = -iaAlphaBeta(grille, couleurOpp, profondeur-1, -beta, -alpha);
+				estim = -iaAlphaBeta(grille, couleurOpp, profondeur+1, -beta, -alpha);
 			
 				if(estim > meilleur){
 					//on vient de trouver un meilleur coup
@@ -41,7 +45,7 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 						coup = [x,y];
 						if(alpha >= beta){
 							grille[x][y]=0; //restauration de la grille
-							if(profondeur===iaProfondeurMax){
+							if(!profondeur){
 								return coup;
 							}else{
 								return meilleur;
@@ -52,7 +56,7 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 				grille[x][y]=0; //restauration de la grille
 			}
 		}
-		if(profondeur===iaProfondeurMax){
+		if(!profondeur){
 			return coup;
 		}else{
 			if(coup) return meilleur;
@@ -124,7 +128,7 @@ function iaAnalyse(grille,x,y){
 	}
 	if(compteur>=nbAlligne){
 		//il est possible de gagner dans cette direction
-		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs((compteur-1)/centre-0.5))*compteur*pcentre;
+		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs(centre/(compteur-1)-0.5))*compteur*pCentre;
 	}
 	
 	//recherche verticale
@@ -157,7 +161,7 @@ function iaAnalyse(grille,x,y){
 	}
 	if(compteur>=nbAlligne){
 		//il est possible de gagner dans cette direction
-		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs((compteur-1)/centre-0.5))*compteur*pcentre;
+		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs(centre/(compteur-1)-0.5))*compteur*pCentre;
 	}
 	
 	//recherche diagonale (NO-SE)
@@ -196,7 +200,7 @@ function iaAnalyse(grille,x,y){
 	}
 	if(compteur>=nbAlligne){
 		//il est possible de gagner dans cette direction
-		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs((compteur-1)/centre-0.5))*compteur*pcentre;
+		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs(centre/(compteur-1)-0.5))*compteur*pCentre;
 	}
 	
 	//recherche diagonale (NE-SO)
@@ -235,7 +239,7 @@ function iaAnalyse(grille,x,y){
 	}
 	if(compteur>=nbAlligne){
 		//il est possible de gagner dans cette direction
-		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs((compteur-1)/centre-0.5))*compteur*pcentre;
+		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs(centre/(compteur-1)-0.5))*compteur*pCentre;
 	}
 	
 	return estimation;

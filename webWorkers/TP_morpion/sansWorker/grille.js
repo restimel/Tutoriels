@@ -10,8 +10,9 @@ var iaBlanc = true; //indique si le joueur blanc est une IA
 
 var grille = []; //grille du jeu
 
-var elemTable; //element contenant les éléments d'affichage du jeu
-var elemIA; //element indiquant que l'ordinateur réfléchi
+var elemTable; //élément contenant les éléments d'affichage du jeu
+var elemIA; //élément indiquant que l'ordinateur réfléchi
+
 
 //Affichage des éléments pour le paramétrage
 function affichageDOM(){
@@ -24,34 +25,31 @@ function affichageDOM(){
 	//NX
 	var label = document.createElement("label");
 	label.textContent = "Largeur :";
-	var input = document.createElement("input");
-	input.type="number";
-	input.min=1;
-	input.value=nx;
-	input.onchange=function(){nx=this.value;};
-	label.appendChild(input);
+	var inputNX = document.createElement("input");
+	inputNX.type="number";
+	inputNX.min=1;
+	inputNX.value=nx;
+	label.appendChild(inputNX);
 	fieldset.appendChild(label);
 
 	//NY
 	label = document.createElement("label");
 	label.textContent = "Hauteur :";
-	input = document.createElement("input");
-	input.type="number";
-	input.min=1;
-	input.value=ny;
-	input.onchange=function(){ny=this.value;};
-	label.appendChild(input);
+	var inputNY = document.createElement("input");
+	inputNY.type="number";
+	inputNY.min=1;
+	inputNY.value=ny;
+	label.appendChild(inputNY);
 	fieldset.appendChild(label);
 
 	//alligne
 	label = document.createElement("label");
 	label.textContent = "Nombre de jetons à alligner pour gagner :";
-	input = document.createElement("input");
-	input.type="number";
-	input.min=1;
-	input.value=nbAlligne;
-	input.onchange=function(){nbAlligne=this.value;};
-	label.appendChild(input);
+	var inputAllign = document.createElement("input");
+	inputAllign.type="number";
+	inputAllign.min=1;
+	inputAllign.value=nbAlligne;
+	label.appendChild(inputAllign);
 	fieldset.appendChild(label);
 	
 	document.body.appendChild(fieldset);
@@ -95,7 +93,7 @@ function affichageDOM(){
 	input.type="number";
 	input.min=1;
 	input.value=iaProfondeurMax;
-	input.onchange=function(){iaProfondeurMax=this.value;};
+	input.onchange=function(){iaProfondeurMax=parseInt(this.value,10);};
 	label.appendChild(input);
 	fieldset.appendChild(label);
 	
@@ -104,7 +102,12 @@ function affichageDOM(){
 	//bouton permettant de lancer la partie
 	var btnStart = document.createElement("button");
 	btnStart.textContent = "Commencer";
-	btnStart.onclick=init;
+	btnStart.onclick=function(){
+		nx = parseInt(inputNX.value,10);
+		ny = parseInt(inputNY.value,10);
+		nbAlligne = parseInt(inputAllign.value,10);
+		init();
+	}
 	document.body.appendChild(btnStart);
 	
 	//Indicateur que l'ordinateur réfléchit
@@ -229,7 +232,7 @@ function verifNbLibre(){
 //permet de vérifier s'il y a un vainqueur (en ne regardant que le dernier coup joué)
 function verifVainqueur(x,y,vGrille){
 	vGrille = vGrille || grille;
-	var col=vGrille[x][y];
+	var col = vGrille[x][y]; //couleur du jeton qui vient d'être joué
 	var alignH = 1; //nombre de jetons alignés horizontalement
 	var alignV = 1; //nombre de jetons alignés verticalement
 	var alignD1 = 1; //nombre de jetons alignés diagonalement NO-SE
@@ -296,6 +299,7 @@ function verifVainqueur(x,y,vGrille){
 		alignD2++;
 	}
 	
+	//parmis tous ces résultats on regarde s'il y en a un qui dépasse le nombre nécessaire pour gagner
 	if(Math.max(alignH,alignV,alignD1,alignD2)>=nbAlligne){
 		return col;
 	}else{
