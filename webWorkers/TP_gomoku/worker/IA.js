@@ -11,7 +11,7 @@ onmessage = function(e){
 	self.iaProfondeurMax = data.profondeur;
 	self.nx=data.grille.length;
 	self.ny=data.grille[0].length;
-	self.nbAlligne=data.nbAlligne;
+	self.nbAligne=data.nbAligne;
 	var coup = iaAlphaBeta(data.grille, data.tour, 0, -Infinity, Infinity);
 	postMessage({cmd:"coup",x:coup[0],y:coup[1]});
 };
@@ -147,7 +147,7 @@ function iaAnalyse(grille,x,y){
 				}
 		}
 	}
-	if(compteur>=nbAlligne){
+	if(compteur>=nbAligne){
 		//il est possible de gagner dans cette direction
 		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs(centre/(compteur-1)-0.5))*compteur*pCentre;
 	}
@@ -180,7 +180,7 @@ function iaAnalyse(grille,x,y){
 				}
 		}
 	}
-	if(compteur>=nbAlligne){
+	if(compteur>=nbAligne){
 		//il est possible de gagner dans cette direction
 		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs(centre/(compteur-1)-0.5))*compteur*pCentre;
 	}
@@ -219,7 +219,7 @@ function iaAnalyse(grille,x,y){
 				i=nx;
 		}
 	}
-	if(compteur>=nbAlligne){
+	if(compteur>=nbAligne){
 		//il est possible de gagner dans cette direction
 		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs(centre/(compteur-1)-0.5))*compteur*pCentre;
 	}
@@ -258,7 +258,7 @@ function iaAnalyse(grille,x,y){
 				i=nx;
 		}
 	}
-	if(compteur>=nbAlligne){
+	if(compteur>=nbAligne){
 		//il est possible de gagner dans cette direction
 		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs(centre/(compteur-1)-0.5))*compteur*pCentre;
 	}

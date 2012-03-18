@@ -1,6 +1,6 @@
 var nx = 7; //nombre de cellules en largeur
 var ny = 7; //nombre de cellules en hauteur
-var nbAlligne = 5; //nombre de jetons à alligner pour gagner
+var nbAligne = 5; //nombre de jetons à aligner pour gagner
 var couleurTour = 1; //couleur dont c'est le tour
 var continueJeu = false; //permet d'indquer si le jeu est arrêté ou non
 
@@ -9,9 +9,11 @@ var iaNoir = false; //indique si le joueur noir est une IA
 var iaBlanc = true; //indique si le joueur blanc est une IA
 
 var grille = []; //grille du jeu
+var iaWorker; // worker gérant l'IA (si le navigateur supportent les workers)
 
 var elemTable; //élément contenant les éléments d'affichage du jeu
 var elemIA; //élément indiquant que l'ordinateur réfléchi
+var progressIA; //élément permettant d'indiquer où en est l'ordinateur
 
 
 //Affichage des éléments pour le paramétrage
@@ -42,14 +44,14 @@ function affichageDOM(){
 	label.appendChild(inputNY);
 	fieldset.appendChild(label);
 
-	//alligne
+	//aligne
 	label = document.createElement("label");
-	label.textContent = "Nombre de jetons à alligner pour gagner :";
-	var inputAllign = document.createElement("input");
-	inputAllign.type="number";
-	inputAllign.min=1;
-	inputAllign.value=nbAlligne;
-	label.appendChild(inputAllign);
+	label.textContent = "Nombre de jetons à aligner pour gagner :";
+	var inputAlign = document.createElement("input");
+	inputAlign.type="number";
+	inputAlign.min=1;
+	inputAlign.value=nbAligne;
+	label.appendChild(inputAlign);
 	fieldset.appendChild(label);
 	
 	document.body.appendChild(fieldset);
@@ -105,7 +107,7 @@ function affichageDOM(){
 	btnStart.onclick=function(){
 		nx = parseInt(inputNX.value,10);
 		ny = parseInt(inputNY.value,10);
-		nbAlligne = parseInt(inputAllign.value,10);
+		nbAligne = parseInt(inputAlign.value,10);
 		init();
 	}
 	document.body.appendChild(btnStart);
@@ -124,14 +126,16 @@ window.addEventListener("load",affichageDOM,false);
 
 //Initialisation d'une partie
 function init(){
+
+	//initialisation de la grille
 	for(var x=0;x<nx;x++){
-		grille[x]=[];
+		grille[x] = [];
 		for(var y=0;y<ny;y++){
-			grille[x][y]=0;
+			grille[x][y] = 0;
 		}
 	}
 	
-	//suppression de la grille précédente
+	//suppression de l'élément HTML de la grille précédente
 	if(elemTable){
 		document.body.removeChild(elemTable);
 	}
@@ -140,7 +144,7 @@ function init(){
 	elemTable = document.createElement("table");
 	var row,cel;
 	for(y=0;y<ny;y++){
-		row=elemTable.insertRow(-1);
+		row = elemTable.insertRow(-1);
 		for(x=0;x<nx;x++){
 			cel = row.insertCell(-1);
 			cel.id = "grille"+x+"_"+y;
@@ -179,7 +183,7 @@ function joue(x,y){
 	if(grille[x][y]) return false;
 	var rslt;
 	changeCouleur(x,y);
-	couleurTour=couleurTour%2+1;
+	couleurTour = couleurTour%2+1;
 	if(rslt=verifVainqueur(x,y)){
 		continueJeu = false;
 		alert((rslt===1?"Noirs":"Blancs")+" vainqueurs");
@@ -300,7 +304,7 @@ function verifVainqueur(x,y,vGrille){
 	}
 	
 	//parmis tous ces résultats on regarde s'il y en a un qui dépasse le nombre nécessaire pour gagner
-	if(Math.max(alignH,alignV,alignD1,alignD2)>=nbAlligne){
+	if(Math.max(alignH,alignV,alignD1,alignD2)>=nbAligne){
 		return col;
 	}else{
 		return 0;

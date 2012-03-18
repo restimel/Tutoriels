@@ -1,6 +1,7 @@
 
 //demande à l'IA de jouer
 function iaJoue(grilleOrig,couleur){
+	//dans un worker cette fonction est devenue inutile
 	var grille = copieGrille(grilleOrig);
 	return iaAlphaBeta(grille, couleur, 0, -Infinity, Infinity);
 }
@@ -126,7 +127,7 @@ function iaAnalyse(grille,x,y){
 				}
 		}
 	}
-	if(compteur>=nbAlligne){
+	if(compteur>=nbAligne){
 		//il est possible de gagner dans cette direction
 		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs(centre/(compteur-1)-0.5))*compteur*pCentre;
 	}
@@ -159,7 +160,7 @@ function iaAnalyse(grille,x,y){
 				}
 		}
 	}
-	if(compteur>=nbAlligne){
+	if(compteur>=nbAligne){
 		//il est possible de gagner dans cette direction
 		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs(centre/(compteur-1)-0.5))*compteur*pCentre;
 	}
@@ -198,7 +199,7 @@ function iaAnalyse(grille,x,y){
 				i=nx;
 		}
 	}
-	if(compteur>=nbAlligne){
+	if(compteur>=nbAligne){
 		//il est possible de gagner dans cette direction
 		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs(centre/(compteur-1)-0.5))*compteur*pCentre;
 	}
@@ -237,7 +238,7 @@ function iaAnalyse(grille,x,y){
 				i=nx;
 		}
 	}
-	if(compteur>=nbAlligne){
+	if(compteur>=nbAligne){
 		//il est possible de gagner dans cette direction
 		estimation += compteur*pLiberte + bonus*pBonus + (1-Math.abs(centre/(compteur-1)-0.5))*compteur*pCentre;
 	}

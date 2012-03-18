@@ -70,7 +70,7 @@ function verifVainqueur(x,y,vGrille){
 	}
 	
 	//parmis tous ces résultats on regarde s'il y en a un qui dépasse le nombre nécessaire pour gagner
-	if(Math.max(alignH,alignV,alignD1,alignD2)>=nbAlligne){
+	if(Math.max(alignH,alignV,alignD1,alignD2)>=nbAligne){
 		return col;
 	}else{
 		return 0;

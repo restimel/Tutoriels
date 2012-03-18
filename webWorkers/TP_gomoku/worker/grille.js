@@ -1,6 +1,6 @@
 var nx = 7; //nombre de cellules en largeur
 var ny = 7; //nombre de cellules en hauteur
-var nbAlligne = 5; //nombre de jetons à alligner pour gagner
+var nbAligne = 5; //nombre de jetons à aligner pour gagner
 var couleurTour = 1; //couleur dont c'est le tour
 var continueJeu = false; //permet d'indquer si le jeu est arrêté ou non
 
@@ -44,14 +44,14 @@ function affichageDOM(){
 	label.appendChild(inputNY);
 	fieldset.appendChild(label);
 
-	//alligne
+	//aligne
 	label = document.createElement("label");
-	label.textContent = "Nombre de jetons à alligner pour gagner :";
-	var inputAllign = document.createElement("input");
-	inputAllign.type="number";
-	inputAllign.min=1;
-	inputAllign.value=nbAlligne;
-	label.appendChild(inputAllign);
+	label.textContent = "Nombre de jetons à aligner pour gagner :";
+	var inputAlign = document.createElement("input");
+	inputAlign.type="number";
+	inputAlign.min=1;
+	inputAlign.value=nbAligne;
+	label.appendChild(inputAlign);
 	fieldset.appendChild(label);
 	
 	document.body.appendChild(fieldset);
@@ -107,7 +107,7 @@ function affichageDOM(){
 	btnStart.onclick=function(){
 		nx = parseInt(inputNX.value,10);
 		ny = parseInt(inputNY.value,10);
-		nbAlligne = parseInt(inputAllign.value,10);
+		nbAligne = parseInt(inputAlign.value,10);
 		init();
 	}
 	document.body.appendChild(btnStart);
@@ -217,7 +217,7 @@ function iaToPlay(){
 		elementIA.style.visibility = "visible";
 		if(iaWorker){
 			iaWorker.playing = true;
-			iaWorker.postMessage({grille:grille,tour:couleurTour,profondeur:iaProfondeurMax,nbAlligne:nbAlligne});
+			iaWorker.postMessage({grille:grille,tour:couleurTour,profondeur:iaProfondeurMax,nbAligne:nbAligne});
 		}else{
 			setTimeout(function(){
 				var rslt = iaJoue(grille,couleurTour);
