@@ -1,6 +1,24 @@
+if(importScripts){
+	//dans le cas d'un worker, on importe le script permettant de vérifier la fin d'une partie
+	importScripts("./verifFin.js");
+	//si importScripts existe c'est qu'on est dans un worker. On va en profiter pour définir une variable afin de facilter la detection ultérieur
+	self.inWorker = true;
+}
+
+//réception des messages
+onmessage = function(e){
+	var data = e.data;
+	self.iaProfondeurMax = data.profondeur;
+	self.nx=data.grille.length;
+	self.ny=data.grille[0].length;
+	self.nbAlligne=data.nbAlligne;
+	var coup = iaAlphaBeta(data.grille, data.tour, 0, -Infinity, Infinity);
+	postMessage({cmd:"coup",x:coup[0],y:coup[1]});
+};
 
 //demande à l'IA de jouer
 function iaJoue(grilleOrig,couleur){
+	//dans un worker cette fonction est devenue inutile
 	var grille = copieGrille(grilleOrig);
 	return iaAlphaBeta(grille, couleur, 0, -Infinity, Infinity);
 }
@@ -22,6 +40,9 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 		for(var x=0;x<nx;x++){
 			for(var y=0;y<ny;y++){
 				if(grille[x][y]) continue; //case déjà occupée
+				if(!profondeur && inWorker){
+					postMessage({cmd:"update",value:(x*ny+y)*100/(nx*ny)});
+				}
 				
 				if(!coup){coup=[x,y];} //pour proposer au moins un coup
 				
