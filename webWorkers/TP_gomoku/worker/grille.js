@@ -131,14 +131,22 @@ window.addEventListener("load",affichageDOM,false);
 
 //Initialisation d'une partie
 function init(){
+	if(iaWorker && iaWorker.playing){
+		//l'IA est encore en train de chercher une solution. On va donc l'arreter
+		iaWorker.terminate();
+		createIAWorker();
+		elementIA.style.visibility = "hidden";
+	}
+	
+	//initialisation de la grille
 	for(var x=0;x<nx;x++){
-		grille[x]=[];
+		grille[x] = [];
 		for(var y=0;y<ny;y++){
-			grille[x][y]=0;
+			grille[x][y] = 0;
 		}
 	}
 	
-	//suppression de la grille précédente
+	//suppression de l'élément HTML de la grille précédente
 	if(elemTable){
 		document.body.removeChild(elemTable);
 	}
@@ -147,7 +155,7 @@ function init(){
 	elemTable = document.createElement("table");
 	var row,cel;
 	for(y=0;y<ny;y++){
-		row=elemTable.insertRow(-1);
+		row = elemTable.insertRow(-1);
 		for(x=0;x<nx;x++){
 			cel = row.insertCell(-1);
 			cel.id = "grille"+x+"_"+y;
@@ -186,7 +194,7 @@ function joue(x,y){
 	if(grille[x][y]) return false;
 	var rslt;
 	changeCouleur(x,y);
-	couleurTour=couleurTour%2+1;
+	couleurTour = couleurTour%2+1;
 	if(rslt=verifVainqueur(x,y)){
 		continueJeu = false;
 		alert((rslt===1?"Noirs":"Blancs")+" vainqueurs");
@@ -208,6 +216,7 @@ function iaToPlay(){
 		continueJeu = false; //pour empêcher un humain de jouer
 		elementIA.style.visibility = "visible";
 		if(iaWorker){
+			iaWorker.playing = true;
 			iaWorker.postMessage({grille:grille,tour:couleurTour,profondeur:iaProfondeurMax,nbAlligne:nbAlligne});
 		}else{
 			setTimeout(function(){
@@ -240,25 +249,35 @@ function verifNbLibre(){
 	return nbLibre;
 }
 
-if(window.Worker){
+//Création d'un worker
+function createIAWorker(){
 	iaWorker = new Worker("./IA.js"); //création du worker
-	iaWorker.onmessage=function(e){
-		//réception des messages du workersMerildaS
+	iaWorker.playing = false;
+	
+	iaWorker.onmessage = function(e){
+		//réception des messages du workers
 		var data = e.data;
 		switch(data.cmd){
 			case "update":
-				progressIA.value=data.value;
+				progressIA.value = data.value;
 				break;
 			case "coup":
 				continueJeu = true;
 				elementIA.style.visibility = "hidden";
+				iaWorker.playing = false;
 				joue(data.x,data.y);
 				break;
 		}
 	};
-	iaWorker.onerror=function(e){
+	
+	iaWorker.onerror = function(e){
+		//Gestion des erreurs
 		alert(e.message);
 	};
+}
+
+if(window.Worker){
+	createIAWorker();
 }else{
 	//solution du substitution au worker
 	iaWorker = document.createElement("script");
