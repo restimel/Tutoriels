@@ -23,20 +23,22 @@ function iaJoue(grilleOrig,couleur){
 	return iaAlphaBeta(grille, couleur, 0, -Infinity, Infinity);
 }
 
-//fonction alphabeta
+//fonction gérant l'algorithme minimax et l'élagage alpha-beta
 function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 	if(profondeur === iaProfondeurMax){
-		//on a atteint la limite de profondeur de calcul
+		//on a atteint la limite de profondeur de calcul on retourne donc une estimation de la position actuelle
 		if(couleur === 1){
 			return iaEstimation(grille);
 		}else{
 			return -iaEstimation(grille);
 		}
 	}else{
-		var meilleur = -Infinity;
-		var estim;
-		var coup=null;
-		var couleurOpp = couleur%2+1;
+		var meilleur = -Infinity; //estimation du meilleur coup actuel
+		var estim; //estimation de la valeur d'un coup
+		var coup=null; //meilleur coup actuel
+		var couleurOpp = couleur%2+1; //optimisation pour calculer la couleur adverse
+
+		//on va essayer toutes les combinaisons possible
 		for(var x=0;x<nx;x++){
 			for(var y=0;y<ny;y++){
 				if(grille[x][y]) continue; //case déjà occupée
@@ -56,8 +58,8 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 						return Infinity;
 					}
 				}
-				estim = -iaAlphaBeta(grille, couleurOpp, profondeur+1, -beta, -alpha);
-			
+				estim = -iaAlphaBeta(grille, couleurOpp, profondeur+1, -beta, -alpha); //on calcule la valeur de ce coup
+
 				if(estim > meilleur){
 					//on vient de trouver un meilleur coup
 					meilleur = estim;
@@ -65,6 +67,9 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 						alpha = meilleur;
 						coup = [x,y];
 						if(alpha >= beta){
+					/*ce coup est mieux que le meilleur des coups qui aurait put être joué si on avait joué un autre
+					coup. Cela signifie que jouer le coup qui a amené cette position n'est pas bon. Il est inutile
+					de continuer à estimer les autres possibilités de cette position (principe de l'élagage alpha-beta). */
 							grille[x][y]=0; //restauration de la grille
 							if(!profondeur){
 								return coup;
@@ -81,7 +86,7 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 			return coup;
 		}else{
 			if(coup) return meilleur;
-			else return 0;
+			else return 0; //si coup n'a jamais été défini c'est qu'il n'y plus de possibilité de jeu. C'est partie nulle.
 		}
 	}
 }
