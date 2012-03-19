@@ -53,9 +53,9 @@ function affichageDOM(){
 	inputAlign.value=nbAligne;
 	label.appendChild(inputAlign);
 	fieldset.appendChild(label);
-	
+
 	document.body.appendChild(fieldset);
-	
+
 	//Pour l'IA
 	fieldset = document.createElement("fieldset");
 	legend = document.createElement("legend");
@@ -74,7 +74,7 @@ function affichageDOM(){
 	};
 	label.appendChild(input);
 	fieldset.appendChild(label);
-	
+
 	//IA blanc?
 	label = document.createElement("label");
 	label.textContent = "Le joueur blanc est un ordinateur :";
@@ -87,7 +87,7 @@ function affichageDOM(){
 	};
 	label.appendChild(input);
 	fieldset.appendChild(label);
-	
+
 	//Profondeur
 	label = document.createElement("label");
 	label.textContent = "Profondeur de recherche :";
@@ -98,7 +98,7 @@ function affichageDOM(){
 	input.onchange=function(){iaProfondeurMax=parseInt(this.value,10);};
 	label.appendChild(input);
 	fieldset.appendChild(label);
-	
+
 	document.body.appendChild(fieldset);
 
 	//bouton permettant de lancer la partie
@@ -111,13 +111,13 @@ function affichageDOM(){
 		init();
 	}
 	document.body.appendChild(btnStart);
-	
+
 	//Indicateur que l'ordinateur réfléchit
 	elementIA = document.createElement("div");
 	elementIA.textContent = "L'ordinateur est en train de réfléchir...";
 	elementIA.style.visibility = "hidden";
 	document.body.appendChild(elementIA);
-	
+
 
 	document.body.appendChild(document.createElement("hr"));
 }
@@ -134,7 +134,7 @@ function init(){
 			grille[x][y] = 0;
 		}
 	}
-	
+
 	//suppression de l'élément HTML de la grille précédente
 	if(elemTable){
 		document.body.removeChild(elemTable);
@@ -188,12 +188,12 @@ function joue(x,y){
 		continueJeu = false;
 		alert((rslt===1?"Noirs":"Blancs")+" vainqueurs");
 	}
-	
+
 	if(!verifNbLibre()){
 		continueJeu = false;
 		alert("Parie nulle : égalité");
 	}
-	
+
 	//est-ce que le prochain coup doit être joué par l'IA ?
 	iaToPlay();
 }
@@ -242,7 +242,7 @@ function verifVainqueur(x,y,vGrille){
 	var alignD1 = 1; //nombre de jetons alignés diagonalement NO-SE
 	var alignD2 = 1; //nombre de jetons alignés diagonalement SO-NE
 	var xt,yt;
-	
+
 	//vérification horizontale
 	xt=x-1;
 	yt=y;
@@ -256,7 +256,7 @@ function verifVainqueur(x,y,vGrille){
 		xt++;
 		alignH++;
 	}
-	
+
 	//vérification verticale
 	xt=x;
 	yt=y-1;
@@ -270,7 +270,7 @@ function verifVainqueur(x,y,vGrille){
 		yt++;
 		alignV++;
 	}
-	
+
 	//vérification diagonale NO-SE
 	xt=x-1;
 	yt=y-1;
@@ -286,7 +286,7 @@ function verifVainqueur(x,y,vGrille){
 		yt++;
 		alignD1++;
 	}
-	
+
 	//vérification diagonale SO-NE
 	xt=x-1;
 	yt=y+1;
@@ -302,7 +302,7 @@ function verifVainqueur(x,y,vGrille){
 		yt--;
 		alignD2++;
 	}
-	
+
 	//parmis tous ces résultats on regarde s'il y en a un qui dépasse le nombre nécessaire pour gagner
 	if(Math.max(alignH,alignV,alignD1,alignD2)>=nbAligne){
 		return col;
