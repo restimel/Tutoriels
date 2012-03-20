@@ -1,7 +1,7 @@
-if(importScripts){
+if(typeof importScripts === "function"){
 	//dans le cas d'un worker, on importe le script permettant de vérifier la fin d'une partie
 	importScripts("./verifFin.js");
-	//si importScripts existe c'est qu'on est dans un worker. On va en profiter pour définir une variable afin de facilter la detection ultérieur
+	//si importScripts existe c'est qu'on est dans un worker. On va en profiter pour définir une variable afin de facilter la détection ultérieur
 	self.inWorker = true;
 }
 
@@ -18,7 +18,7 @@ onmessage = function(e){
 
 //demande à l'IA de jouer
 function iaJoue(grilleOrig,couleur){
-	//dans un worker cette fonction est devenue inutile
+	//dans un worker cette fonction devient inutile
 	var grille = copieGrille(grilleOrig);
 	return iaAlphaBeta(grille, couleur, 0, -Infinity, Infinity);
 }
@@ -48,7 +48,7 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 				
 				if(!coup){coup=[x,y];} //pour proposer au moins un coup
 				
-				grille[x][y]=couleur; //on va essayer avec ce coup
+				grille[x][y]=couleur; //on va essayer ce coup
 				//vérifie si le coup est gagnant
 				if(estim=verifVainqueur(x,y,grille)){
 					grille[x][y]=0; //restauration de la grille
@@ -67,8 +67,8 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 						alpha = meilleur;
 						coup = [x,y];
 						if(alpha >= beta){
-					/*ce coup est mieux que le meilleur des coups qui aurait put être joué si on avait joué un autre
-					coup. Cela signifie que jouer le coup qui a amené cette position n'est pas bon. Il est inutile
+					/*ce coup est mieux que le meilleur des coups qui auraient put être joués si on avait joué un autre
+					coup. Cela signifie que jouer le coup qui a amené à cette position n'est pas bon. Il est inutile
 					de continuer à estimer les autres possibilités de cette position (principe de l'élagage alpha-beta). */
 							grille[x][y]=0; //restauration de la grille
 							if(!profondeur){
@@ -90,7 +90,6 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 		}
 	}
 }
-
 
 
 //permet d'estimer la position
@@ -120,9 +119,9 @@ function iaAnalyse(grille,x,y){
 	var estimation = 0; //estimation pour toutes les directions
 	var compteur = 0; //compte le nombre de possibilité pour une direction
 	var centre = 0; //regarde si le jeton a de l'espace de chaque côté
-	var bonus = 0; //point bonus liée aux jetons alliés dans cette même direction
+	var bonus = 0; //point bonus lié aux jetons alliés dans cette même direction
 	var i,j; //pour les coordonées temporaires
-	var pass=false; //permet de voir si on a passé la case étudiée
+	var pass=false; //permet de voir si on a dépassé la case étudiée
 	var pLiberte = 1; //pondération sur le nombre de liberté
 	var pBonus = 1; //pondération Bonus
 	var pCentre = 2; //pondération pour l'espace situé de chaque côté
@@ -271,7 +270,7 @@ function iaAnalyse(grille,x,y){
 	return estimation;
 }
 
-//permet de copier une grille
+//permet de copier une grille, cela permet d'éviter de modifier par inadvertance la grille de jeu originale
 function copieGrille(grille){
 	var nvGrille=[];
 	for(var x=0;x<nx;x++){
