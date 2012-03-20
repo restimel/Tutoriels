@@ -25,8 +25,8 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 				if(grille[x][y]) continue; //case déjà occupée
 
 				if(!coup){coup=[x,y];} //pour proposer au moins un coup
-
-				grille[x][y]=couleur; //on va essayer avec ce coup
+				
+				grille[x][y]=couleur; //on va essayer ce coup
 				//vérifie si le coup est gagnant
 				if(estim=verifVainqueur(x,y,grille)){
 					grille[x][y]=0; //restauration de la grille
@@ -45,8 +45,8 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 						alpha = meilleur;
 						coup = [x,y];
 						if(alpha >= beta){
-					/*ce coup est mieux que le meilleur des coups qui aurait put être joué si on avait joué un autre
-					coup. Cela signifie que jouer le coup qui a amené cette position n'est pas bon. Il est inutile
+					/*ce coup est mieux que le meilleur des coups qui auraient put être joués si on avait joué un autre
+					coup. Cela signifie que jouer le coup qui a amené à cette position n'est pas bon. Il est inutile
 					de continuer à estimer les autres possibilités de cette position (principe de l'élagage alpha-beta). */
 							grille[x][y]=0; //restauration de la grille
 							if(!profondeur){
@@ -97,9 +97,9 @@ function iaAnalyse(grille,x,y){
 	var estimation = 0; //estimation pour toutes les directions
 	var compteur = 0; //compte le nombre de possibilité pour une direction
 	var centre = 0; //regarde si le jeton a de l'espace de chaque côté
-	var bonus = 0; //point bonus liée aux jetons alliés dans cette même direction
+	var bonus = 0; //point bonus lié aux jetons alliés dans cette même direction
 	var i,j; //pour les coordonées temporaires
-	var pass=false; //permet de voir si on a passé la case étudiée
+	var pass=false; //permet de voir si on a dépassé la case étudiée
 	var pLiberte = 1; //pondération sur le nombre de liberté
 	var pBonus = 1; //pondération Bonus
 	var pCentre = 2; //pondération pour l'espace situé de chaque côté

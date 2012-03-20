@@ -2,14 +2,14 @@ var nx = 7; //nombre de cellules en largeur
 var ny = 7; //nombre de cellules en hauteur
 var nbAligne = 5; //nombre de jetons à aligner pour gagner
 var couleurTour = 1; //couleur dont c'est le tour
-var continueJeu = false; //permet d'indquer si le jeu est arrêté ou non
+var continueJeu = false; //permet d'indiquer si le jeu est arrêté ou non
 
 var iaProfondeurMax = 4; //indique la profondeur de recherche de l'IA
 var iaNoir = false; //indique si le joueur noir est une IA
 var iaBlanc = true; //indique si le joueur blanc est une IA
 
 var grille = []; //grille du jeu
-var iaWorker; // worker gérant l'IA (si le navigateur supportent les workers)
+var iaWorker; // worker gérant l'IA (si le navigateur supporte les workers)
 
 var elemTable; //élément contenant les éléments d'affichage du jeu
 var elemIA; //élément indiquant que l'ordinateur réfléchi
@@ -168,7 +168,7 @@ function init(){
 	iaToPlay(); //on vérifie si c'est au tour de l'IA de jouer
 };
 
-//permet de changer la couleur lors d'un coup
+//permet de changer l'affichage de la couleur d'un jeton
 function changeCouleur(x,y){
 	grille[x][y]=couleurTour;
 	var elem = document.getElementById("grille"+x+"_"+y);
@@ -184,7 +184,7 @@ function joue(x,y){
 	var rslt;
 	changeCouleur(x,y);
 	couleurTour = couleurTour%2+1;
-	if(rslt=verifVainqueur(x,y)){
+	if(rslt=verifVainqueur(x,y)){ //y a-t-il un gagnant ?
 		continueJeu = false;
 		alert((rslt===1?"Noirs":"Blancs")+" vainqueurs");
 	}
@@ -198,7 +198,7 @@ function joue(x,y){
 	iaToPlay();
 }
 
-//est-ce que le prochain coup doit être joué par l'IA ?
+//Permet de vérifier si le prochain coup doit être joué par l'IA
 function iaToPlay(){
 	if(!continueJeu) return false;
 	if((couleurTour === 1 && iaNoir) || (couleurTour === 2 && iaBlanc)){

@@ -179,7 +179,7 @@ function init(){
 	iaToPlay(); //on vérifie si c'est au tour de l'IA de jouer
 };
 
-//permet de changer l'affichage de la couleur d'un jeuton
+//permet de changer l'affichage de la couleur d'un jeton
 function changeCouleur(x,y){
 	grille[x][y]=couleurTour;
 	var elem = document.getElementById("grille"+x+"_"+y);

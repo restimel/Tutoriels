@@ -92,7 +92,6 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 }
 
 
-
 //permet d'estimer la position
 function iaEstimation(grille){
 	var estimation = 0; //estimation global de la position
@@ -271,7 +270,7 @@ function iaAnalyse(grille,x,y){
 	return estimation;
 }
 
-//permet de copier une grille
+//permet de copier une grille, cela permet d'éviter de modifier par inadvertance la grille de jeu originale
 function copieGrille(grille){
 	var nvGrille=[];
 	for(var x=0;x<nx;x++){
