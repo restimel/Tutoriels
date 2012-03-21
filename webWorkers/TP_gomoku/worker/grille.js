@@ -249,7 +249,7 @@ function verifNbLibre(){
 	return nbLibre;
 }
 
-//Création d'un worker
+//Création d'un worker pour l'IA
 function createIAWorker(){
 	iaWorker = new Worker("./IA.js"); //création du worker
 	iaWorker.playing = false;
