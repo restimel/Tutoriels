@@ -3,6 +3,8 @@ if(typeof importScripts === "function"){
 	importScripts("./verifFin.js");
 	//si importScripts existe c'est qu'on est dans un worker. On va en profiter pour définir une variable afin de facilter la détection ultérieur
 	self.inWorker = true;
+}else{
+	window.inWorker = false;
 }
 
 //réception des messages
@@ -12,14 +14,13 @@ onmessage = function(e){
 	self.nx=data.grille.length;
 	self.ny=data.grille[0].length;
 	self.nbAligne=data.nbAligne;
-	var coup = iaAlphaBeta(data.grille, data.tour, 0, -Infinity, Infinity);
+	var coup = iaJoue(data.grille,data.tour);
 	postMessage({cmd:"coup",x:coup[0],y:coup[1]});
 };
 
 //demande à l'IA de jouer
 function iaJoue(grilleOrig,couleur){
-	//dans un worker cette fonction devient inutile
-	var grille = copieGrille(grilleOrig);
+	var grille = inWorker?grilleOrig:copieGrille(grilleOrig);
 	return iaAlphaBeta(grille, couleur, 0, -Infinity, Infinity);
 }
 
