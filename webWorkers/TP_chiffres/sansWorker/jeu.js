@@ -7,7 +7,7 @@ var zonePlaque = document.getElementById("zonePlaque");
 var zoneParametre = document.getElementById("zoneParametres");
 var zoneResulat = document.getElementById("zoneResultat");
 
-var nombresDispo = document.getElementById("nombresDispo");
+var zoneIA = document.getElementById("resultatIA");
 var zoneCalcul = document.getElementById("zoneCalcul");
 
 var regleNbPlaques = document.getElementById("regleNbPlaques");
@@ -36,7 +36,7 @@ function initialisation(){
 	jeuTemps.value = regleTemps.value;
 	
 	zonePlaque.innerHTML = "";
-	nombresDispo.innerHTML = "";
+	zoneIA.innerHTML = "";
 	zoneCalcul.innerHTML = "";
 	
 	listeNombre = [];
@@ -58,6 +58,12 @@ var chronometre=(function(){
 		if(temps>regleTemps.value){
 			clearInterval(timer);
 			//TODO fin
+			var liste = [];
+			listeNombre.forEach(function(el){
+				if(!el.parent1) liste.push(el.valeur);
+			});
+			var resultat = chercheSolution(liste,jeuCible.value);
+			zoneIA.innerHTML = resultat[1].replace(/\n/g,"<br>");
 		}
 	}
 	
@@ -74,7 +80,7 @@ function generateNombre(){
 		listeNombre.push(new Nombre(null,null,null,choix[Math.floor(Math.random()*choix.length)]));
 		setTimeout(generateNombre,500);
 	}else{
-		jeuCible.value = Math.floor(Math.random()*898)+1;
+		jeuCible.value = Math.floor(Math.random()*898)+101;
 		chronometre();
 	}
 }
@@ -189,10 +195,6 @@ function Nombre(parent1,parent2,op,init){
 		this.parent2.utilise(this);
 		this.createCalcul();
 	}
-	this.refDispo = creationNombresDispo(this.valeur);
-	this.refDispo.className = "nombreDispo";
-	
-	
 }
 
 Nombre.prototype.createCalcul = function(){
@@ -208,12 +210,10 @@ Nombre.prototype.createCalcul = function(){
 };
 
 Nombre.prototype.utilise = function(parent){
-	this.refDispo.className = "nombreNonDispo";
 	this.usedBy = parent;
 };
 
 Nombre.prototype.libre = function(){
-	this.refDispo.className = "nombreDispo";
 	this.usedBy = null;
 };
 
@@ -228,14 +228,96 @@ Nombre.prototype.supprime = function(){
 		this.parent2.libre();
 	}
 	this.refCalcul.parentNode.removeChild(this.refCalcul);
-	this.refDispo.parentNode.removeChild(this.refDispo);
 	listeNombre.splice(listeNombre.indexOf(this),1);
 };
 
-// création et affichage de la disponibilité des nombres
-function creationNombresDispo(nb){
-	var nombre = document.createElement("div");
-	nombre.textContent = nb;
-	nombresDispo.appendChild(nombre);
-	return nombre;
+
+//recherche une solution
+function chercheSolution(nombres,cible){
+	var li = nombres.length;
+	var nb1,nb2;
+	var i,j;
+	var lj = li - 1;
+	var calcul;
+	var rslt;
+	var distance = Infinity;
+	var solution = "";
+	
+	var nombresSansNb1;
+	var nombresSansNb2;
+	
+	for(i=0; i<li && distance; i++){
+		nb1 = nombres[i];
+		nombresSansNb1 = nombres.concat([]); //copie
+		nombresSansNb1.splice(i,1); //on retire le nombre de la liste
+		
+		for(j=0; j<lj; j++){
+			nb2 = nombresSansNb1[j];
+			nombresSansNb2 = nombresSansNb1.concat([]);
+			nombresSansNb2.splice(j,1);
+			
+			//calcul ×
+			calcul = nb1 * nb2;
+			if(Math.abs(cible - calcul)<distance){
+				distance = Math.abs(cible - calcul);
+				solution = nb1 +" × " + nb2 + " = " + calcul;
+				if(!distance) break; //on a trouvé une solution on arrête la boucle
+			}
+			rslt = chercheSolution(nombresSansNb2.concat([calcul]),cible); // on relance la recherche avec les nombres restant + ce résultat
+			if(rslt[0]<distance){
+				distance = rslt[0];
+				solution = nb1 +" × " + nb2 + " = " + calcul + "\n" + rslt[1];
+				if(!distance) break; //on a trouvé une solution on arrête la boucle
+			}
+			
+			//calcul +
+			calcul = nb1 + nb2;
+			if(Math.abs(cible - calcul)<distance){
+				distance = Math.abs(cible - calcul);
+				solution = nb1 +" + " + nb2 + " = " + calcul;
+				if(!distance) break; //on a trouvé une solution on arrête la boucle
+			}
+			rslt = chercheSolution(nombresSansNb2.concat([calcul]),cible); // on relance la recherche avec les nombres restant + ce résultat
+			if(rslt[0]<distance){
+				distance = rslt[0];
+				solution = nb1 +" + " + nb2 + " = " + calcul + "\n" + rslt[1];
+				if(!distance) break; //on a trouvé une solution on arrête la boucle
+			}
+			
+			//calcul -
+			calcul = nb1 - nb2;
+			if(calcul>0){
+				if(Math.abs(cible - calcul)<distance){
+					distance = Math.abs(cible - calcul);
+					solution = nb1 +" - " + nb2 + " = " + calcul;
+					if(!distance) break; //on a trouvé une solution on arrête la boucle
+				}
+				rslt = chercheSolution(nombresSansNb2.concat([calcul]),cible); // on relance la recherche avec les nombres restant + ce résultat
+				if(rslt[0]<distance){
+					distance = rslt[0];
+					solution = nb1 +" - " + nb2 + " = " + calcul + "\n" + rslt[1];
+					if(!distance) break; //on a trouvé une solution on arrête la boucle
+				}
+			}
+			
+			//calcul ÷
+			calcul = nb1 / nb2;
+			if(calcul === Math.floor(calcul)){
+				if(Math.abs(cible - calcul)<distance){
+					distance = Math.abs(cible - calcul);
+					solution = nb1 +" ÷ " + nb2 + " = " + calcul;
+					if(!distance) break; //on a trouvé une solution on arrête la boucle
+				}
+				rslt = chercheSolution(nombresSansNb2.concat([calcul]),cible); // on relance la recherche avec les nombres restant + ce résultat
+				if(rslt[0]<distance){
+					distance = rslt[0];
+					solution = nb1 +" ÷ " + nb2 + " = " + calcul + "\n" + rslt[1];
+					if(!distance) break; //on a trouvé une solution on arrête la boucle
+				}
+			}
+			
+		}
+	}
+	
+	return [distance,solution];
 }

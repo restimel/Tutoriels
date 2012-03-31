@@ -10,6 +10,7 @@
 				right: 0;
 				top: 7em;
 				bottom: 0;
+				background-color: #CCF;
 			}
 			.info{
 				position: absolute;
@@ -18,20 +19,16 @@
 				top: 0;
 				height: 7em;
 			}
-			
-			#zoneResultat{
-				background-color: #CCF;
-			}
 			#zoneCalcul{
 				right: 10em;
 				padding: 1em;
 			}
-			#nombresDispo{
+			#resultatIA{
 				position: absolute;
 				top:0.5em;
 				bottom:0;
 				right: 0;
-				width: 10em;
+				width: 15em;
 				background-color: #DDD;
 				border:1px solid #000;
 				box-shadow: inset 0 0 0.3em 0.1em #999;
@@ -46,7 +43,7 @@
 				position: absolute;
 				display: block;
 				bottom: 0.5em;
-				right: 10.5em;
+				right: 16em;
 			}
 			#zonePlaque{
 				display: block;
@@ -92,7 +89,7 @@
 				display: inline-block;
 			}
 			
-			#zoneCalcul > div{
+			#zoneCalcul > div, #resultatIA{
 				margin: 0.5em 1em 0 0;
 				color:#333;
 				text-shadow: 1px 1px 0 #111;
@@ -100,20 +97,6 @@
 				cursor: pointer;
 			}
 			
-			.nombreDispo{
-				margin: 0.5em 1em 0 0;
-				padding-left: 1em;
-				color:#38C;
-				text-shadow: 0 0 0.1em #27B;
-				display: block;
-			}
-			.nombreNonDispo{
-				margin: 0.5em 1em 0 0;
-				padding-left: 1em;
-				color:#46C;
-				text-decoration: line-through;
-				display: block;
-			}
 			.erreur{
 				background-color: #FCC;
 			}
@@ -137,10 +120,11 @@
 		<fieldset id="zoneResultat">
 			<legend>Résultat</legend>
 			<section id="zoneCalcul"></section>
-			<aside id="nombresDispo"></aside>
+			<aside id="resultatIA"></aside>
 			<input type="text" id="entreeFormule" title="Entrez ici vos formules de calculs" placeholder="Entrez les calculs ici" />
 			<output id="jeuDistance"></output>
 		</fieldset>
+		
 		<script src="jeu.js"></script>
 	</body>
 </html>
