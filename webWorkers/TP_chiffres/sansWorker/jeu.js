@@ -43,6 +43,7 @@ function initialisation(){
 	
 	generateNombre();
 	
+	inputFormule.style.display = "";
 	inputFormule.addEventListener("blur",restoreFocus,false);
 	inputFormule.addEventListener("keypress",analyseFormule,false);
 	inputFormule.addEventListener("blur",analyseFormule,false);
@@ -58,12 +59,20 @@ var chronometre=(function(){
 		if(temps>regleTemps.value){
 			clearInterval(timer);
 			//TODO fin
+			
+			//On retire le formulaire
+			inputFormule.style.display = "none";
+			inputFormule.removeEventListener("blur",restoreFocus,false);
+			inputFormule.removeEventListener("keypress",analyseFormule,false);
+			inputFormule.removeEventListener("blur",analyseFormule,false);
+			
+			
 			var liste = [];
 			listeNombre.forEach(function(el){
 				if(!el.parent1) liste.push(el.valeur);
 			});
 			var resultat = chercheSolution(liste,jeuCible.value);
-			zoneIA.innerHTML = resultat[1].replace(/\n/g,"<br>");
+			zoneIA.innerHTML = resultat[1].replace(/\n/g,"<br>")+"<div>"+(resultat[0]?"Compte approchant : " + resultat[0]:"Le compte est bon !")+"</div>";
 		}
 	}
 	

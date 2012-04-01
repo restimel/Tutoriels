@@ -43,7 +43,13 @@
 				position: absolute;
 				display: block;
 				bottom: 0.5em;
-				right: 16em;
+				right: 17em;
+			}
+			#resultatIA > div{
+				position:absolute;
+				display: block;
+				bottom: 0.5em;
+				right: 1em;
 			}
 			#zonePlaque{
 				display: block;
@@ -96,6 +102,9 @@
 				display: block;
 				cursor: pointer;
 			}
+			#zoneJeu > button{
+				float: right;
+			}
 			
 			.erreur{
 				background-color: #FCC;
@@ -107,6 +116,7 @@
 	</head>
 	<body>
 		<section class="info" id="zoneJeu" style="display:none;">
+			<button onclick="initialisation()">Rejouer</button>
 			<output id="jeuCible"></output>
 			<output id="jeuTemps"></output>
 			<section id="zonePlaque"></section>
