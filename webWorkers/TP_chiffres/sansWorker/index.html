@@ -4,14 +4,6 @@
 		<meta charset="UTF-8" />
 		<title>TP : jeu des chiffres</title>
 		<style>
-			#zoneResultat{
-				position: absolute;
-				left: 0;
-				right: 0;
-				top: 7em;
-				bottom: 0;
-				background-color: #CCF;
-			}
 			.info{
 				position: absolute;
 				left: 0;
@@ -19,43 +11,10 @@
 				top: 0;
 				height: 7em;
 			}
-			#zoneCalcul{
-				right: 10em;
-				padding: 1em;
-			}
-			#resultatIA{
-				position: absolute;
-				top:0.5em;
-				bottom:0;
-				right: 0;
-				width: 15em;
-				background-color: #DDD;
-				border:1px solid #000;
-				box-shadow: inset 0 0 0.3em 0.1em #999;
-			}
-			#entreeFormule{
-				position: absolute;
-				display: block;
-				bottom: 0.5em;
-				left: 0.5em;
-			}
-			#jeuDistance{
-				position: absolute;
-				display: block;
-				bottom: 0.5em;
-				right: 17em;
-			}
-			#resultatIA > div{
-				position:absolute;
-				display: block;
-				bottom: 0.5em;
-				right: 1em;
-			}
 			#zonePlaque{
 				display: block;
 			}
-			#jeuCible{
-				/*float: left;*/
+			#jeuCible{ /*le nombre à trouver*/
 				display: inline-block;
 				width: 4em;
 				padding: 0.3em;
@@ -68,8 +27,7 @@
 				text-shadow: 2px 2px 5px #090;
 				background-color: #000;
 			}
-			#jeuTemps{
-				/*float: left;*/
+			#jeuTemps{ /*le chornomètre*/
 				display: inline-block;
 				width: 5em;
 				padding: 0.3em;
@@ -84,7 +42,7 @@
 			#jeuTemps:after{
 				content: " s";
 			}
-			#zonePlaque > div{
+			#zonePlaque > div{ /*les plaques*/
 				width: 3em;
 				padding: 0.5em;
 				margin: 0 0.5em 0 0.5em;
@@ -93,9 +51,51 @@
 				color:#FFF;
 				font-weight: bold;
 				display: inline-block;
+				cursor: pointer;
+			}
+			#zoneResultat{ /*espace de jeu*/
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 7em;
+				bottom: 0;
+				background-color: #CCF;
+				display: none;
+			}
+			#zoneCalcul{ /*zone d'affichage des opérations*/
+				right: 10em;
+				padding: 1em;
+			}
+			#resultatIA{ /*zone d'affichage de l'IA*/
+				position: absolute;
+				top:0.5em;
+				bottom:0;
+				right: 0;
+				width: 15em;
+				background-color: #DDD;
+				border:1px solid #000;
+				box-shadow: inset 0 0 0.3em 0.1em #999;
+			}
+			#entreeFormule{ /*espace où l'utiliateur entre sa formule*/
+				position: absolute;
+				display: block;
+				bottom: 0.5em;
+				left: 0.5em;
+			}
+			#jeuDistance{ /*distance obtenue par le joueur*/
+				position: absolute;
+				display: block;
+				bottom: 0.5em;
+				right: 17em;
+			}
+			#resultatIA > div{ /*distance obtenue par l'IA*/
+				position:absolute;
+				display: block;
+				bottom: 0.5em;
+				right: 1em;
 			}
 			
-			#zoneCalcul > div, #resultatIA{
+			#zoneCalcul > div, #resultatIA{ /*les opérations*/
 				margin: 0.5em 1em 0 0;
 				color:#333;
 				text-shadow: 1px 1px 0 #111;
@@ -125,7 +125,7 @@
 			<label>Nombre de plaques : <input type="number" min="2" value="6" id="regleNbPlaques"/></label>
 			<label>Temps de jeu : <input type="number" min="1" value="45" id="regleTemps"/> secondes</label>
 			<br/>
-			<button id="boutonCommence">Commencer une partie</button>
+			<button onclick="initialisation()">Commencer une partie</button>
 		</section>
 		<fieldset id="zoneResultat">
 			<legend>Résultat</legend>
