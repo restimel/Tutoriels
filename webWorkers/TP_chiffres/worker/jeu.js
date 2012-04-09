@@ -16,6 +16,12 @@ regleTemps.value=45;
 
 // initialisation d'une nouvelle partie
 function initialisation(){
+	if(solutionWorker){
+		//pour éviter de calculer la solution d'une autre partie
+		solutionWorker.terminate();
+		solutionWorker = createWorker();
+	}
+
 	//cache les paramètres de règles
 	document.getElementById("zoneParametres").style.display = "none";
 	
@@ -45,7 +51,7 @@ function initialisation(){
 
 //gestion du chronometre
 var chronometre=(function(){
-	var init,timer=-1
+	var init,timer=-1;
 	function chrono(){
 		var temps = (Date.now() - init)/1000; //temps écoulé depuis le début du jeu
 		jeuTemps.value = Math.round(regleTemps.value - temps);
@@ -75,21 +81,37 @@ var chronometre=(function(){
 
 //permet de rechercher une solution et de l'afficher
 function analyseIA(){
-	//recherche une des meilleures solutions 
-	var liste = [];
-	listeNombre.forEach(function(el){
-		if(!el.parent1) liste.push(el.valeur);
-	}); //récupération des nombres de départ
-	var resultat = chercheSolution(liste,jeuCible.value);
+	if(solutionWorker){
+		//les workers sont utilisés
+		if(solutionWorker.resultat){
+			//le résultat a déjà été trouvé
+			affichageIA(solutionWorker.resultat);
+		}else{
+			//le résultat n'a pas encore été trouvé
+			solutionWorker.resultat = -1;
+			document.getElementById("resultatIA").textContent = "recherche en cours..."; //on avertit l'utilisateur
+		}
+	}else{
+		//Le worker n'est pas utilisé ainsi on lance la recherche de solutions 
+		var liste = [];
+		listeNombre.forEach(function(el){
+			if(!el.parent1) liste.push(el.valeur);
+		}); //récupération des nombres de départ
+		affichageIA(chercheSolution(liste,jeuCible.value));
+	}
+
+}
+
+//affiche le résultat trouvé par l'ordinateur
+function affichageIA(resultat){
 	var explication = resultat[1].replace(/\n/g,"<br>");
-	if(resultat[0]){
+	if(resultat[0]>0){
 		explication += "<div>Compte approchant : " + resultat[0] + "</div>";
 	}else{
 		explication += "<div>Le compte est bon !</div>";
 	}
 	document.getElementById("resultatIA").innerHTML = explication;
 }
-
 
 //permet de générer les nombres pour jouer et défini la cible
 function generateNombre(){
@@ -99,7 +121,15 @@ function generateNombre(){
 		listeNombre.push(new Nombre(null,null,null,choix[Math.floor(Math.random()*choix.length)]));
 		setTimeout(generateNombre,500);
 	}else{
-		jeuCible.value = Math.floor(Math.random()*898)+101; //le nombre à trouver doit être compris entre 101 et 999
+		jeuCible.value = Math.floor(Math.random()*898)+101; //le nombre à trouver doit être compris entre 101 et 999		
+		if(solutionWorker){
+			//on utilise un worker pour trouver la solution
+			var liste = "";
+			listeNombre.forEach(function(el){liste += el.valeur+",";}); //on prépare la liste des nombres
+			liste += jeuCible.value; //on ajoute la cible à la fin de la liste
+			solutionWorker.postMessage(liste); //on envoit la liste pour démarrer la recherche
+			solutionWorker.resultat = null; //on réinitialise la propriété resultat
+		}
 		chronometre(); //on démarre le compte à rebours
 	}
 }
@@ -278,93 +308,35 @@ Nombre.prototype.supprime = function(){
 	listeNombre.splice(listeNombre.indexOf(this),1);
 };
 
-
-//recherche une solution
-function chercheSolution(nombres,cible){ //il s'agit d'une fonction récursive
-	var nb1,nb2; //nombres utilisés pour étudier une opération
-	var i,j; //index itératifs
-	var li = nombres.length; //taille de la liste des nombres parmis lesquels il faut chercher le premier nombre de l'opération
-	var lj = li - 1; //taille de la liste des nombres moins nb1 parmis lesquels le deuxième nombre de l'opération est recherché
-	var calcul; //résultat de l'opération en cours
-	var rslt; //résultat d'une recherche avec moins de nombres
-	var distance = Infinity; //distance de la solution actuelle par rapport à la cible
-	var solution = ""; //meilleure solution actuelle
-	
-	var nombresSansNb1; //liste de nombre sans le premier nombre de l'opération (nb1)
-	var nombresSansNb2; //liste de nombre sans les nombres de l'opération (nb1 et nb2)
-	
-	for(i=0; i<li && distance; i++){
-		nb1 = nombres[i]; //analyse avec ce premier nombre
-		nombresSansNb1 = nombres.concat([]); //copie de la liste
-		nombresSansNb1.splice(i,1); //on retire le nombre de la liste
-		
-		for(j=0; j<lj; j++){
-			nb2 = nombresSansNb1[j]; //analyse avec ce deuxième nombre
-			nombresSansNb2 = nombresSansNb1.concat([]); //copie de la liste
-			nombresSansNb2.splice(j,1); //on retire le nombre de la liste
-			
-			//calcul ×
-			calcul = nb1 * nb2;
-			if(Math.abs(cible - calcul)<distance){
-				distance = Math.abs(cible - calcul);
-				solution = nb1 +" × " + nb2 + " = " + calcul;
-				if(!distance) break; //on a trouvé une solution on arrête la boucle
-			}
-			rslt = chercheSolution(nombresSansNb2.concat([calcul]),cible); // on relance la recherche avec les nombres restant + ce résultat
-			if(rslt[0]<distance){
-				distance = rslt[0];
-				solution = nb1 +" × " + nb2 + " = " + calcul + "\n" + rslt[1];
-				if(!distance) break; //on a trouvé une solution on arrête la boucle
-			}
-			
-			//calcul +
-			calcul = nb1 + nb2;
-			if(Math.abs(cible - calcul)<distance){
-				distance = Math.abs(cible - calcul);
-				solution = nb1 +" + " + nb2 + " = " + calcul;
-				if(!distance) break; //on a trouvé une solution on arrête la boucle
-			}
-			rslt = chercheSolution(nombresSansNb2.concat([calcul]),cible); // on relance la recherche avec les nombres restant + ce résultat
-			if(rslt[0]<distance){
-				distance = rslt[0];
-				solution = nb1 +" + " + nb2 + " = " + calcul + "\n" + rslt[1];
-				if(!distance) break; //on a trouvé une solution on arrête la boucle
-			}
-			
-			//calcul -
-			calcul = nb1 - nb2;
-			if(calcul>0){
-				if(Math.abs(cible - calcul)<distance){
-					distance = Math.abs(cible - calcul);
-					solution = nb1 +" - " + nb2 + " = " + calcul;
-					if(!distance) break; //on a trouvé une solution on arrête la boucle
-				}
-				rslt = chercheSolution(nombresSansNb2.concat([calcul]),cible); // on relance la recherche avec les nombres restant + ce résultat
-				if(rslt[0]<distance){
-					distance = rslt[0];
-					solution = nb1 +" - " + nb2 + " = " + calcul + "\n" + rslt[1];
-					if(!distance) break; //on a trouvé une solution on arrête la boucle
-				}
-			}
-			
-			//calcul ÷
-			calcul = nb1 / nb2;
-			if(calcul === Math.floor(calcul)){
-				if(Math.abs(cible - calcul)<distance){
-					distance = Math.abs(cible - calcul);
-					solution = nb1 +" ÷ " + nb2 + " = " + calcul;
-					if(!distance) break; //on a trouvé une solution on arrête la boucle
-				}
-				rslt = chercheSolution(nombresSansNb2.concat([calcul]),cible); // on relance la recherche avec les nombres restant + ce résultat
-				if(rslt[0]<distance){
-					distance = rslt[0];
-					solution = nb1 +" ÷ " + nb2 + " = " + calcul + "\n" + rslt[1];
-					if(!distance) break; //on a trouvé une solution on arrête la boucle
-				}
-			}
-			
-		}
+//permet d'analyser la réponse du worker
+function reponseWorker(event){
+	var reponse = event.data.split("|");
+	console.log(reponse[2]/1000);
+	if(solutionWorker.resultat === -1){
+		//il faut afficher le resultat tout de suite
+		affichageIA(reponse);
+	}else{
+		//on garde la réponse au chaud
+		solutionWorker.resultat = reponse;
 	}
-	
-	return [distance,solution];
 }
+
+//création d'un worker
+function createWorker(){
+	var w = new Worker("./solution.js");
+	w.addEventListener("message",reponseWorker,false);
+	return w;
+}
+
+if(window.Worker){
+	//le navigateur supporte les workers
+	var solutionWorker = createWorker();
+}else{
+	//le navigateur ne supporte pas les Workers, on charge le fichier dynamiquement
+	(function(){//pour éviter de polluer l'espace globale
+		var script = document.createElement("script");
+		script.src="./solution.js";
+		document.body.appendChild(script);
+	})();
+}
+
