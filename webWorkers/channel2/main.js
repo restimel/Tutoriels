@@ -1,4 +1,5 @@
 if(window.Worker && window.MessageChannel){
+
 	//création du canal de communication
 	var channel = new MessageChannel();
 	channel.port1.onmessage=function(e){
@@ -11,9 +12,10 @@ if(window.Worker && window.MessageChannel){
 		alert("Je ne veux pas recevoir de message par ce canal");
 	};
 
-	//transfert de port2
+	//transfert de port2 vers le thread
 	w.postMessage("Voici le port2",[channel.port2]);
 	//à partir de maintenant channel.port2 n'est plus utilisable dans ce thread. Il a été transféré
+
 }else{
 //le navigateur ne supporte pas ce code
 	alert("Désolé votre navigateur ne supporte pas les workers ou les message-channel ! ☹");
