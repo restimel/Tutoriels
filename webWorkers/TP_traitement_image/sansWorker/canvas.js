@@ -62,6 +62,41 @@ function draw(event){
 	ctx.fill();
 }
 
+/*
+ * Shim
+ */
+
+//afin que tous les navigateurs supportent les fonctions utilisées
+if(MouseEvent && MouseEvent.prototype){
+	//support du event.offsetX
+	if(!MouseEvent.prototype.hasOwnProperty("offsetX")){
+		Object.defineProperty(MouseEvent.prototype, "offsetX",{get: function(){
+			var el = this.target, ox = -el.offsetLeft;
+			while(el=el.offsetParent){
+				ox += el.scrollLeft - el.offsetLeft;
+			}
+			if(window.scrollX){
+				ox += window.scrollX;
+			}
+			return this.clientX + ox; 
+		}});
+	}
+
+	//support du event.offsetY
+	if(!MouseEvent.prototype.hasOwnProperty("offsetY")){
+		Object.defineProperty(MouseEvent.prototype, "offsetY",{get: function(){
+			var el = this.target, oy = -el.offsetTop;
+			while(el=el.offsetParent){
+				oy += el.scrollTop - el.offsetTop;
+			}
+			if(window.scrollY){
+				oy += window.scrollY;
+			}
+			return this.clientY + oy; 
+		}});
+	}
+}
+
 
 /*
  * Initialisation

@@ -38,77 +38,79 @@ elem_zoom.appendChild(elem_canvasZoom);
 /**
  * Fonctions de gestion des filtres
  */
+
+//définitions des filtres
 var listeFiltre = [
-{
-	nom:"Flou (petit)",
-	filtre:[
-	[1/10,1/10,1/10],
-	[1/10,2/10,1/10],
-	[1/10,1/10,1/10]
-	]
-},
-{
-	nom:"Flou (moyen)",
-	filtre:[
-	[1/26,1/26,1/26,1/26,1/26],
-	[1/26,1/26,1/26,1/26,1/26],
-	[1/26,1/26,2/26,1/26,1/26],
-	[1/26,1/26,1/26,1/26,1/26],
-	[1/26,1/26,1/26,1/26,1/26]
-	]
-},
-{
-	nom:"Flou (grand)",
-	filtre:[
-	[1/50,1/50,1/50,1/50,1/50,1/50,1/50],
-	[1/50,1/50,1/50,1/50,1/50,1/50,1/50],
-	[1/50,1/50,1/50,1/50,1/50,1/50,1/50],
-	[1/50,1/50,1/50,2/50,1/50,1/50,1/50],
-	[1/50,1/50,1/50,1/50,1/50,1/50,1/50],
-	[1/50,1/50,1/50,1/50,1/50,1/50,1/50],
-	[1/50,1/50,1/50,1/50,1/50,1/50,1/50]
-	]
-},
-{
-	nom:"Flou Gaussien (moyen, σ=0.7)",
-	filtre:[
-	[0.0001,0.002,0.0055,0.002,0.0001],
-	[0.002,0.0422,0.1171,0.0422,0.002],
-	[0.0055,0.1171,0.3248,0.1171,0.0055],
-	[0.002,0.0422,0.1171,0.0422,0.002],
-	[0.0001,0.002,0.0055,0.002,0.0001]
-	]
-},
-{
-	nom:"Filtre de Laplace (petit)",
-	filtre:[
-	[-1,-1,-1],
-	[-1,8,-1],
-	[-1,-1,-1]
-	]
-},
-{
-	nom:"Sobel (vertical)",
-	filtre:[
-	[-1,0,1],
-	[-2,0,2],
-	[-1,0,1]
-	]
-},
-{
-	nom:"Sobel (horizontal)",
-	filtre:[
-	[-1,-2,-1],
-	[0,0,0],
-	[1,2,1]
-	]
-}
+	{
+		nom:"Flou (petit)",
+		filtre:[
+			[1/9,1/9,1/9],
+			[1/9,1/9,1/9],
+			[1/9,1/9,1/9]
+		]
+	},
+	{
+		nom:"Flou (moyen)",
+		filtre:[
+			[1/25,1/25,1/25,1/25,1/25],
+			[1/25,1/25,1/25,1/25,1/25],
+			[1/25,1/25,1/25,1/25,1/25],
+			[1/25,1/25,1/25,1/25,1/25],
+			[1/25,1/25,1/25,1/25,1/25]
+		]
+	},
+	{
+		nom:"Flou (grand)",
+		filtre:[
+			[1/49,1/49,1/49,1/49,1/49,1/49,1/49],
+			[1/49,1/49,1/49,1/49,1/49,1/49,1/49],
+			[1/49,1/49,1/49,1/49,1/49,1/49,1/49],
+			[1/49,1/49,1/49,1/49,1/49,1/49,1/49],
+			[1/49,1/49,1/49,1/49,1/49,1/49,1/49],
+			[1/49,1/49,1/49,1/49,1/49,1/49,1/49],
+			[1/49,1/49,1/49,1/49,1/49,1/49,1/49]
+		]
+	},
+	{
+		nom:"Flou Gaussien (moyen, σ=0.7)",
+		filtre:[
+			[0.0001,0.002,0.0055,0.002,0.0001],
+			[0.002,0.0422,0.1171,0.0422,0.002],
+			[0.0055,0.1171,0.3248,0.1171,0.0055],
+			[0.002,0.0422,0.1171,0.0422,0.002],
+			[0.0001,0.002,0.0055,0.002,0.0001]
+		]
+	},
+	{
+		nom:"Filtre de Laplace",
+		filtre:[
+			[-1,-1,-1],
+			[-1,8,-1],
+			[-1,-1,-1]
+		]
+	},
+	{
+		nom:"Sobel (vertical)",
+		filtre:[
+			[-1,0,1],
+			[-2,0,2],
+			[-1,0,1]
+		]
+	},
+	{
+		nom:"Sobel (horizontal)",
+		filtre:[
+			[-1,-2,-1],
+			[0,0,0],
+			[1,2,1]
+		]
+	}
 ];
 
 //permet de préparer la liste des filtres disponibles
 function generateFilterList(){
 	var i = 0,
-	li = listeFiltre.length,
+	    li = listeFiltre.length,
 	option;
 	do{
 		option = document.createElement("option");
@@ -120,15 +122,6 @@ function generateFilterList(){
 
 //permet de préparer tout ce qui est nécessaire pour appliquer le filtre sur le canvas
 function prepareFiltre(){
-	var idFiltre = elem_listeFiltre.value;
-	
-	var image1D = []; //contiendra la liste des pixels correspondant à l'image du Canvas
-	var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height); //récupération des données binaires du Canvas
-	if(imageData){
-		// on a réussi à extraire les données du Canvas, dans ce cas on remplit imagePixels
-		image1D = imageData.data;
-	}//si on n'a pas réussi à extraire les données, alors on laisse le tableau vide.
-	
 	//génération d'une nouvelle ligne de résultat
 	var ligne = elem_result.insertRow(-1);
 	var cellule = ligne.insertCell(0);
@@ -138,19 +131,26 @@ function prepareFiltre(){
 	cellule.id = "filtre_"+uid;
 	cellule.textContent = "en cours de génération";
 	
-	var image2D = conversionImage(image1D,canvas.width); //prepare l'image en 2D (+RVB)
-	image2D = appliquerFiltre(image2D, idFiltre, uid);//on applique le filtre à l'image
+	var image1D = getCanvas(); //on récupère la liste des pixels en 1D
+	var image2D = conversionImage(image1D,canvas.width); //prépare l'image en 2D (+RVB)
+	image2D = appliquerFiltre(image2D, elem_listeFiltre.value, uid); //on applique le filtre à l'image
 	finalisationFiltre(image2D,uid++); //on affiche le résultat
 }
 
-//permet de convertir un tableaude pixel 1D en 2D
+//permet de récupérer la liste des pixels
+function getCanvas(){
+	var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height); //récupération des données binaires du Canvas
+	return imageData.data;
+}
+
+//permet de convertir un tableau de pixels 1D en 2D
 function conversionImage(image1D,w,uid){
 	//prepare l'image en 2D (+RVB)
-	var image2D = [],
-	i,
-	x=0,
-	y=0,
-	li = image1D.length;
+	var image2D = [], //image finale
+	    i, //index pour parcourrir l'image1D
+	    x=0, //coordonnée pour l'image2D
+	    y=0, //coordonnée pour l'image2D
+	    li = image1D.length;
 	
 	for(i=0 ; i<li; i++){
 		if(y===0){
@@ -172,15 +172,15 @@ function conversionImage(image1D,w,uid){
 //permet d'appliquer le filtre sur l'image
 function appliquerFiltre(image, idFiltre){
 	var filtre = (listeFiltre[idFiltre] && listeFiltre[idFiltre].filtre) || [[]], //récupère le filtre s'il existe ou alors génère un filtre vide
-	imgX, //position X sur l'image
-	imgY, //position Y sur l'image
-	imgMaxX = image.length, // largeur de l'image
-	imgMaxY = image[0].length, //hauteur de l'image
-	fltX, //position X sur le filtre
-	fltY, //position Y sur le filtre
-	fltMaxX = filtre.length, //largeur du filtre
-	fltMaxY = filtre[0].length, //hauteur du filtre
-	fltOffsetX = (fltMaxX - 1)/2, //offset X à appliquer sur le filtre pour trouver le bon pixel sur l'image
+	    imgX, //position X sur l'image
+	    imgY, //position Y sur l'image
+	    imgMaxX = image.length, // largeur de l'image
+	    imgMaxY = image[0].length, //hauteur de l'image
+	    fltX, //position X sur le filtre
+	    fltY, //position Y sur le filtre
+	    fltMaxX = filtre.length, //largeur du filtre
+	    fltMaxY = filtre[0].length, //hauteur du filtre
+	    fltOffsetX = (fltMaxX - 1)/2, //offset X à appliquer sur le filtre pour trouver le bon pixel sur l'image
 	fltOffsetY = (fltMaxY - 1)/2, //offset Y à appliquer sur le filtre pour trouver le bon pixel sur l'image
 	index, //sert à identifier la position par rapport à la liste des pixels
 	sommeRouge, //valeur temporaire pour l'application du filtre sur un pixel
@@ -243,12 +243,13 @@ function finalisationFiltre(image2D,uid){
 	var ctx = canvasResult.getContext("2d");
 	var imageData = ctx.getImageData(0, 0, canvasResult.width, canvasResult.height);
 	
+	//reconversion en une image à 1 dimension
 	var x,
-	y,
-	lx = image2D.length,
-	ly = image2D[0].length,
-	i=0,
-	image1D = imageData.data;
+	    y,
+	    lx = image2D.length,
+	    ly = image2D[0].length,
+	    i=0,
+	    image1D = imageData.data;
 	
 	for(y = 0; y<ly; y++){
 		for(x = 0; x<lx; x++){
@@ -259,7 +260,7 @@ function finalisationFiltre(image2D,uid){
 		}
 	}
 	
-	ctx.putImageData(imageData,0,0);
+	ctx.putImageData(imageData,0,0); //on 
 }
 
 //permet d'afficher en plus grand un résultat
