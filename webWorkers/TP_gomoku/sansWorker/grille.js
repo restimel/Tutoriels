@@ -209,7 +209,7 @@ function iaToPlay(){
 			continueJeu = true;
 			elementIA.style.visibility = "hidden";
 			joue(rslt[0],rslt[1]);
-		},10); //au cas où deux ordi jouent ensemble et pour voir le coup pendant que l'IA réfléchi
+		},10); //au cas où deux ordi jouent ensemble et pour voir le coup pendant que l'IA réfléchit
 	}
 }
 
@@ -220,7 +220,7 @@ function setClick(x,y){
 	};
 }
 
-//permet de vérifier s'il reste des coups jouable
+//permet de vérifier s'il reste des coups jouables
 function verifNbLibre(){
 	var nbLibre=0;
 	for(var x=0;x<nx;x++){

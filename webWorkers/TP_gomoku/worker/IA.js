@@ -39,7 +39,7 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 		var coup=null; //meilleur coup actuel
 		var couleurOpp = couleur%2+1; //optimisation pour calculer la couleur adverse
 
-		//on va essayer toutes les combinaisons possible
+		//on va essayer toutes les combinaisons possibles
 		for(var x=0;x<nx;x++){
 			for(var y=0;y<ny;y++){
 				if(grille[x][y]) continue; //case déjà occupée
@@ -68,7 +68,7 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 						alpha = meilleur;
 						coup = [x,y];
 						if(alpha >= beta){
-					/*ce coup est mieux que le meilleur des coups qui auraient put être joués si on avait joué un autre
+					/*ce coup est mieux que le meilleur des coups qui auraient pu être joués si on avait joué un autre
 					coup. Cela signifie que jouer le coup qui a amené à cette position n'est pas bon. Il est inutile
 					de continuer à estimer les autres possibilités de cette position (principe de l'élagage alpha-beta). */
 							grille[x][y]=0; //restauration de la grille
@@ -87,7 +87,7 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 			return coup;
 		}else{
 			if(coup) return meilleur;
-			else return 0; //si coup n'a jamais été défini c'est qu'il n'y plus de possibilité de jeu. C'est partie nulle.
+			else return 0; //si coup n'a jamais été défini c'est qu'il n'y a plus de possibilité de jeu. C'est partie nulle.
 		}
 	}
 }
@@ -95,12 +95,12 @@ function iaAlphaBeta(grille, couleur, profondeur, alpha, beta){
 
 //permet d'estimer la position
 function iaEstimation(grille){
-	var estimation = 0; //estimation global de la position
+	var estimation = 0; //estimation globale de la position
 	
 	for(var x=0;x<nx;x++){
 		for(var y=0;y<ny;y++){
 			if(!grille[x][y]) continue;
-			//estimation de la valeur de ce jeton et ajout au calcul d'estimation global
+			//estimation de la valeur de ce jeton et ajout au calcul d'estimation globale
 			switch(grille[x][y]){
 				case 1:
 					estimation += iaAnalyse(grille,x,y);
@@ -114,16 +114,16 @@ function iaEstimation(grille){
 	return estimation;
 }
 
-//permet de calculer le nombre de "liberté" pour la case donnée
+//permet de calculer le nombre de "libertés" pour la case donnée
 function iaAnalyse(grille,x,y){
 	var couleur = grille[x][y];
 	var estimation = 0; //estimation pour toutes les directions
-	var compteur = 0; //compte le nombre de possibilité pour une direction
+	var compteur = 0; //compte le nombre de possibilités pour une direction
 	var centre = 0; //regarde si le jeton a de l'espace de chaque côté
 	var bonus = 0; //point bonus lié aux jetons alliés dans cette même direction
-	var i,j; //pour les coordonées temporaires
+	var i,j; //pour les coordonnées temporaires
 	var pass=false; //permet de voir si on a dépassé la case étudiée
-	var pLiberte = 1; //pondération sur le nombre de liberté
+	var pLiberte = 1; //pondération sur le nombre de libertés
 	var pBonus = 1; //pondération Bonus
 	var pCentre = 2; //pondération pour l'espace situé de chaque côté
 
@@ -204,7 +204,7 @@ function iaAnalyse(grille,x,y){
 				compteur++;
 				bonus++;
 				break;
-			default: //jeton adverse, on arrete de rechercher
+			default: //jeton adverse, on arrête de rechercher
 				i=0;
 		}
 	}
@@ -220,7 +220,7 @@ function iaAnalyse(grille,x,y){
 				compteur++;
 				bonus++;
 				break;
-			default: //jeton adverse, on arrete de rechercher
+			default: //jeton adverse, on arrête de rechercher
 				i=nx;
 		}
 	}
@@ -243,7 +243,7 @@ function iaAnalyse(grille,x,y){
 				compteur++;
 				bonus++;
 				break;
-			default: //jeton adverse, on arrete de rechercher
+			default: //jeton adverse, on arrête de rechercher
 				i=0;
 		}
 	}
@@ -259,7 +259,7 @@ function iaAnalyse(grille,x,y){
 				compteur++;
 				bonus++;
 				break;
-			default: //jeton adverse, on arrete de rechercher
+			default: //jeton adverse, on arrête de rechercher
 				i=nx;
 		}
 	}

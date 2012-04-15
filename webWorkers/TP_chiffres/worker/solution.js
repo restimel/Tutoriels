@@ -4,8 +4,8 @@
 function chercheSolution(nombres,cible){ //il s'agit d'une fonction récursive
 	var nb1,nb2; //nombres utilisés pour étudier une opération
 	var i,j; //index itératifs
-	var li = nombres.length; //taille de la liste des nombres parmis lesquels il faut chercher le premier nombre de l'opération
-	var lj = li - 1; //taille de la liste des nombres moins nb1 parmis lesquels le deuxième nombre de l'opération est recherché
+	var li = nombres.length; //taille de la liste des nombres parmi lesquels il faut chercher le premier nombre de l'opération
+	var lj = li - 1; //taille de la liste des nombres moins nb1 parmi lesquels le deuxième nombre de l'opération est recherché
 	var calcul; //résultat de l'opération en cours
 	var rslt; //résultat d'une recherche avec moins de nombres
 	var distance = Infinity; //distance de la solution actuelle par rapport à la cible
@@ -98,5 +98,5 @@ onmessage = function(event){
 	nombres = nombres.map(function(v){return parseInt(v,10);}); // conversion de toutes les valeurs en nombre
 	var resultat = chercheSolution(nombres,cible); //on effectue le calcul
 	resultat.push(Date.now() - d);
-	postMessage(resultat.join("|")); //on renvoit la solution
+	postMessage(resultat.join("|")); //on renvoie la solution
 };

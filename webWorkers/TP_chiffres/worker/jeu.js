@@ -1,12 +1,12 @@
 /*
-  Références globales aux éléments HTML frquemment utilisés
+  Références globales aux éléments HTML fréquemment utilisés
 */
 
 var regleTemps = document.getElementById("regleTemps"); //élément indiquant le temps total de réflexion
 var jeuTemps = document.getElementById("jeuTemps"); //élément indiquant le temps restant pour jouer
 var jeuCible = document.getElementById("jeuCible"); //élément indiquant le nombre à trouver
 
-var listeNombre = []; //liste des nombres utilisable par l'utilisateur
+var listeNombre = []; //liste des nombres utilisables par l'utilisateur
 
 //paramétrage par défaut
 document.getElementById("regleNbPlaques").value=6;
@@ -113,9 +113,9 @@ function affichageIA(resultat){
 	document.getElementById("resultatIA").innerHTML = explication;
 }
 
-//permet de générer les nombres pour jouer et défini la cible
+//permet de générer les nombres pour jouer et définit la cible
 function generateNombre(){
-	var choix = [1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,25,50,75,100]; //plaques possible
+	var choix = [1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,25,50,75,100]; //plaques possibles
 	var nbPlaque = parseInt(document.getElementById("regleNbPlaques").value,10);
 	if(listeNombre.length < nbPlaque){
 		listeNombre.push(new Nombre(null,null,null,choix[Math.floor(Math.random()*choix.length)]));
@@ -283,12 +283,12 @@ Nombre.prototype.createCalcul = function(){
 	document.getElementById("zoneCalcul").appendChild(this.refCalcul);
 };
 
-//défini l'utilisation de ce nombre dans un opération
+//définit l'utilisation de ce nombre dans un opération
 Nombre.prototype.utilise = function(parent){
 	this.usedBy = parent;
 };
 
-//défini le fait que ce nombre n'est plus utilisé dans une opération
+//définit le fait que ce nombre n'est plus utilisé dans une opération
 Nombre.prototype.libre = function(){
 	this.usedBy = null;
 };
