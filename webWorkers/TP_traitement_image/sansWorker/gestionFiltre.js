@@ -122,6 +122,8 @@ function generateFilterList(){
 
 //permet de préparer tout ce qui est nécessaire pour appliquer le filtre sur le canvas
 function prepareFiltre(){
+	var idFiltre = elem_listeFiltre.value;
+
 	//génération d'une nouvelle ligne de résultat
 	var ligne = elem_result.insertRow(-1);
 	var cellule = ligne.insertCell(0);
@@ -140,7 +142,11 @@ function prepareFiltre(){
 //permet de récupérer la liste des pixels
 function getCanvas(){
 	var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height); //récupération des données binaires du Canvas
-	return imageData.data;
+	if(imageData){
+		return imageData.data;
+	}else{
+		return [];//si on n'a pas réussi à extraire les données, alors on donne un tableau vide.
+	}
 }
 
 //permet de convertir un tableau de pixels 1D en 2D
