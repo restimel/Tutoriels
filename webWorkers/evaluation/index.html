@@ -18,6 +18,7 @@
 			font-size: 0.5em;
 			font-style: italic;
 		}
+		
 	</style>
 </head>
 <body>
@@ -25,6 +26,8 @@
 <aside id="browser"></aside>
 <hr>
 <div id="result"></div>
+<aside id="recordArea"><label>log Record:<textarea id="record"></textarea></label></aside>
+<br>
 
 <script>
 	document.getElementById("browser").innerHTML="Browser: "+navigator.appName+"<br>Version: "+navigator.appVersion+"<br>Platform: "+navigator.platform+"<br>userAgent:"+navigator.userAgent;
@@ -41,9 +44,11 @@
 	elemStatus.textContent="analyzing";
 	elemStatus.style.color="orange";
 	setTimeout(function(){
-		refresh();
+		var rslt=refresh();
+		rslt.navigator={appName:navigator.appName,appVersion:navigator.appVersion,platform:navigator.platform,userAgent:navigator.userAgent};
 		elemStatus.textContent="done";
 		elemStatus.style.color="green";
+		document.getElementById("record").value = JSON.stringify(rslt);
 	},2000);
 </script>
 
