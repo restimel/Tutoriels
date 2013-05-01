@@ -86,6 +86,21 @@ Task.prototype.display=function(){
 	return elem;
 }
 
+Task.prototype.simpleObject=function(){
+	var obj={
+		name:this.name,
+		note:this.getNote(),
+		subtask:[]
+	};
+	
+	var i=0,li=this.subTask.length;
+	while(i<li){
+		obj.subtask[i]=this.subTask[i++].simpleObject();
+	}
+	
+	return obj;
+};
+
 var wWorker=new Task("Web-Workers",0);
 var dWorker=new Task("Dedicated-Worker",1,wWorker);
 var pstMsg=new Task("worker.postMessage",1,dWorker);
@@ -185,6 +200,7 @@ function refresh(){
 	var elem=document.getElementById("result");
 	elem.innerHTML="";
 	elem.appendChild(taches.display());
+	return taches.simpleObject();
 }
 
 
