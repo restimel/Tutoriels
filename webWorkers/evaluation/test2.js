@@ -384,28 +384,21 @@ if(typeof window.SharedWorker !== "undefined"){
 	}
 	
 	try{
-		var blob=null;
-		if(window.BlobBuilder){
-			blob = new BlobBuilder();
-		}else if(window.WebKitBlobBuilder){
-			blob = new WebKitBlobBuilder();
-		}else if(window.MozBlobBuilder){
-			blob = new MozBlobBuilder();
-		}else if(window.OBlobBuilder){
-			blob = new OBlobBuilder();
-		}else if(window.MsBlobBuilder){
-			blob = new OBlobBuilder();
+		var fileContents = ["onconnect=function(e){var port=e.ports[0];port.onmessage=function(e){port.postMessage('je réponds au message : '+e.data);};};"],
+			blob=null;
+		if(window.Blob){
+			blob = new Blob(content);
 		}else{
 			sWorker.set("inline",false);
 		}
 
 		if(blob){
 			sWorker.set("blob",true);
-			blob.append("onconnect=function(e){var port=e.ports[0];port.onmessage=function(e){port.postMessage('je réponds au message : '+e.data);};};");
+
 			var URL = window.URL || window.webkitURL || window.MozURL || window.mozURL || window.oURL || window.OURL || window.MsURL;
 			if(URL){
 				if(URL.createObjectURL) sWorker.set("createObjectURL",true);
-				var blobUrl = URL.createObjectURL(blob.getBlob());
+				var blobUrl = URL.createObjectURL(blob);
 
 				var worker = new SharedWorker(blobUrl);
 				worker.port.onmessage=function(e){

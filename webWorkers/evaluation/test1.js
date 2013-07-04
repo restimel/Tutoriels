@@ -230,27 +230,19 @@ if(typeof window.Worker !== "undefined"){
 	}
 	
 	try{
-		var blob=null;
-		if(window.BlobBuilder){
-			blob = new BlobBuilder();
-		}else if(window.WebKitBlobBuilder){
-			blob = new WebKitBlobBuilder();
-		}else if(window.MozBlobBuilder){
-			blob = new MozBlobBuilder();
-		}else if(window.OBlobBuilder){
-			blob = new OBlobBuilder();
-		}else if(window.MsBlobBuilder){
-			blob = new OBlobBuilder();
+		var fileContents = ["onmessage=function(e){postMessage('je réponds au message : '+e.data);};"],
+			blob=null;
+		if(window.Blob){
+			blob = new Blob(content);
 		}else{
 			dWorker.set("inline",false);
 		}
 
 		if(blob){
 			dWorker.set("blob",true);
-			if(!window.BlobBuilder){
+			if(!window.Blob){
 				dWorker.set("blob",false); //Blob works but not with the "official" one
 			}
-			blob.append("onmessage=function(e){postMessage('je réponds au message : '+e.data);};");
 		}
 		
 		var compatibleURL = window.URL || window.webkitURL || window.MozURL || window.mozURL || window.oURL || window.OURL || window.MsURL;
@@ -262,7 +254,7 @@ if(typeof window.Worker !== "undefined"){
 				dWorker.set("createObjectURL",false); //URL works but not with the "official" one
 			}
 			if(blob){
-				var blobUrl = compatibleURL.createObjectURL(blob.getBlob());
+				var blobUrl = compatibleURL.createObjectURL(blob);
 				var worker = new Worker(blobUrl);
 				worker.onmessage=function(e){
 					dWorker.set("inline",true);
