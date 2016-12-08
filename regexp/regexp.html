@@ -1,0 +1,1118 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Regexp - A quick presentation</title>
+
+        <meta name="description" content="A quick presentation of RegExp">
+        <meta name="author" content="Benoît Mariat">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+            if( window.location.search.match( /print-pdf/gi ) ) {
+                var link = document.createElement( 'link' );
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = 'css/print/pdf.css';
+                document.getElementsByTagName( 'head' )[0].appendChild( link );
+            }
+        </script>
+
+        <style>
+            p.error {
+                font-size: x-large;
+                background-color: #CE171C;
+                border-radius: 1em;
+                padding: 0.5em;
+            }
+            p.info {
+                font-size: x-large;
+                background-color: #1157ED;
+                border-radius: 1em;
+                padding: 0.5em;
+            }
+            p.smaller, td.smaller, code.smaller {
+                font-size: 0.8em;
+            }
+            .mermaid {
+                background-color: #BEA575; /*#AE876F;*/
+                color: black;
+            }
+            .mermaid span{
+                background-color: transparent !important;
+                color: #1A1A1A;
+                font-size: 0.6em;
+                font-style: italic;
+            }
+            span.key {
+                color: #000;
+                display: inline-block;
+                text-shadow: none;
+                border-radius: 10px;
+                background: #fff;
+                box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px;
+                padding: 1px 6px 1px;
+            }
+        </style>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h1>RegExp</h1>
+                    <h3>Regular expressions in JavaScript</h3>
+                    <br><br><br>
+                    <p>Navigate with <span class="key">→</span> through chapters and <span class="key">↓</span> inside chapters.</p>
+                    <p><small>And also <span class="key">esc</span> if you are hurry.</small></p>
+                </section>
+
+                <section>
+                    <h2>Introduction to RegExp</h2>
+                    <ul>
+                        <li>Why?</li>
+                        <li>Where?</li>
+                        <li>How?
+                            <ul>
+                                <li>RegExp's method</li>
+                                <li>Build RegExp</li>
+                                <li>Quantifiers</li>
+                                <li>Classes</li>
+                                <li>Groups</li>
+                                <li>Assertion</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Why using RegExp?</h2>
+                    </section>
+                    <section>
+                        <h3>To search text</h3>
+                        <p>It is possible to search complex statements in few characters.</p>
+                        <br>
+                        <p>Example:<br>
+                        I look for word "get" but not followed by 'String'.
+                        <pre><code data-trim contenteditable>get(?!String)</code></pre>
+                        </p>
+                    </section>
+                    <section>
+                        <h3>To check format</h3>
+                        <ul>
+                            <li>Check for a phone number: <pre><code contenteditable>0\d([\s.-]?\d\d){4}</code></pre></li>
+                            <li>Check for an e-mail: <pre><code contenteditable>[\w.]+@\w+\.\w{1,3}</code></pre></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>To replace texts</h3>
+                        <p class="smaller over">Example: We want to add a class 'blue' to all div and span</p>
+                        <pre><code contenteditable data-trim class="smaller" id="example1">
+<div class="header">
+  <h2 class="title">title</h2>
+</div>
+<div id="body"></div>
+<div id="msg" class="msg hidden"></div>
+<button class="btn">
+  <span class="fa fa-paw"></span>
+</button>
+                        </code></pre>
+                            <p class="smaller over fragment" data-fragment-index="1">The replacement expression</p>
+
+                        <pre class="fragment" data-fragment-index="1"><code contenteditable class="smaller" oninput="var str = document.getElementById('example1').textContent; document.getElementById('result1').textContent = eval(this.textContent);">str.replace(  /(<(div|span).*?)( class="(.*?)")?(?![^>]*class=")/g,  '$1 class="$4 blue"');</code></pre>
+                            <p class="smaller over fragment" data-fragment-index="1">The result</p>
+
+
+                        <pre class="fragment" data-fragment-index="1"><code contenteditable data-trim class="smaller" id='result1'>
+<div class="header blue">
+  <h2 class="title">title</h2>
+</div>
+<div class="blue" id="body"></div>
+<div id="msg" class="msg hidden blue"></div>
+<button class="btn">
+  <span class="fa fa-paw blue"></span>
+</button>
+                        </code></pre>
+
+
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Where can I use RegExp?</h2>
+                    </section>
+                    <section>
+                        <h3>In programmation languages</h3>
+                        <p>Almost all languages accept RegExp, sometimes with small differences:<br>
+                        <br>
+                        Perl, Python, Ruby, PHP, Java, C++, SQL, ...<br>
+                        And of course <b>JavaScript</b>
+                        </p>
+                    </section>
+                    <section>
+                        <h3>In shell</h3>
+                        <p>Many command can use RegExp, like:<br>grep, find, less, ed, ex, sed, awk</p>
+                        <table width="100%">
+                            <tr><td width="60%">
+                            <pre><code data-trim>
+                                $ git grep '\.trigger(.*\bsuccess\b'
+                            </code></pre>
+                            </td><td width="40%" style="font-size: medium">
+                            <p>
+                                this.<span style="color: green">trigger('user:create:success</span>', user);<br>
+                                this.<span style="color: green">trigger(rpc + ':success</span>', this, data[1], data);<br>
+                                this.<span style="color: green">trigger('list:success</span>:change', {
+                            </p>
+                            </td></tr>
+
+                            <tr><td>
+                            <pre><code data-trim>$ sed -e 's/^\s\|\s$//g'</code></pre>
+                            </td><td style="font-size: medium"><p>Remove all spaces or tabulations at start and at end of each line of a file (Trim).</p></td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>In Text editors</h3>
+                        <p>Sublime, vi, emacs, ...<br><br>
+                        Almost all text editors support RegExp.</p>
+                        <br>
+                        <p>Sometime we need to activate it.<br>For Sublime, CTRL+f (to start a search) then ALT+r to enable/disable regular expression search.</p>
+                    </section>
+                    <section>
+                        <h3>In Gerrit</h3>
+                        <p>In the new interface search expression is a RegExp.</p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Use RegExp in JavaScript</h2>
+                    </section>
+                    <section>
+                        <h3>Regexp's methods</h2>
+                        <ul>
+                            <li>reg.<b>exec</b>(str): executes a search for a match in a specified string.</li>
+                            <li>reg.<b>test</b>(str): check for a match between the expression and a specified string.</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>String's methods</h2>
+                        <ul>
+                            <li>str.<b>match</b>(reg): retrieves the matches of the regExp.</li>
+                            <li>str.<b>search</b>(reg): get the index in the string of the first match.</li>
+                            <li>str.<b>replace</b>(reg, string): replaces matches by the 2nd argument.</li>
+                            <li>str.<b>split</b>(reg): split the string into sub-strings. The separators are built from the matches.</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Compatibility</h3>
+                        <p>
+                            All methods using RegExp are defined in ECMAScript 3rd edition.<br><br>
+                            They are usable by all browsers &#128568;.
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Build a RegExp</h2>
+                    </section>
+                    <section>
+                        <h4>With a constructor</h4>
+                        <pre><code data-trim contenteditable>
+var reg = new RegExp('toto', 'gim');
+                        </code></pre>
+                        <h4>Literal notation</h4>
+                        <pre><code data-trim contenteditable>
+var reg = /toto/gim;
+                        </code></pre>
+                        <br>
+                        <br>
+                        <p class="info">It is more efficient to use litteral notation, because it is compiled only once.<br>
+                        The constructor is usefull only when you have to built dynamically the expression.</p>
+                    </section>
+                    <section>
+                        <h3>The Expression part</h3>
+                        <pre><code data-trim contenteditable>
+var reg = /toto/gim;
+                        </code></pre>
+                        <p><em>toto</em> is the expression.<br>
+                        This part will be evaluated to find any matches in a string.</p>
+                        <br>
+                        <p>The escape character is \<br>
+                        <table>
+                            <tr><th>Expression</th><th>Matches</th>
+                            <tr><td>\\</td><td>\</td>
+                            <tr><td>\/</td><td>/</td>
+                            <tr><td>\n</td><td>(Line Feed)</td>
+                            <tr><td>\r</td><td>(Carriage return)</td>
+                            <tr><td>\t</td><td>(Tabulation)</td>
+                            <tr><td colspan="2">...</td></tr>
+                        </table>
+                        </p>
+                    </section>
+                    <section>
+                        <h3>The flags</h3>
+                        <pre><code data-trim contenteditable>
+var reg = /toto/gim;
+                        </code></pre>
+                        <p><em>gim</em> are flags.<br>
+                        They are parameters.</p><br>
+                        <ul>
+                            <li><b>g</b> (<em>Global match</em>): search all pattern matching the expression.</li>
+                            <li><b>i</b> (<em>case Insensitive</em>): ignore the case.</li>
+                            <li><b>m</b> (<em>Multi-line</em>): Each line is evaluated like a new input.</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Character Sets</h2>
+                    </section>
+                    <section>
+                        <p>By default each character must be match once<br>
+                        and one by one.</p>
+                        <br>
+                        <pre><code>/lettres/</code></pre>
+                        <div>
+                            <img src="./img/sequence.svg">
+                        </div>
+                        <script type="text/mermaid">
+                            <div class="mermaid">
+                            graph LR;
+                                1[l]-->2;
+                                2[e]-->3;
+                                3[t]-->4;
+                                4[t]-->5;
+                                5[r]-->6;
+                                6[e]-->7[s];
+                            </div>
+                        </script>
+                    </section>
+                    <section class="hack">
+                        <h3>[]</h3>
+                        <p>A character sets match one of the enclosed characters.</p>
+                        <pre><code contenteditable>/[abcd]/</code></pre>
+                            <img src="./img/charSet.svg">
+                        <script type="text/mermaid">
+                            <div class="mermaid">
+                            graph LR;
+                                1(( ))-->2;
+                                1-->3;
+                                1-->4;
+                                1-->5;
+                                2[a]-->6;
+                                3[b]-->6;
+                                4[c]-->6;
+                                5[d]-->6;
+                                6(( ));
+                            </div>
+                        </script>
+                    </section>
+                    <section>
+                        <h4>Example</h4>
+                        <pre><code contenteditable>/f[ae]l/</code></pre>
+                        <table>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fal</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fel</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fil</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fol</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">ful</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fyl</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fael</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>- : range</h3>
+                        <p>The <em>-</em> character build a range of characters. All characters between the two are included in the set.</p>
+                        <br>
+                        <h4>Example</h4>
+                        <pre><code contenteditable>/f[a-t]l/</code></pre>
+                        <table>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fal</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fel</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fil</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fol</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">ful</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fyl</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <p>To add <em>-</em> to the set, we can escape it or put it at the start or at the end of the set.</p>
+                        <br>
+                        <h4>Example</h4>
+                        <pre><code data-trim contenteditable>/f[at-]l/
+/f[-at]l/
+/f[a\-t]l/
+                        </code></pre>
+                        <table>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fal</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fel</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fil</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fol</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">ful</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fyl</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">f-l</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>^ : negated set</h3>
+                        <p>When a set begins with <em>^</em>, it matches everything except the enclosed characters.</p>
+                        <br>
+                        <h4>Example</h4>
+                        <pre><code contenteditable>/f[^aei]l/</code></pre>
+                        <table>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fal</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fel</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fil</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fol</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">ful</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fyl</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>Character Classes</h3>
+                        <table>
+                        <tr><td>\d</td><td>[0-9]</td>   <td>(digit)</td> <td>\D</td><td>[^0-9]</td></tr>
+                        <tr><td>\s</td><td>[ \t\v\r\n\f]</td>   <td>(whitespace)</td> <td>\S</td><td>[^ \t\v\r\n\f]</td></tr>
+                        <tr><td>\w</td><td>[_a-zA-Z0-9]</td>   <td>(alphanumeric)</td> <td>\W</td><td>[^_a-zA-Z0-9]</td></tr>
+                        </table>
+                        <br>
+                        <h4>Example</h4>
+                        <table width="100%">
+                        <tr><td class="fragment" data-fragment-index="1">
+                            <pre><code contenteditable>/f\dl/</code></pre>
+                            <table>
+                            <tr><td class="fragment highlight-red" data-fragment-index="2">fl</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="2">fal</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="2">f2l</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="2">f9l</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="2">f13l</td></tr>
+                            </table>
+                        </td>
+                        <td class="fragment" data-fragment-index="3">
+                            <pre><code contenteditable>/f[abc\s]l/</code></pre>
+                            <table>
+                            <tr><td class="fragment highlight-red" data-fragment-index="4">fl</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="4">fal</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="4">f2l</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="4">f l</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="4">fAl</td></tr>
+                            </table></td>
+                        </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>. : any single character</h3>
+                        <h5>(almost)</h5>
+                        <p><em>.</em> character is a wilcard character it matches all characters.<br>
+                        ⚠ in JavaScript, it is equivalent to [^\r\n]</p>
+                        <br>
+                        <h4>Example</h4>
+                        <table width="100%">
+                        <tr><td>
+                            <pre><code contenteditable>/f.l/</code></pre>
+                            <table>
+                            <tr><td class="fragment highlight-red" data-fragment-index="1">fl</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="1">fal</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="1">fAl</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="1">f2l</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="1">f l</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="1">f.l</td></tr>
+                            </table>
+                        </td>
+                        <td class="fragment" data-fragment-index="2">
+                            <pre><code contenteditable>/f[.]l/</code></pre>
+                            <table>
+                            <tr><td class="fragment highlight-red" data-fragment-index="3">fl</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="3">fal</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="3">fAl</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="3">f2l</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="3">f l</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="3">f.l</td></tr>
+                            </table></td>
+                        </tr>
+                        </table>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Quantifiers</h2>
+                    </section>
+                    <section>
+                        <h3>N{min, max}</h3>
+                        <p>N character must be there at least <em>min</em> times.<br>
+                        N character must be there no more than <em>max</em> times.</p>
+                    </section>
+                    <section>
+                        <h4>Example</h4>
+                        <pre><code>/fe{1,3}l/</code></pre>
+                        <table>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fl</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fel</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">feel</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">feeel</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">feeeel</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h4>Example</h4>
+                        <pre><code>/fe{1,}l/</code></pre>
+                        <p>When maximum is not given, we look for the character at least <em>minimum</em> times.</p>
+                        <table>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fl</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fel</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">feel</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">feeel</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">feeeel</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h4>Example</h4>
+                        <pre><code>/fe{2}l/</code></pre>
+                        <p>When only one value is given, we expect the character to be there this value times.</p>
+                        <table>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fl</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fel</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">feel</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">feeel</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">feeeel</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>?</h3>
+                        <p><em>?</em> is equivalent to <em>{0,1}</em></p>
+                        <br>
+                        <h4>Example</h4>
+                        <pre><code>/fe?l/</code></pre>
+                        <table>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fl</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fel</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">feel</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">feeel</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">feeeel</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>*</h3>
+                        <p><em>*</em> is equivalent to <em>{0,}</em></p>
+                        <br>
+                        <h4>Example</h4>
+                        <pre><code>/fe*l/</code></pre>
+                        <table>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fl</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fel</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">feel</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">feeel</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">feeeel</td></tr>
+                        </table>
+                        <br>
+                        <p class="error fragment" data-fragment-index="2">Do not get confused: * does not represent a character itself.</p>
+                    </section>
+                    <section>
+                        <h3>+</h3>
+                        <p><em>+</em> is équivalent to <em>{1,}</em></p>
+                        <br>
+                        <h4>Example</h4>
+                        <pre><code>/fe+l/</code></pre>
+                        <table>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fl</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fel</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">feel</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">feeel</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">feeeel</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>Greedy / ungreedy</h3>
+                        <p>By default, the matches is the greatest that can be found<br>(greedy mode).</p>
+                        <br>
+                        <p>In JavaScript, there is no flag to set an Ungreedy mode.<br>
+                        </p>
+                        <br>
+                        <h4>Example</h4>
+                        <pre><code>/QQ[qQ]+QQ/</code></pre>
+                        <div><span class="fragment highlight-green" data-fragment-index="2"><span class="fragment highlight-current-red" data-fragment-index="1">QQqQqQQ</span>qqQQ</span></div>
+                    </section>
+                    <section>
+                        <h3>?: ungreedy</h3>
+                        <p>When <em>?</em> is after a quantifier, the quantifier becomes ungreedy</p>
+                        <br>
+                        <h4>Example</h4>
+                        <pre><code>/QQ[qQ]+?QQ/</code></pre>
+                        <div><span class="fragment highlight-green" data-fragment-index="1">QQqQqQQ</span>qqQQ</div>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Grouping</h2>
+                    </section>
+                    <section>
+                        <h3>(): create a group</h3>
+                        <p>All characters include in <em>()</em> are match together.</p>
+                        <table width="100%">
+                            <tr>
+                                <td>
+                                    <table width="100%">
+                                        <tr><td><pre><code contenteditable>/ab(cd)/</code></pre></td>
+                                        <td>or</td>
+                                        <td><pre><code contenteditable>/(abcd)/</code></pre></td>
+                                        </tr>
+                                    </table>
+                                    <div><img src="./img/group1.svg"></div>
+                                    <script type="text/mermaid">
+                                        <div class="mermaid">
+                                        graph LR;
+                                            1(( ));
+                                            2[a];
+                                            3[b];
+                                            4[c];
+                                            5[d];
+                                            6(( ));
+                                            1-->2;
+                                            2-->3;
+                                            3-->4;
+                                            4-->5;
+                                            5-->6;
+                                        </div>
+                                    </script>
+                                </td>
+                            </tr><tr>
+                                <td>
+                                    <pre><code contenteditable>/ab(cd)+/</code></pre>
+                                    <div>
+                                        <img src="./img/group2.svg">
+                                    </div>
+                                    <script type="text/mermaid">
+                                        <div class="mermaid">
+                                        graph LR;
+                                            1(( ));
+                                            2[a];
+                                            3[b];
+                                            gStart(( ));
+                                            4[c];
+                                            5[d];
+                                            gEnd(( ));
+                                            6(( ));
+                                            1-->2;
+                                            2-->3;
+                                            3-->gStart;
+                                            gStart-->4;
+                                            4-->5;
+                                            5-->gEnd;
+                                            gEnd-->gStart;
+                                            gEnd-->6;
+                                        </div>
+                                    </script>
+                                </td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h4>Example</h4>
+                        <pre><code contenteditable>/f(ae)*l/</code></pre>
+                        <table>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fl</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">fal</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">fael</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">feal</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">faeael</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">faeel</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>| : or</h3>
+                        <p><em>|</em> indicates that the pattern must match any of expression around this operator.</p>
+                        <table width="100%">
+                        <tr><td>
+                        <pre><code contenteditable>/ab|cd/</code></pre>
+                        <div>
+                            <img src="./img/or1.svg">
+                        </div>
+                        <script type="text/mermaid">
+                            <div class="mermaid">
+                            graph LR;
+                                1(( ));
+                                2[ab];
+                                3[cd];
+                                4(( ));
+                                1-->2;
+                                1-->3;
+                                2-->4;
+                                3-->4;
+                            </div>
+                        </script>
+                        </td>
+                        <td class="fragment">
+                        <pre><code contenteditable>/ab|cd|e[fg]/</code></pre>
+                        <div>
+                            <img src="./img/or2.svg">
+                        </div>
+                        <script type="text/mermaid">
+                            <div class="mermaid">
+                            graph LR;
+                                1(( ));
+                                2[ab];
+                                3[cd];
+                                4[e];
+                                5[f];
+                                6[g];
+                                7(( ));
+                                1-->2;
+                                1-->3;
+                                1-->4;
+                                2-->7;
+                                3-->7;
+                                4-->5;
+                                4-->6;
+                                5-->7;
+                                6-->7;
+                            </div>
+                        </script>
+                        </td>
+                        </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <p>The 'scope' of the <em>|</em> is its group</p>
+                        <pre><code contenteditable>/a(b|cd)/</code></pre>
+                        <div>
+                            <img src="./img/group3.svg">
+                        </div>
+                        <script type="text/mermaid">
+                            <div class="mermaid">
+                            graph LR;
+                                1(( ));
+                                2[a];
+                                3[b];
+                                4[c];
+                                5[d];
+                                6(( ));
+                                1-->2;
+                                2-->3;
+                                2-->4;
+                                3-->6;
+                                4-->5;
+                                5-->6;
+                            </div>
+                        </script>
+                    </section>
+                    <section>
+                        <p class="info"> When you can use both [] and | it is more efficient to use [].<br>
+                        Even if the results is the same.
+                        </p>
+                        <table width="100%">
+                        <tr><td>
+                        <pre><code contenteditable>/a|b/</code></pre>
+                        <div>
+                            <img src="./img/or3.svg">
+                        </div>
+                        <script type="text/mermaid">
+                            <div class="mermaid">
+                            graph LR;
+                                1(( ));
+                                2[a];
+                                3[b];
+                                4(( ));
+                                1-->2;
+                                1-->3;
+                                2-->4;
+                                3-->4;
+                            </div>
+                        </script>
+                        </td>
+                        <td>
+                        <pre><code contenteditable>/[ab]/</code></pre>
+                        <div>
+                            <img src="./img/or3.svg">
+                        </div>
+                        <script type="text/mermaid">
+                            <div class="mermaid">
+                            graph LR;
+                                1(( ));
+                                2[a];
+                                3[b];
+                                4(( ));
+                                1-->2;
+                                1-->3;
+                                2-->4;
+                                3-->4;
+                            </div>
+                        </script>
+                        </td>
+                        </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>\1 : Reuse a pattern</h3>
+                        <p><em>\N</em> (with <i>N</i>, a digit from 1 to 9) matches the pattern matched by a previous group.<br><br><i>N</i> is the position of the captured group in the expression.</p>
+                        <br>
+                        <h4>Example</h4>
+                        <table width="100%">
+                        <tr><td>
+                            <pre><code contenteditable>/(a|bc)X\1/</code></pre>
+                            <table>
+                            <tr><td class="fragment highlight-green" data-fragment-index="1">aXa</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="1">aXbc</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="1">bcXa</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="1">bcXbc</td></tr>
+                            </table>
+                        </td>
+                        <td class="fragment" data-fragment-index="2">
+                            <pre><code contenteditable>/(['"])(a|bc)X\2\1/</code></pre>
+                            <table>
+                            <tr><td class="fragment highlight-red" data-fragment-index="3">"aXbc"</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="3">"aXa"</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="3">"aXa'</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="3">'aXa'</td></tr>
+                            </table></td>
+                        </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>(?:) : A not capturing group</h3>
+                        <h4>Example</h4>
+                        <pre><code contenteditable>/(?:a|bc)(["'])X\1/</code></pre>
+                        <table>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">a"X"</td></tr>
+                        <tr><td class="fragment highlight-green" data-fragment-index="1">bc'X'</td></tr>
+                        <tr><td class="fragment highlight-red" data-fragment-index="1">a"Xa</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>Capturing-group vs Non-capturing-group</h3>
+                        <ul>
+                            <li>Non capturing group are faster than capturing group.<br>
+                            They have less work to do.</li>
+                            <li>Only 9 capturing groups can be re-used inside the expression.</li>
+                        </ul>
+                        <br><br>
+                        <p class="info">If you don't need to re-use a group, use a non-capturing group.</p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Assertions</h2>
+                    </section>
+                    <section>
+                        <h2>Assertions</h2>
+                        <p>Assertion are zero-width characters.<br>
+                        They only check that, at the current position, the expression matches another expression.</p>
+                        <br><br>
+                        <!-- <pre><code contenteditable>/a(b|cd)/</code></pre> -->
+                        <div>
+                            <img src="./img/assertion1.svg">
+                        </div>
+                        <script type="text/mermaid">
+                            <div class="mermaid">
+                            graph LR;
+                                1(( ));
+                                2[a];
+                                3[b];
+                                a(( ));
+                                4[c];
+                                5[d];
+                                6(( ));
+                                1-->2;
+                                2-->3;
+                                3-->a;
+                                a-->4;
+                                4-->5;
+                                5-->6;
+                            </div>
+                        </script>
+                    </section>
+                    <section>
+                        <h3>^ : at start</h3>
+                        <p><em>^</em> matches the start of the string.<br>
+                        If the flag <em>m</em> is set, <em>^</em> matches the start of each line.</p>
+                        <br>
+                        <h4>Example</h4>
+                        <pre><code contenteditable>/^abc/</code></pre>
+                        <table>
+                            <tr><td class="fragment highlight-green" data-fragment-index="1">abc</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="1">Xabc</td></tr>
+                            <tr><td><span class="fragment highlight-green" data-fragment-index="1">abc</span>X</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="1">XabcX</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>$ : at end</h3>
+                        <p><em>$</em> matches the end of the string.<br>
+                        If the flag <em>m</em> is set, <em>$</em> matches the end of each line.</p>
+                        <br>
+                        <h4>Example</h4>
+                        <pre><code contenteditable>/abc$/</code></pre>
+                        <table>
+                            <tr><td class="fragment highlight-green" data-fragment-index="1">abc</td></tr>
+                            <tr><td>X<span class="fragment highlight-green" data-fragment-index="1">abc</span></td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="1">abcX</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="1">XabcX</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>\b : word boundary</h3>
+                        <p><em>\b</em> matches the start or the end of a word.<br>
+                        It matches the moment where characters change between<br> \w and \W.</p>
+                        <br>
+                        <h4>Example</h4>
+                        <pre><code contenteditable>/\babc/</code></pre>
+                        <table>
+                            <tr><td><span class="fragment highlight-green" data-fragment-index="1">abc</span>X</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="1">Xabc</td></tr>
+                            <tr><td>XXX <span class="fragment highlight-green" data-fragment-index="1">abc</span>X</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>\B : not word boundary</h3>
+                        <p><em>\B</em> is the opposite of \b.<br>
+                        It matches the moment between 2 \w or 2 \W.</p>
+                        <br>
+                        <h4>Example</h4>
+                        <pre><code contenteditable>/\Babc/</code></pre>
+                        <table>
+                            <tr><td class="fragment highlight-red" data-fragment-index="1">abcX</td></tr>
+                            <tr><td>X<span class="fragment highlight-green" data-fragment-index="1">abc</span></td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="1">XXX abcX</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>(?=) : Look ahead</h3>
+                        <p>Look ahead assertion checks if the current pattern is followed by the given expression.</p>
+                        <br>
+                        <pre><code contenteditable>/a(?=b)/</code></pre>
+                        <div>
+                            <img src="./img/assertion2.svg">
+                        </div>
+                        <script type="text/mermaid">
+                            <div class="mermaid">
+                            graph LR;
+                                1(( ));
+                                2[a];
+                                3(( ));
+                                1-->2;
+                                2-->|must be followed by b|3;
+                            </div>
+                        </script>
+                        <br>
+                        <p class="info">This group is not a capturing group and is even not part of the final pattern.</p>
+                    </section>
+                    <section>
+                        <h4>Example</h4>
+                        <pre><code contenteditable>/\w+(?= stuff)/</code></pre>
+                        <table>
+                            <tr><td class="fragment highlight-red" data-fragment-index="1">stuff</span></td></tr>
+                            <tr><td><span class="fragment highlight-green" data-fragment-index="1">all</span> stuffs</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="1">anystuff</span></td></tr>
+                            <tr><td>I look for <span class="fragment highlight-green" data-fragment-index="1">a</span> stuff</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>(?!) : Negative look ahead</h3>
+                        <p>This assertion checks if the current pattern is not followed by the given expression.</p>
+                        <br>
+                        <h4>Example</h4>
+                        <pre><code contenteditable>/^(?!\d)\w+$/</code></pre>
+                        <table>
+                            <tr><td class="fragment highlight-green" data-fragment-index="1">var1</span></td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="1">Var2</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="1">_var3</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="1">4var</td></tr>
+                            <tr><td class="fragment highlight-red" data-fragment-index="1">var 5</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>(?&lt;=) and (?&lt;!) : Look behind</h3>
+                        <p class="error">These assertions are not supported in JavaScript. 😿</p>
+                        <p>Look behind assertion check that the current pattern is (not) preceded by the given expression</p>
+                        <table width="100%">
+                        <tr><td>
+                            <pre><code contenteditable>/(?&lt;=[.?!]\s|^)[a-z]/g</code></pre>
+                            <table>
+                            <tr><td style="white-space: nowrap;"><span class="fragment highlight-green" data-fragment-index="1">t</span>his is a sentence! <span class="fragment highlight-green" data-fragment-index="1">a</span>nd, now,<br> I look for some typo. <span class="fragment highlight-green" data-fragment-index="1">i</span>s it<br>ok? I'll check.</td></tr>
+                            </table>
+                        </td>
+                        <td class="fragment" data-fragment-index="2">
+                            <pre><code contenteditable>/(['"]).*(?&lt;!\\)\1/</code></pre>
+                            <table>
+                            <tr><td class="fragment highlight-green" data-fragment-index="3">"a text"</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="3">"it's a text"</td></tr>
+                            <tr><td class="fragment highlight-green" data-fragment-index="3">'it\'s a text with "single quotes".'</td></tr>
+                            <tr><td>this is not a whole <span class="fragment highlight-green" data-fragment-index="3">"quoted"</span> text</td></tr>
+                            </table></td>
+                        </tr>
+                        </table>
+                        <br>
+                        <p class="info fragment roll-in" data-fragment-index="3">There are some tricks to support these assertions in JavaScript.<br>
+                        For example, you can reverse the string and then using lookahead assertions.</p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>A little bit more?</h2>
+                    </section>
+                    <section>
+                        <h3>Replace method</h3>
+                        <p>In JavaScript, the string.replace method allows to reuse captured pattern</p>
+                        <pre><code data-trim contenteditable>
+var text = 'This is a ~small~ text.';
+
+var str = text.replace(/~(.+)~/, '[$1]'); // This is a [small] text.
+                        </code></pre>
+                        <ul>
+                            <li><em>$N</em> is replaced with the N<sup>th</sup> captured group pattern.</li>
+                            <li><em>$&</em> is replaced with the matched pattern ('~small~').</li>
+                            <li><em>$$</em> is replaced with a single $.</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Replace method</h3>
+                        <p>The 2<sup>nd</sup> argument can be a function callback</p>
+                        <pre><code data-trim contenteditable>
+var text = 'This is a ~small~ text.';
+
+var str = text.replace(/~(.+)~/,
+    function (pattern, captured1, offset, string)
+{
+    return 'new value';
+});
+                        </code></pre>
+                        <table>
+                            <tr>
+                                <td>pattern</td><td>~small~</td>
+                            </tr>
+                            <tr>
+                                <td>captured1</td><td>small</td>
+                            </tr>
+                            <tr>
+                                <td>offset</td><td>10</td>
+                            </tr>
+                            <tr>
+                                <td>string</td><td>This is a ~small~ text.</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <p>There will be as much arguments as you have captured groups in your expression.</p>
+                    </section>
+                    <section>
+                        <h3>Special characters</h3>
+                        <p>There are some special characters for your expressions to handle specific cases</p>
+                        <table>
+                            <tr><td>\0</td><td>Matches a NUL character.<br>
+                                    (Not to be confused with \1-\9)</td></tr>
+                            <tr><td>\u<em>hhhh</em></td><td>
+                                <em>hhhh</em> are 4 hexadecimals digits.<br>
+                                Matches the Unicode characters value <em>hhhh</em>.
+                            </td></tr>
+                            <tr><td>\x<em>hh</em></td><td>
+                                <em>hh</em> are 2 hexadecimals digits.<br>
+                                Matches the code characters value <em>hh</em>.
+                            </td></tr>
+                            <tr><td>\c<em>X</em></td><td>
+                                <em>X</em> is a letter from [A-Z].<br>
+                                Matches a control-<em>X</em> character.
+                            </td></tr>
+
+                            <tr><td>[\b]</td><td>Matches a backspace character.<br> (Not to be confused with \b)</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>Performance tips</h3>
+                        <ul>
+                            <li>If you can do the same search without RegExp, do it without RegExp.</li>
+                            <li>Help the search engine to find characters quickly (mainly with infinite quantifiers).</li>
+                            <li>Avoid too many capturing groups.</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Questions ?</h2>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>Stellar Links</h2>
+                    <ul>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">MDN - guide on Regular Expressions</a></li>
+                        <li><a href="http://www.regular-expressions.info/">Regular-Expressions.info</a></li>
+                        <li><a href="https://www.debuggex.com">Regex Analyzer</a>
+                        <li><a href="https://regex101.com/">RexExp tester</a></li>
+                        <br>
+                        <br>
+                        <li><a href="http://regexcrossword.com/">Regex Crossword</a></li>
+                        <li><a href="https://alf.nu/RegexGolf">Regex Golf</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>THE END</h1>
+                    <h3>By Restimel / restimel@gmail.com</h3>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+    </body>
+</html>
