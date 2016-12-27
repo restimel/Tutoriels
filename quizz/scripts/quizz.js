@@ -242,7 +242,7 @@ function answerButtonQuizz(e){
 }
 
 /**
- * Selection des questions pour Analyse
+ * Sélection des questions pour Analyse
 **/
 //permet de (dé)sélectionner tous les input du tableau
 function selectAll(){
@@ -328,7 +328,8 @@ var displayAnalyze = (function(){
 		document.getElementById("analyzePrevious").onclick = previous;
 		document.getElementById("analyzeNext").onclick = next;
 		document.getElementById("analyzeCodeEdit").onchange = majCode;
-		document.querySelector("#quizzAnalyze fieldset.code>button").onclick = test;
+		document.querySelector("#testCode").onclick = test;
+		document.querySelector("#modifyCode").onclick = editCode;
 	},false);
 		
 	return init;
@@ -392,6 +393,9 @@ var displayAnalyze = (function(){
 		document.getElementById("analyzeCodeEdit").value = item.code;
 		document.querySelector("#quizzAnalyze>nav>output").textContent = (current+1) + " / "+ length;
 		
+		//restauration du mode lecture
+		readCode();
+
 		//remplissage des réponses
 		var elemReponse = document.getElementById("analyzeQst"), //element où doivent se mettre les réponses (le ul)
 			nbReponse = item.reponses.length, //nb de réponses possible
@@ -488,6 +492,20 @@ var displayAnalyze = (function(){
 				alert("ERREUR d'exécution\nUne erreur est survenue pendant l'exécution :\n"+e.message);
 			}
 		}
+	}
+
+	//permet de passer en mode édition
+	function editCode(){
+		document.getElementById("analyzeCodeEdit").style.display = "block";
+		document.getElementById("analyzeCodeRead").style.display = "none";
+		document.getElementById("modifyCode").style.display = "none";
+	}
+
+	//permet de revenir en mode lecture
+	function readCode(){
+		document.getElementById("analyzeCodeEdit").style.display = "none";
+		document.getElementById("analyzeCodeRead").style.display = "block";
+		document.getElementById("modifyCode").style.display = "block";
 	}
 })();
 

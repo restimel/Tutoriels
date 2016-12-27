@@ -14,7 +14,7 @@ Vous êtes autorisés à utiliser, partager, redistribuer et modifier ce code ta
 
 
 Content: QCM Quizz to tests knowledge on specific topic. It is design for JS questions (questions are in quizz.json)
-Original file: http://b.mariat.free.fr/tutorial/quizz/quizz.htm
+Original file: http://restimel.github.io/Tutoriels/quizz/quizz.html
 
 -->
 	<title>JS Quizz</title>
@@ -28,8 +28,6 @@ Original file: http://b.mariat.free.fr/tutorial/quizz/quizz.htm
 	* Personnalisation de liste de questions (load/export) [analyze/preparationQuizz]
 	* Information du nombre de questions disponible dynamiquement [preparationQuizz/search]
 	* fonction tweeter (envoyer résultat)
-
-For online debug : http://restimel.github.io/projets_perso/quizz/quizz.htm
 -->
 <nav>
 	<ul>
@@ -48,16 +46,18 @@ For online debug : http://restimel.github.io/projets_perso/quizz/quizz.htm
 
 <section id="accueil" class="sectionActive">
 	<article>
+	<header>Connaissez-vous vraiment le JavaScript&nbsp;?</header>
 	<p>Bonjour et bienvenue dans le Quizz intéractif sur le JavaScript.<br>
 	Ici vous pourrez tester votre niveau de connaissance en JavaScript. Le but de chaque question est de dire ce qui s'afficherait dans les <samp class="commonMethod">alert</samp> si on exécute le code présenté.<br>
 	Les questions s'appuient sur l'ECMAscript 5.1 selon la norme <a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm" target="_blank">ECMA-262</a>.<br>
 	De nombreuses questions s'appuient sur des pièges (classique ou non).<br><br>
 	En mode exploration, il est possible de tester le code des questions mais aussi de le modifier afin de bien comprendre les variations possibles.<br>
 	<br>
-	Le niveau de difficulté a été choisi arbitrairement et certaines questions peuvent vous paraître plus faciles ou plus difficiles selon vos conaissances.
+	Le niveau de difficulté a été choisi arbitrairement et certaines questions peuvent vous paraître plus faciles ou plus difficiles selon vos connaissances.
 	</p>
 	</article>
 	<button id="accueilQuizz"><span>Affronter une série de Questions</span></button> <button id="accueilExplore"><span>Découvrir & Analyser des questions</span></button>
+	<footer>I am sorry for the people who don't speak French. I have built this app some time ago, and answers' explanations are all in French. However you can navigate through questions as they are only about ECMAscript 5.1.</footer>
 </section>
 
 <section id="quizzPreparation">
@@ -197,7 +197,8 @@ For online debug : http://restimel.github.io/projets_perso/quizz/quizz.htm
 			<legend>Code</legend>
 			<textarea id="analyzeCodeEdit" title="Vous pouvez modifier ce code pour le tester"></textarea>
 			<code id="analyzeCodeRead"></code>
-			<button title="Tester le code"><span>Tester</span></button>
+			<button title="Tester le code" id="testCode"><span>Tester</span></button>
+			<button title="Modifier le code" id="modifyCode"><span>Modifier</span></button>
 		</fieldset>
 		<fieldset class="reponse">
 			<legend>Qu'est-ce qui s'affiche si on exécute ce code&nbsp;?</legend>
@@ -221,9 +222,9 @@ For online debug : http://restimel.github.io/projets_perso/quizz/quizz.htm
 <section id="about">
 	<article>
 		<ul>
-			<li>Auteur : Benoît Mariat (<a href="mailto:b.mariat@gmail.com">b.mariat@gmail.com</a>)</li>
-			<li>Date : Mai 2013</li>
-			<li>Denière mise à jour: 7 septembre 2013</li>
+			<li>Auteur&nbsp;: Benoît Mariat (<a href="mailto:b.mariat@gmail.com">b.mariat@gmail.com</a>)</li>
+			<li>Date&nbsp;: Mai 2013</li>
+			<li>Dernière mise à jour&nbsp;: 27 décembre 2016</li>
 		</ul>
 		<header>Licence</header>
 		<p>
@@ -235,7 +236,7 @@ For online debug : http://restimel.github.io/projets_perso/quizz/quizz.htm
 		</p>
 		<br><br><hr>
 		<p>
-		<a href="http://b.mariat.free.fr/tutorial/quizz/quizz.htm">http://b.mariat.free.fr/tutorial/quizz/quizz.htm</a>
+		<a href="http://restimel.github.io/Tutoriels/quizz/quizz.html">http://restimel.github.io/Tutoriels/quizz/quizz.html</a>
 		</p>
 	</article>
 </section>

@@ -141,6 +141,15 @@ summary.detailsOpen:before{
 	text-shadow: 2px 2px black, -1px -1px #606060;
 }
 
+#accueil header {
+	font-size: 1.6em;
+}
+
+#accueil footer {
+	margin-top: 1em;
+	font-size: 0.7em;
+}
+
 /*
  *	mise en page de "quizz preparation"
  */
@@ -631,13 +640,6 @@ button.ready{
 	background-image: -o-linear-gradient(-45deg, rgba(0,0,0,0.05) 20%, rgba(250,250,250,0));
 	background-image: -webkit-linear-gradient(-45deg, rgba(0,0,0,0.05) 20%, rgba(250,250,250,0));
 	background-image: linear-gradient(-45deg, rgba(0,0,0,0.05) 20%, rgba(250,250,250,0));
-}
-
-#quizzAnalyze>div>fieldset.code:hover>textarea,#analyzeCodeEdit:focus{
-	display: block;
-}
-#quizzAnalyze>div>fieldset.code:hover>code,#analyzeCodeEdit:focus+code{
-	display: none;
 }
 
 #quizzAnalyze>div>fieldset.code>button{
