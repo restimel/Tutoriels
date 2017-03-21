@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Création d’un arc avec la méthode arcTo() </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="578" height="200">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script type="text/javascript">
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	contexte.beginPath();
+	contexte.moveTo(20, 20); //création d'un point de départ
+	contexte.lineTo(100, 20); //création d'une ligne horizontale
+	contexte.arcTo(150, 20, 150, 70, 50); //creation de l'arc
+	contexte.lineTo(150, 120); //continuer avec une ligne verticale
+	contexte.lineWidth = 5;
+	contexte.stroke();
+	</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+#f1 {
+	fill: red;
+	stroke: gold;
+	stroke-width: 4;
+}
+
+circle {
+	fill: yellow;
+	stroke: green;
+	stroke-width: 20;
+}

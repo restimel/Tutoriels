@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   width="250"
+   height="250">
+  <circle cx="125" cy="125" r="100" style="stroke:black;stroke-width:14;fill:yellow;"/>
+  <circle cx="85" cy="85" r="23" style="fill:black"/>
+  <circle cx="165" cy="85" r="23" style="fill:black"/>
+  <path d="M50 125 A75 75 0 1 0 200 125" style="stroke:black;stroke-width:14;fill:none;"/>
+</svg>

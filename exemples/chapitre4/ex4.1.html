@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> Exemple complet de glisser déposer </title>
+    <!-- Style interne -->
+    <style>
+        fieldset {
+            width: 540px;
+            height: 130px;
+            margin: 20px;
+        }
+        img {display:inline-block;}
+    </style>
+    <script>
+
+    //fonction d’annulation du comportement par défaut
+    function survoler(ev) {
+        ev.preventDefault();
+    }
+
+    function glisser(ev) {
+        //seulement l’opération copy est autorisé
+        ev.dataTransfer.effectAllowed = "copy";
+        //stockage des données dans l'objet transfert (récupération à travers les id)
+        ev.dataTransfer.setData("text",ev.target.getAttribute("id"));
+    }
+
+    function deposer(ev) {
+        // annulation du comportement par défaut
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        //ajout de l'élément récupéré dans l'élément destination
+        ev.currentTarget.appendChild(document.getElementById(data));
+    }
+
+    </script>
+</head>
+<body>
+    <h2> Choisir vos langages de programmation préférés </h2>
+    <!-- Collection des langages de programmation -->
+    <fieldset ondragstart="glisser(event)" >
+        <legend> Collection des langages de programmation&nbsp;: </legend>
+        <img id="drag1" src="images/JS.jpg" draggable="true" width="100" height="100">
+        <img id="drag2" src="images/PHP.jpg" draggable="true" width="100" height="100">
+        <img id="drag3" src="images/HTML.jpg" draggable="true" width="100" height="100">
+        <img id="drag4" src="images/JAVA.jpg" draggable="true" width="100" height="90">
+        <img id="drag5" src="images/Python.jpg" draggable="true" width="120" height="100">
+    </fieldset>
+    <br>
+    <!-- Liste des langages que vous maîtrisez -->
+    <fieldset dropzone="copy f:image/jpeg" ondrop="deposer(event)"
+        ondragover="survoler(event)">
+        <legend> Mes langages de programmation préférés&nbsp;: </legend>
+    </fieldset>
+</body>
+</html>

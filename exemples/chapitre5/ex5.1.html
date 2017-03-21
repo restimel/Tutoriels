@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> Gestion de stockage dans une session et dans le local storage</title>
+</head>
+<body>
+<button onclick="sauve()">setItem</button><input id="valeur" placeholder="valeur à sauvegarder"><br>
+<button onclick="lit()">getItem</button><br>
+<button onclick="supprime()">removeItem</button><br>
+<button onclick="effaceTout()">clear</button><br>
+
+<script>
+function sauve() {
+    var valeur = document.getElementById("valeur").value;
+    localStorage.setItem("exemple", valeur);
+    sessionStorage.setItem("exemple", valeur);
+    console.log('ok')
+}
+
+function lit(){
+	alert("localStorage : " + localStorage.getItem("exemple") +
+		  "\nsessionStorage : " + sessionStorage.getItem("exemple"));
+}
+
+function supprime() {
+	localStorage.removeItem("exemple");
+    sessionStorage.removeItem("exemple");
+    console.log('ok')
+}
+
+function effaceTout() {
+	localStorage.clear();
+    sessionStorage.clear();
+}
+</script>
+</body>
+</html>

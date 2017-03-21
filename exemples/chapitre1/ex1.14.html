@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Exemple de chemin </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="578" height="200">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script type="text/javascript">
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	contexte.beginPath();
+	contexte.moveTo(100, 20);
+	//ligne 1
+	contexte.lineTo(200, 160);
+	//courbe quadratique
+	contexte.quadraticCurveTo(230, 200, 250, 120);
+	//courbe de bezier
+	contexte.bezierCurveTo(290, -40, 300, 200, 400, 150);
+	//ligne 2
+	contexte.lineTo(500, 90);
+	contexte.lineWidth = 5;
+	contexte.strokeStyle = "blue";
+	contexte.stroke();
+	</script>
+</body>
+</html>

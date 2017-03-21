@@ -1,0 +1,8 @@
+Infrastructure - Exercice 3
+Thème: Géolocalisation
+
+Le but de cet exercice est de localiser l'utilisateur par rapport aux lieux, et de lui indiquer lequel est le plus près.
+
+Objectifs:
+	* Ajouter des coordonnées (latitude et longitude) aux lieux qui pourront être configurables.
+	* Récupérer la position de l'utilisateur et calculer le lieu le plus proche.

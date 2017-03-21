@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="250" height="250">
+	<defs>
+		<g id="couche">
+			<ellipse cx="125" cy="105" rx="100" ry="50" style="stroke:#0a0a0a;stroke-width:4;fill:#908e8e;"/>
+			<rect x="25" y="75" width="200" height="30" rx="5" ry="5" style="stroke:none;fill:#908e8e" />
+			<line x1="25" y1="75" x2="25" y2="105" style="stroke:#0a0a0a;stroke-width:4;"/>
+			<line x1="225" y1="75" x2="225" y2="105" style="stroke:#0a0a0a;stroke-width:4;"/>
+			<ellipse cx="125" cy="75" rx="100" ry="50" style="stroke:#0a0a0a;stroke-width:4;fill:#a09d9d;"/>
+		</g>
+	</defs>
+	<use href="#couche" y="90"/>
+	<use href="#couche" y="45"/>
+	<use href="#couche" />
+</svg>

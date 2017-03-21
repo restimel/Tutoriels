@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg" >
+	<title> utilisation de motif </title>
+	<defs>
+		<pattern id="m1" patternUnits="userSpaceOnUse" x="0" y="0" width="50" height="50">
+			<ellipse style="fill:yellow; stroke:black;" cx="25" cy="20" rx="20" ry="15" />
+		</pattern>
+	</defs>
+	<rect x="15" y="15" width="400" height="200" style="fill:url(#m1);stroke:#acdc66;"
+	/>
+</svg>

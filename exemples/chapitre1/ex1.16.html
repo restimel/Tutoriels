@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Exemple avec la propriété lineJoin </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="578" height="200">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script type="text/javascript">
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	//Définition d’une largeur de 20px pour toutes les lignes
+	contexte.lineWidth = 20;
+	//Application de la propriété miter
+	contexte.beginPath();
+	contexte.moveTo(50, 50);
+	contexte.lineTo(50, 170);
+	contexte.lineTo(130, 170);
+	contexte.lineJoin = "miter";
+	contexte.strokeStyle = "red";
+	contexte.stroke();
+	//Application de la propriété round
+	contexte.beginPath();
+	contexte.moveTo(160, 50);
+	contexte.lineTo(160, 170);
+	contexte.lineTo(230, 170);
+	contexte.lineJoin = "round";
+	contexte.strokeStyle = "green";
+	contexte.stroke();
+	//Application de la propriété bevel
+	contexte.beginPath();
+	contexte.moveTo(260, 50);
+	contexte.lineTo(260, 170);
+	contexte.lineTo(330, 170);
+	contexte.lineJoin = "bevel";
+	contexte.strokeStyle = "blue";
+	contexte.stroke();
+	</script>
+</body>
+</html>

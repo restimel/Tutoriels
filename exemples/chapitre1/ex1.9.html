@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Propriétés de style </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="300" height="300">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script type="text/javascript">
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+
+	//propriété linecap=butt
+	contexte.beginPath();
+	contexte.moveTo(30, 50);
+	contexte.lineTo(140, 250);
+	contexte.lineWidth = 20;
+	contexte.strokeStyle = "rgb(255, 0, 255)";
+	contexte.lineCap = "butt";
+	contexte.stroke();
+
+	//propriété linecap=round
+	contexte.beginPath();
+	contexte.moveTo(90, 50);
+	contexte.lineTo(200, 250);
+	contexte.lineWidth = 20;
+	contexte.strokeStyle = "green";
+	contexte.lineCap = "round";
+	contexte.stroke();
+
+	//propriété linecap=square
+	contexte.beginPath();
+	contexte.moveTo(150, 50);
+	contexte.lineTo(260, 250);
+	contexte.lineWidth = 20;
+	contexte.strokeStyle = "#0000ff";
+	contexte.lineCap = "square";
+	contexte.stroke();
+	</script>
+</body>
+</html>

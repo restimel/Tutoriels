@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Communication avec le worker</title>
+</head>
+<body>
+<script>
+	//création du worker
+	var w = new Worker("Worker7.5.js");
+
+	//réception des messages
+	w.onmessage = function(event) {
+		alert("Le worker a répondu :\n" + event.data);
+		if (event.data.substr(0,7) === "Bonjour") {
+			//Si le message commence par "Bonjour"
+			var nom = prompt("Quel est ton nom ?");
+			w.postMessage("L'utilisateur s'appelle : " + nom);
+		}
+	};
+
+	w.postMessage("Bonjour");
+</script>
+</body>
+</html>

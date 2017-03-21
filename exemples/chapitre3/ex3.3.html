@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> Récupération d’erreur de type PERMISSION_DENIED </title>
+</head>
+<body>
+<script>
+if (navigator.geolocation) {
+	navigator.geolocation.getCurrentPosition(succesGeo,echecGeo);
+} else {
+	alert("Votre navigateur ne supporte pas l’API Géolocalisation");
+}
+
+function succesGeo(position){
+	// Traitement en cas de succès de la géolocalisation
+}
+
+//fonction callback appelée en cas d’échec de la géolocalisation
+function echecGeo(error) {
+	switch (error.code) {
+		case error.PERMISSION_DENIED:
+			alert("La permission de récupérer la position n’a pas été accordée");
+			break ;
+		default : alert("Erreur : " + error.message) ;
+	}
+}
+</script>
+</body>
+</html>

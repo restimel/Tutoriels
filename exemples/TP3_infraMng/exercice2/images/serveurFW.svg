@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="250" height="250">
+  	<style>
+  		rect {
+  			fill: #ff7700;
+  		}
+  		path {
+  			stroke: #ffffff;
+  			stroke-width: 1;
+  		}
+      #serveur path {
+        stroke:#0a0a0a;
+        stroke-width:4;
+        stroke-linejoin: round;
+      }
+  	</style>
+  	<defs>
+  		<g id="wall">
+	  		<rect x="0" y="0" width="75" height="45"/>
+	  		<path d="M0,15H75 M0,30H75 M25,0v15 M50,0v15 M37,15v15 M12,15v15 M62,15v15 M25,30v15 M50,30v15" />
+	  	</g>
+      <g id="serveur">
+        <path d="M25,100L25,225 110,225 110,100 Z M50,200H85" style="fill:#a09d9d;"/>
+        <path d="M45,160H90 M45,150H90 M45,140H90 M45,130H90" style="stroke-width:2"/>
+        <path d="M110,100L110,225 175,150 175,25 Z" style="fill:#908e8e;"/>
+        <path d="M25,100L110,100 175,25 90,25 Z" style="fill:#b9b9b9;"/>
+      </g>
+  	</defs>
+	<use href="#serveur"/>
+	<use href="#wall" x="75" y="190"/>
+</svg>

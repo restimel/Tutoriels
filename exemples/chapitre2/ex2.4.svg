@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<symbol id="s1">
+		<rect x="5" y="5" width="70" height="70" fill="red" />
+		<rect x="25" y="25" width="70" height="70" fill="green" />
+	</symbol>
+
+	<use x="30" y="30" xlink:href="#s1" />
+	<use x="60" y="60" xlink:href="#s1" />
+</svg>

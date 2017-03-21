@@ -1,0 +1,40 @@
+<html>
+<head><title> Attribut preserveAspectRatio</title>
+<meta charset="UTF-8">
+<style type="text/css">
+	svg {border : solid 1px red;}
+</style>
+</head>
+<body>
+	<div>
+		<div>preserveAspectRatio="none"</div>
+		<?xml version="1.0" standalone="no"?>
+		<svg width="200" height="150" version="1.1"
+			 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" 
+			 preserveAspectRatio="none">
+			
+			<circle cx="100" cy="100" r="50"/>
+		</svg>
+	</div>
+	<div>
+		<div>preserveAspectRatio="xMinYMax meet"</div>
+		<?xml version="1.0" standalone="no"?>
+		<svg width="200" height="150" version="1.1"
+			 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" 
+			 preserveAspectRatio="xMinYMax meet">
+			
+			<circle cx="100" cy="100" r="50"/>
+		</svg>
+	</div>
+	<div>
+		<div>preserveAspectRatio="xMinYMax slice"</div>
+		<?xml version="1.0" standalone="no"?>
+		<svg width="200" height="150" version="1.1"
+			 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" 
+			 preserveAspectRatio="xMinYMax slice">
+			
+			<circle cx="100" cy="100" r="50"/>
+		</svg>
+	</div>
+</body>
+</html>

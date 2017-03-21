@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Exemple de lecture et de copie de pixels d'une image </title>
+	<style type="text/css">
+		#dessin, #dessin2, button {
+			display:block;
+			margin:auto;
+			padding:5px;
+		}
+	</style>
+</head>
+
+<body>
+	<canvas id="dessin" width="700" height="250" >
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<button onclick="copier()">Extraire la plaque d'immatriculation</button>
+	<canvas id="dessin2" width="175" height="35" >
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script>
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	var canvas2 = document.getElementById("dessin2");
+	var contexte2 = canvas2.getContext("2d");
+	var img = new Image();
+	img.src = "matricule.jpg";
+	// chargement de l'image à partir des coordonnées (0,0) coin supérieur guache
+	img.onload = function() {
+		contexte.drawImage(img, 0, 0);
+	};
+	function copier() {
+		//Lecture de l’immatriculation de la voiture à partir de l'image source
+		var imgData= contexte.getImageData(257, 123, 175, 35);
+		//Ecriture de la partie copiée dans le 2 ème canvas avec la méthode putImageData()
+		contexte2.putImageData(imgData, 0, 0);
+	}
+	</script>
+</body>
+</html>

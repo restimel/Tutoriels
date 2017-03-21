@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Manipulation des methods save() et restore()</title>
+</head>
+
+<body>
+	<canvas id="dessin" width="400" height="400">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script>
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	contexte.beginPath();
+	contexte.arc(30, 30, 20, 0, 2 * Math.PI, true);
+	contexte.fillStyle = "Yellow";
+	contexte.fill();
+	contexte.lineWidth = 2;
+	contexte.stroke();
+	contexte.save();
+	contexte.scale(3, 3);
+	contexte.beginPath();
+	contexte.arc(70, 70, 20, 0, 2 * Math.PI, true);
+	contexte.fillStyle = "red";
+	contexte.fill();
+	contexte.lineWidth = 2;
+	contexte.stroke();
+	contexte.restore();
+	contexte.beginPath();
+	contexte.arc(70, 70, 20, 0, 2 * Math.PI, true);
+	contexte.fillStyle = "red";
+	contexte.fill();
+	contexte.lineWidth = 2;
+	contexte.stroke();
+	</script>
+</body>
+</html>

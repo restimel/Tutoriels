@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Exemple d’objets ombrés </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="600" height="200">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script>
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	contexte.font = "Bold 40pt Arial";
+	contexte.shadowOffsetX = 6;
+	contexte.shadowOffsetY = 6;
+	contexte.shadowBlur = 10;
+	contexte.shadowColor = "gray";
+	contexte.fillStyle = "orange";
+	contexte.fillText("API JavaScript", 100, 100);
+	contexte.fillStyle = "blue";
+	contexte.fillRect(220, 140, 30, 30);
+	contexte.fillStyle = "blue";
+	contexte.fillRect(240, 150, 30, 30);
+	</script>
+</body>
+</html>

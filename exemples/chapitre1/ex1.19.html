@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Dégradé de couleur </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="250" height="250">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script type="text/javascript">
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	//création de dégradé linéaire
+	var degradelineair = contexte.createLinearGradient(0, 0, 200, 120);
+	//point de Départ bleu claire
+	degradelineair.addColorStop(0, "#8ED6EF");
+	//point d'arrivée bleu d’arrivée
+	degradelineair.addColorStop(1, "#004CB3");
+	;//affectation de remplissage
+	contexte.fillStyle = degradelineair;
+	//création du rectangle
+	contexte.fillRect(10, 10, 200, 100);
+	//création de dégradé radial
+	var degraderadial = contexte.createRadialGradient(238, 50, 10, 238, 50, 300);
+	//point de départ
+	degraderadial.addColorStop(0, "blue");
+	//point intermédiaire
+	degraderadial.addColorStop(0.5, "yellow");
+	//point arrivée
+	degraderadial.addColorStop(1, "green");
+	//Affectation de remplissage
+	contexte.fillStyle = degraderadial;
+	//création du rectangle
+	contexte.fillRect(10, 130, 200, 100);
+	</script>
+</body>
+</html>

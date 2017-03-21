@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Barre d'outil</title>
+    <link rel="stylesheet" type="text/css" href="dessin.css">
+</head>
+<body>
+    <header>
+        <label id="forme">
+            Pinceau:
+            <button id="carre" title="Carré">&#9632;</button>
+            <button id="rond" title="Rond" class="actif">&#9679;</button>
+            <button id="rectangle" title="Rectangle">&#9645;</button>
+            <button id="cercle" title="Cercle">&#9711;</button>
+            <button id="gomme" title="Efface les dessins">Gomme</button>
+            <button id="copie" title="Copie une partie du dessin">Copier</button>
+            <button id="colle" title="Colle une partie copiée">Coller</button>
+        </label>
+        <label>
+            Taille: <input id="taille" type="number" min="1" value="10">
+        </label>
+        <label>
+            Couleur: <input id="couleur" type="color" value="#000000">
+        </label>
+    </header>
+
+    <script src="principal.js"></script>
+    <script src="outils.js"></script>
+</body>
+</html>

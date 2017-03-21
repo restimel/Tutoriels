@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Service worker</title>
+</head>
+<body>
+<script src="./baseURL.js"></script>
+<div id="test"></div>
+<script>
+	if (navigator.serviceWorker) {
+			navigator.serviceWorker.register(baseURL + "serviceWorker.js")
+				.then(function(){
+					console.log("service worker enregistré");
+				})
+
+			// chargement de 2 images après quelques instants (le temps que le sevice worker prenne le controle)
+			setTimeout(function() {
+				var el = document.getElementById("test");
+				el.innerHTML = "<img src=\"image1.svg\"><img src=\"image2.svg\">";
+			}, 1000);
+	} else {
+		alert("votre navigateur ne supporte pas serviceWorker ☹");
+	}
+</script>
+</body>
+</html>

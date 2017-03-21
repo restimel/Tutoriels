@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Manipulation du cache</title>
+</head>
+<body>
+<script>
+//ouverture et création du cache
+caches.open("exemple").then(function(cache) {
+	//ajout des fichiers dans le cache
+	return cache.addAll([
+		"index.html",
+		"code.js",
+		"image.jpg"
+	]).catch(function() {
+		console.error("erreur en chargeant le cache");
+	}).then(function() {
+		//Enumération du contenu du cache
+		cache.keys().then(function(liste) {
+			console.log("actuellement dans le cache", liste);
+		});
+	});
+}).then(function() {
+	// Récupère le contenu d'une requête depuis un cache
+	caches.match("index.html").then(function(reponse) {
+		// si on a trouvé la ressources on affiche son contenu
+		if (reponse) {
+			reponse.text().then(function(contenu) {
+				console.log("voici le contenu", contenu);
+			});
+		} else {
+			console.log("le contenu n'a pas été trouvé");
+		}
+	}).catch(function() {
+		console.error("impossible de lire le contenu de cette ressource");
+	});
+}).then(function() {
+	// Suppression du cache
+	caches.delete("exemple");
+});
+</script>
+<p>Ouvrez la console pour voir le résultat.</p>
+</body>
+</html>

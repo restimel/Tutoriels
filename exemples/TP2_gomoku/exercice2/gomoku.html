@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>TP: Gomoku</title>
+    <link rel="stylesheet" type="text/css" href="gomoku.css">
+</head>
+<body>
+<progress id="ia-progression" value="0" title="l'ordinateur réfléchi"></progress>
+<div class="svg-conteneur">
+    <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+            <circle id="pierre" cx="500" cy="500" r="500"/>
+            <path id="chemin-victoire" d="M200,300 L800,300 Q900,300 900,400 L900,600 Q900,700 800,700 L200,700 Q100,700 100,600 L100,400 Q100,300 200,300 L800,300"/>
+            <path id="chemin-nulle" d="M200,500 Q350,300 500,500 T800,500 500,500 200,500 500,500"/>
+        </defs>
+        <g id="plateau"><!-- rempli par le code JS --></g>
+        <g id="marques"><!-- rempli par le JS --></g>
+        <text id="victoire">
+            <textPath xlink:href="#chemin-victoire">
+                <tspan id="victoire-text"><!-- texte rempli par le JS --></tspan>
+                <animate attributeName="startOffset" attributType="XML" from="0%" to="79%" begin="0s" dur="6s" repeatCount="indefinite"/>
+            </textPath>
+        </text>
+        <text id="partie-nulle">
+            <textPath xlink:href="#chemin-nulle">
+                <tspan id="victoire-text">Partie nulle !</tspan>
+                <animate attributeName="startOffset" attributType="XML" from="0%" to="81.5%" begin="0s" dur="6s" repeatCount="indefinite"/>
+            </textPath>
+        </text>
+    </svg>
+</div>
+<button id="ouvrir-configuration">Configuration</button>
+<fieldset id="configuration-form"><legend>Configuration</legend>
+    <label><input type="checkbox" id="ia-joueur-noir"> Le joueur noir est controlé par une IA</label>
+    <label><input type="checkbox" id="ia-joueur-blanc" checked> Le joueur blanc est controlé par une IA</label>
+    <button id="fermer-configuration">Fermer</button>
+</fieldset>
+<script src="gomoku.js"></script>
+<script src="svg.js"></script>
+<script src="interface.js"></script>
+</body>
+</html>

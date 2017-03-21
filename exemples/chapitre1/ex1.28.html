@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Propriété globalAlpha </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="500" height="300">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script>
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	contexte.globalAlpha = 0.5;
+	contexte.beginPath();
+	contexte.arc(60, 60, 40, 0, 2 * Math.PI, true);
+	contexte.strokeStyle = "blue";
+	contexte.fillStyle = "blue";
+	contexte.fill();
+	contexte.stroke();
+	contexte.beginPath();
+	contexte.arc(100, 90, 40, 0, 2 * Math.PI, true);
+	contexte.strokeStyle = "yellow";
+	contexte.fillStyle = "yellow";
+	contexte.fill();
+	contexte.stroke();
+	contexte.beginPath();
+	contexte.arc(150, 60, 40, 0, 2 * Math.PI, true);
+	contexte.strokeStyle = "black";
+	contexte.fillStyle = "black";
+	contexte.fill();
+	contexte.stroke();
+	contexte.beginPath();
+	contexte.arc(190, 90, 40, 0, 2 * Math.PI, true);
+	contexte.strokeStyle = "green";
+	contexte.fillStyle = "green";
+	contexte.fill();
+	contexte.stroke();
+	contexte.beginPath();
+	contexte.arc(240, 60, 40, 0, 2 * Math.PI, true);
+	contexte.strokeStyle = "red";
+	contexte.fillStyle = "red";
+	contexte.fill();
+	contexte.stroke();
+</script>
+</body>
+</html>

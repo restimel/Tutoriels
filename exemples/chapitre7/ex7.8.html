@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Shared-worker</title>
+</head>
+<body>
+<script>
+	//Création d'une zone d'affichage
+	var elem = document.createElement("output");
+	elem.value = "Log :";
+	document.body.appendChild(elem);
+
+	if (window.SharedWorker) {
+		//le navigateur supporte les shared-workers
+		var w = new SharedWorker("Worker7.8.js");
+		w.port.onmessage = function(e) {
+			elem.innerHTML += "<br>" + e.data;
+		};
+		w.port.postMessage("Bonjour");
+	} else {
+		elem.textContent = "Votre navigateur ne supporte pas les shared-workers ☹";
+	}
+</script>
+</body>
+</html>

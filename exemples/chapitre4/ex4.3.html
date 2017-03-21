@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Dépôt d'un fichier depuis le navigateur</title>
+</head>
+<body>
+<!-- fichier à déposer sur le système peut être un lien, une image, etc.
+l’élément img contient l’attribut data-downloadurl qui contient
+l’URL du fichier à déposer depuis la fenêtre du navigateur -->
+	<img src="images/js.png" id="i1" data-downloadurl="image/png:js.png:https://restimel.github.io/Tutoriels/exemples/chapitre4/images/js.png"/>
+
+	<script>
+	// Définition des événements l’objet img
+	document.getElementById("i1").addEventListener("dragstart", function(e) {
+		// l’URL est récupérée grâce à la propriété dataset
+		if (this.dataset) {
+			e.dataTransfer.setData("DownloadURL", this.dataset.downloadurl);
+		}
+	}, false);
+	</script>
+</body>
+</html>

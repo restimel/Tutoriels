@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> Script de détection de la position d’un objet </title>
+</head>
+<body>
+<script>
+// Vérification de la prise en charge de l’API par le navigateur
+if (navigator.geolocation) {
+	// Appel de la méthode getCurrentPosition() pour la récupération de la position
+	navigator.geolocation.getCurrentPosition(succesGeo, echecGeo);
+} else {
+	alert("Votre navigateur ne supporte pas l’API Géolocalisation ");
+}
+
+function succesGeo() {
+	alert("votre position a été identifiée");
+}
+
+function echecGeo(){
+	alert("Impossible d’identifier votre position");
+}
+</script>
+</body>
+</html>

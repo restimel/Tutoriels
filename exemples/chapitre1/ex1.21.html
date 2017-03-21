@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Exemple de manipulation avec la méthode drawImage() </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="500" height="500">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script type="text/javascript">
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	//création d'une instance de l'objet image
+	var img = new Image();
+	//définition de la source de l'image
+	img.src = "animaux.jpg";
+	//Création de la fonction et appel du gestionnaire d’événement onload
+	img.onload = function() {
+		//Dessin de l’image source avec ses dimensions réelles à partir du point de coordonnées (0,0)
+		contexte.drawImage(img, 0, 0);
+		//Dessin d’une zone de l’image source à partir du point de coordonnées (200,200)
+		contexte.drawImage(img, 0, 0, 100, 100, 200, 200, 150, 150);
+	}
+	</script>
+</body>
+</html>

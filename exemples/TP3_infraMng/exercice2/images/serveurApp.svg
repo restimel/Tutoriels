@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="250" height="250">
+  	<style>
+  		path {
+  			stroke:#0a0a0a;
+  			stroke-width:2;
+  			stroke-linejoin: round;
+  			fill: #c0c0e0;
+  		}
+  		circle {
+  			stroke:#0a0a0a;
+  			stroke-width:2.5;
+  			fill: #aeaed0;
+  		}
+      #serveur path {
+        stroke:#0a0a0a;
+        stroke-width:4;
+        stroke-linejoin: round;
+        fill: none;
+      }
+  	</style>
+  	<defs>
+  		<g id="engrenage">
+  			<path d="M20,0 L35,0 A35,35 0 0 0 30.31088913245535,-17.5 L17.32050807568877,-10 A20,20 0 0 0 10,-17.32050807568877 L17.5,-30.31088913245535 A35,35 0 0 0 0,-35 L0,-20 A20,20 0 0 0 -10,-17.32050807568877 L-17.5,-30.31088913245535 A35,35 0 0 0 -30.31088913245535,-17.5 L-17.32050807568877,-10 A20,20 0 0 0 -20,0 L-35,0 A35,35 0 0 0 -30.31088913245535,17.5 L-17.32050807568877,10 A20,20 0 0 0 -10,17.32050807568877 L-17.5,30.31088913245535 A35,35 0 0 0 0,35 L0,20 A20,20 0 0 0 10,17.32050807568877 L17.5,30.31088913245535 A35,35 0 0 0 30.31088913245535,17.5 L17.32050807568877,10 A20,20 0 0 0 20,0" />
+  			<circle cx="0" cy="0" r="10" />
+  		</g>
+      <g id="serveur">
+        <path d="M25,100L25,225 110,225 110,100 Z M50,200H85" style="fill:#a09d9d;"/>
+        <path d="M45,160H90 M45,150H90 M45,140H90 M45,130H90" style="stroke-width:2"/>
+        <path d="M110,100L110,225 175,150 175,25 Z" style="fill:#908e8e;"/>
+        <path d="M25,100L110,100 175,25 90,25 Z" style="fill:#b9b9b9;"/>
+      </g>
+  	</defs>
+	<use href="#serveur"/>
+	<use href="#engrenage" x="170" y="40"/>
+</svg>

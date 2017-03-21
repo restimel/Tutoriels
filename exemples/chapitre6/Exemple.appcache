@@ -1,0 +1,9 @@
+CACHE MANIFEST
+
+#version 2017-06-01
+
+#Liste des fichiers à mettre en cache après le premier chargement
+CACHE:
+Exemple.html
+style.css
+Exemple.js

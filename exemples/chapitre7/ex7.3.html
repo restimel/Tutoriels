@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html><body>
+<script>
+	//Création d'une zone d'affichage
+	var elem = document.createElement("output");
+	elem.value = "Le jardinier marche vers le potager";
+	document.body.appendChild(elem);
+
+	if (window.Worker) {
+		//Création d'un worker en cas de prise en charge par le navigateur
+		var worker = new Worker("Worker7.4.js");
+		worker.onmessage = function(event) {
+			elem.value = event.data;
+		};
+	} else {
+		alert("Désolé votre navigateur ne supporte pas les workers !");
+	}
+</script></body>
+</html

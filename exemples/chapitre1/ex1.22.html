@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Exemple de création de blocs de pixels </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="300" height="150">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script type="text/javascript">
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+
+	//création des objets imageData vides
+	var imgData1 = contexte.createImageData(50, 100);
+	var imgData2 = contexte.createImageData(50, 100);
+	var i;
+
+	//Boucle qui met tous les pixels de l’objet imgData1 à bleu
+	for (i = 0; i < imgData1.data.length; i += 4) {
+		imgData1.data[i+0] = 0; //canal rouge
+		imgData1.data[i+1] = 0; //canal vert
+		imgData1.data[i+2] = 255; //canal bleu
+		imgData1.data[i+3] = 255; //canal alpha
+	}
+
+	//Boucle qui met tous les pixels de l’objet imgData2 à rouge
+	for (i = 0; i < imgData2.data.length; i += 4) {
+	imgData2.data[i+0] = 255; //canal rouge
+	imgData2.data[i+1] = 0; //canal vert
+	imgData2.data[i+2] = 0; //canal bleu
+	imgData2.data[i+3] = 255; //canal alpha
+	}
+
+	//Modification des pixels dans le canvas
+	contexte.putImageData(imgData1, 10, 10);
+	contexte.putImageData(imgData2, 110, 10);
+	</script>
+</body>
+</html>

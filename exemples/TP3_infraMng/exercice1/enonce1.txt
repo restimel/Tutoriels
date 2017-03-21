@@ -1,0 +1,11 @@
+Infrastructure - Exercice 1
+Thème: Glisser/Déposer (objet et fichier)
+
+Le but de cet exercice est de mettre en place un espace pour gérer différents lieux de stockage (par exemple des sites où se trouvent des serveurs).
+Il devra être possible de créer des lieux et de leur associer des ressources (des serveurs).
+Ces ressources pourront être déplacées d'un lieu à un autre.
+
+Objectifs:
+	* Créer une page permettant de créer des lieux.
+	* Utiliser le glisser/déposer pour créer de nouvelles ressources et déplacer les objets.
+	* Utiliser le glisser/déposer pour charger une configuration définie dans un fichier.

@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><!-- Déclaration du préfixe xlink avec la technique xmlns de XML -->
+	<title> utilisation de motif avec une image </title>
+	<defs>
+		<pattern id="m1" patternUnits="userSpaceOnUse" x="0" y="0" width="50" height="37" >
+			<image x="0" y="0" width="50px" height="37px" xlink:href="coeur.jpg" />
+		</pattern>
+	</defs>
+	<rect x="15" y="15" width="400" height="100" style="fill:url(#m1); stroke:#acdc66;" />
+</svg>

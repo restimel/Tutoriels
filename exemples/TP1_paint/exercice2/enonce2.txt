@@ -1,0 +1,11 @@
+Paint - Exercice 2
+Thème: LocalStorage
+
+Le but de cet exercice est de compléter l'exercice précédent en ajoutant une sauvegarde des outils de dessin dans le navigateur.
+Si l'utilisateur quitte la page et revient plus tard, il devrait être capable de réutiliser le même outil.
+
+Pour sauvegarder ces états vous devrez utiliser le web storage.
+
+Objectif:
+	* Enregistrer les états de tous les outils.
+	* Restaurer ces états dans l'application.

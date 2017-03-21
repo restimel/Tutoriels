@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title> Animation des couleurs </title>
+	<rect x="40" y="100" width="100" height="80" fill="blue" stroke-width="5px">
+		<animate attributeName="fill" attributeType="XML" from="blue" to="red" begin="0s" dur="4s" repeatCount="indefinite" fill="freeze"/>
+	</rect>
+</svg>

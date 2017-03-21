@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Les propriétés de style stockeStyle et fillStyle. </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="600" height="200">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script>
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	contexte.font = "Bold 40pt Arial";
+	contexte.fillStyle = 'blue';
+	contexte.fillText("API", 100, 100);
+	contexte.strokeStyle = "green";
+	contexte.strokeText("JavaScript", 200, 100);
+	</script>
+</body>
+</html>

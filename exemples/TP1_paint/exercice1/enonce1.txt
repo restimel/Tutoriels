@@ -1,0 +1,10 @@
+Paint - Exercice 1
+Thème: Canvas
+
+Le but de cet exercice est de créer un espace où l'utilisateur pourra dessiner ce qu'il veut.
+
+Objectif:
+	* Avoir un espace d'outil où l'utilisateur pourra changer son pinceau. il devra pouvoir changer sa taille, sa forme (carré, rond) et sa couleur.
+	* Avoir un espace de dessin (en canvas)
+	* Avoir différents outils comme une gomme, dessiner des rectangles ou cercles.
+	* Permettre de copier/coller une partie du dessin (à l'aide de getImageData et putImageData)

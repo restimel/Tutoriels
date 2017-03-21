@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Gestion de la transparence : RGBa </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="500" height="300">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script>
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	//Création du soleil
+	contexte.beginPath();
+	contexte.arc(60, 60, 40, 0, 2 * Math.PI, true);
+	contexte.strokeStyle = "red";
+	contexte.fillStyle = "rgba(255,0,0,0.6)";
+	contexte.fill();
+	contexte.stroke();
+	//création de l'arc de ciel
+	contexte.lineWidth =15;
+	contexte.beginPath();
+	contexte.arc(220, 200, 120, 0, 2 * Math.PI/2, true);
+	contexte.strokeStyle = "#FF0000";
+	contexte.stroke();
+	contexte.beginPath();
+	contexte.arc(220, 200, 105, 0, 2 * Math.PI/2, true);
+	contexte.strokeStyle = "Orange";
+	contexte.stroke();
+	contexte.beginPath();
+	contexte.arc(220, 200, 90, 0, 2 * Math.PI/2, true);
+	contexte.strokeStyle = "Yellow";
+	contexte.stroke();
+	contexte.beginPath();
+	contexte.arc(220, 200, 75, 0, 2 * Math.PI/2, true);
+	contexte.strokeStyle = "rgba(0,255,0,0.8)";
+	contexte.stroke();
+	contexte.beginPath();
+	contexte.arc(220, 200, 60, 0, 2 * Math.PI/2, true);
+	contexte.strokeStyle = "rgba(0,0,255,0.2)";
+	contexte.stroke();
+	//création du motif de la terre
+	contexte.beginPath();
+	contexte.moveTo(0,300);
+	contexte.bezierCurveTo(100, 300, 251, 190, 280, 350);
+	contexte.bezierCurveTo(280, 350, 220, 160, 500, 300);
+	contexte.bezierCurveTo(500, 300, 350, 350, 0, 300);
+	contexte.strokeStyle = "green";
+	contexte.fillStyle = "green";
+	contexte.fill();
+	contexte.stroke();
+</script>
+</body>
+</html>

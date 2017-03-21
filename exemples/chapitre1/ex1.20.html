@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Remplissage par un motif </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="500" height="500">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script type="text/javascript">
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	//création d’une instance de l’objet image
+	var img = new Image();
+	//Identification de la source de l’image
+	img.src = "img.jpg";
+	//Chargement de l’image
+	img.onload = function() {
+		var pat = contexte.createPattern(img, "repeat");
+		contexte.rect(0, 0, 300, 300);
+		contexte.fillStyle = pat;
+		contexte.fill();
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Exemple de remplissage d’une forme par une couleur unie </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="500" height="300">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script type="text/javascript">
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	//Création d’un cercle
+	contexte.beginPath();
+	contexte.arc(200, 155, 20, 0, 2 * Math.PI, true);
+	contexte.fillStyle = "yellow";
+	contexte.fill();
+	contexte.lineWidth = 5;
+	contexte.stroke();
+	//Création papillion coté droite
+	contexte.beginPath();
+	contexte.moveTo(180, 150);
+	contexte.bezierCurveTo (150, 120, 110, 110, 100, 150);
+	contexte.bezierCurveTo (100, 190, 150, 190, 180, 160);
+	contexte.fillStyle = "red";
+	contexte .fill();
+	contexte.lineWidth = 5;
+	contexte.stroke();
+	//Création papillion coté gauche
+	contexte.beginPath();
+	contexte.moveTo(220, 150);
+	contexte.bezierCurveTo(250, 120, 290, 120, 300, 150);
+	contexte.bezierCurveTo(305, 170, 280, 200, 220, 160);
+	contexte.fillStyle = "red";
+	contexte .fill();
+	contexte.lineWidth = 5;
+	contexte.stroke();
+	</script>
+</body>
+</html>

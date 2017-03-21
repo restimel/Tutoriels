@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<title> Mise en forme d'un texte </title>
+	<text x="20" y="60" style="fill:yellow; stroke:#abcdef; Font-size:50px; font-weight:bold;">
+		BONNE ANNEE 2017
+	</text>
+</svg>

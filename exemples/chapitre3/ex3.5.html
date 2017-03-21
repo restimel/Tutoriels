@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> Géolocalisation avec carte Google Maps </title>
+	<!--Mise en forme de l’élément div qui va recueillir la carte -->
+	<style>
+	#carte{height:600px; width:800px ; margin : 20px ; }
+	</style>
+
+	<!-- Chargement de l’API google Maps -->
+	<!-- Attention la clef (key) n'est valable que pour ce site. Vous devez générer votre propre clef pour utiliser ce code -->
+	<script src="https://maps.google.com/maps/api/js?sensor=true&key=AIzaSyDvrMw7E1DdtckJi1UDTebrs-gbO91AKak"></script>
+</head>
+<body>
+
+<h3>Afficher votre position actuelle avec un marqueur sur une carte</h3>
+<!-- Un élément HTML pour recueillir la carte -->
+<div id="carte"></div>
+
+<script>
+
+if (navigator.geolocation) {
+	navigator.geolocation.getCurrentPosition(succesGeo, echecGeo);
+} else {
+	alert("Pas de prise en charge de la géolocalisation.");
+}
+
+// Fonction de callback en cas de succès
+function succesGeo(position) {
+	var lat = position.coords.latitude;
+	var lng = position.coords.longitude;
+	// Initialisation de la carte avec les options
+	var map = new google.maps.Map(document.querySelector("#carte"), {
+		zoom:19,
+		center: new google.maps.LatLng(lat,lng),
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	});
+
+	//Ajout d’un marqueur à la position trouvée
+	new google.maps.Marker({
+		position: new google.maps.LatLng(lat,lng),
+		map:map
+	});
+}
+
+// Fonction de callback en cas d’echec
+function echecGeo(error) {
+	switch(error.code) {
+		case error.PERMISSION_DENIED : alert("La permission de récupérer position n’a pas été accordée")
+			break ;
+		default : alert("Erreur : " + error.message) ;
+	}
+}
+</script>
+</body>
+</html>

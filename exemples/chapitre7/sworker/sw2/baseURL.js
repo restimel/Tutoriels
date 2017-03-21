@@ -1,0 +1,1 @@
+var baseURL = "/Tutoriels/exemples/chapitre7/sworker/sw2/";

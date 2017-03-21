@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title> Répétition d’une animation avec repeatDur </title>
+	<circle r="30" cx="50" cy="50" fill="orange">
+		<animate attributeName="cx" attributeType="XML" from="50" to="450" dur="2s" begin="0s" repeatDur="01:30" fill="freeze"/>
+	</circle>
+</svg>

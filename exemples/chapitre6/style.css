@@ -1,0 +1,22 @@
+fieldset {
+	margin-bottom: 15px;
+	padding: 10px;
+}
+
+legend {
+	padding:0px 3px;
+	font-weight: bold;
+	font-variant: small-caps;
+}
+
+label {
+	width: 110px;
+	display: inline-block;
+	vertical-align: top;
+	margin: 6px;
+}
+
+input[type="submit"] {
+	width: 150px;
+	padding: 10px;
+}

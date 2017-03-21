@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Service worker - communicationr</title>
+</head>
+<body>
+<script src="./baseURL.js"></script>
+<div id="test"></div>
+<script>
+	if (navigator.serviceWorker) {
+			navigator.serviceWorker.register(baseURL + "serviceWorker.js")
+
+			navigator.serviceWorker.onmessage = function(event) {
+				alert("le service worker à dit: '" + event.data + "'");
+			};
+
+			setTimeout(function() {
+				navigator.serviceWorker.controller.postMessage('coucou');
+			}, 1500);
+	} else {
+		alert("votre navigateur ne supporte pas serviceWorker ☹");
+	}
+</script>
+</body>
+</html>

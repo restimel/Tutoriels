@@ -1,0 +1,9 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<!-- Création d’un élément graphique de type cercle -->
+	<circle id="c1" cx="40" cy="30" r="30"/>
+
+	<!-- Réutilisation de l’objet cercle avec l’élément <use> -->
+	<use x="50" y="50" fill="green" xlink:href="#c1" />
+	<use x="70" y="70" fill="red" xlink:href="#c1" />
+</svg>

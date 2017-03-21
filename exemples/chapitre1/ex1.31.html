@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Exemple de transformation</title>
+	<style type="text/css">
+	#dessin,
+	#dessin2,
+	#dessin3,
+	#dessin4,
+	#dessin5,
+	img {
+		border: 1px solid gray;
+	}
+	</style>
+</head>
+
+<body>
+	<canvas id="dessin" width="200" height="100">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<canvas id="dessin2" width="200" height="100">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<canvas id="dessin3" width="200" height="100">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<canvas id="dessin4" width="200" height="100">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<canvas id="dessin5" width="200" height="100">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script>
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	var canvas2 = document.getElementById("dessin2");
+	var contexte2 = canvas2.getContext("2d");
+	var canvas3 = document.getElementById("dessin3");
+	var contexte3 = canvas3.getContext("2d");
+	var canvas4 = document.getElementById("dessin4");
+	var contexte4 = canvas4.getContext("2d");
+	var canvas5 = document.getElementById("dessin5");
+	var contexte5 = canvas5.getContext("2d");
+	var img = new Image();
+	img.src = "logo.png";
+	img.onload = function() {
+		[contexte, contexte2, contexte3, contexte4, contexte5].forEach(function(ctx) {
+			ctx.drawImage(img, 10, 10);
+		});
+	};
+
+	// Rotation du contexte de 0.3 radians
+	function rotation(){
+		contexte.rotate(0.3);
+		contexte.drawImage(img, 10, 10);
+	}
+
+	//Le contexte est « étiré » (doublé) sur l’axe x et sur l’axe y
+	function Modifier() {
+		contexte2.scale(2, 2);
+		contexte2.drawImage(img, 10, 10);
+	}
+
+	//Le contexte est translaté de 50px sur l’axe des x.
+	function Translater() {
+		contexte3.translate(50, 0);
+		contexte3.drawImage(img, 10, 10);
+	}
+
+	function transformer() {
+		contexte4.transform(1.5, 0.1, 1, 0.9, 0.4, 0.5);
+		contexte4.drawImage(img, 10, 10);
+	}
+
+	function transformer2() {
+		contexte5.setTransform(0.8, 0.8, 0.3, 0.6, 0, 0.6);
+		contexte5.drawImage(img,10, 10);
+	}
+	</script>
+	<br>
+	<button onclick="rotation()"> rotate()</button>
+	<button onclick="Modifier()"> scale()</button>
+	<button onclick="Translater()"> translate</button>
+	<button onclick="transformer()">transform</button>
+	<button onclick="transformer2()"> settransform</button>
+</body>
+</html>

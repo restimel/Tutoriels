@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> Récupération de la latitude, longitude et l’altitude d’une position </title>
+</head>
+<body>
+<script>
+// Vérification de la prise en charge de l’API par le navigateur
+if (navigator.geolocation) {
+	navigator.geolocation.getCurrentPosition(succesGeo,echecGeo);
+} else {
+	alert("Votre navigateur ne supporte pas l’API Géolocalisation");
+}
+
+// fonction de callback appelée en cas de succès de la géolocalisation
+// permettant de récupérer la latitude, longitude et  l’altitude d’une position
+function succesGeo(position) {
+	var lat = position.coords.latitude;
+	var lng = position.coords.longitude;
+	var alt = position.coords.altitude;
+	alert("Lat: " + lat + " Lng: " + lng + " Alt: " + alt);
+}
+
+// fonction callback appelée en cas d’échec de la géolocalisation
+function echecGeo(error) {
+	alert("il y a un problème: " + error) ;
+}
+</script>
+</body>
+</html>

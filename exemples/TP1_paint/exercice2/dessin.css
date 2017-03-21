@@ -1,0 +1,19 @@
+.actif {
+    border: 2px solid red;
+}
+
+header {
+    height: 50px;
+}
+
+canvas {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+}
+
+#dessin {
+    background-color: rgba(200, 200, 200, 0.15);
+}

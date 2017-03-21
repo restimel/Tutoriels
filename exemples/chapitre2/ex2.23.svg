@@ -1,0 +1,16 @@
+<?xml version="1.0" standalone="no" ?>
+<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<title> Texte glissant </title>
+	<text id="texte" x="20" y="80">
+		Bonne
+		<tspan dy="-2"> A</tspan>
+		<tspan dy="-3"> N</tspan>
+		<tspan dy="-4"> N</tspan>
+		<tspan dy="-5" > É</tspan>
+		<tspan dy="-6">E </tspan>
+		<tspan dy="-6"> 2</tspan>
+		<tspan dy="8"> 0</tspan>
+		<tspan dy="7"> 1</tspan>
+		<tspan dy="6" > 7</tspan>
+	</text>
+</svg>

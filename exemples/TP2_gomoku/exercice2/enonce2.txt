@@ -1,0 +1,8 @@
+Gomoku - Exercice 2
+Thème: Worker
+
+Le but de cet exercice est de réaliser une intelligence artificielle et que l'application reste disponible pendant son temps de réflexion.
+
+Objectif:
+	* Ajouter une interface pour activer ou non l'ordinateur.
+	* Ajouter un web worker et y intégrer la recherche du coup de l'IA. (le but de l'exercice n'est pas de faire une IA efficace)

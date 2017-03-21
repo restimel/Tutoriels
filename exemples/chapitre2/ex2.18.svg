@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg" >
+	<title> Dégradé linéaire </title>
+	<defs>
+		<linearGradient id="D1" x1="0%" y1="0%" x2="100%" y2="100%">
+			<stop offset="0%" style="stop-color:#26CD22; stop-opacity: 1"/>
+			<stop offset="100%" style="stop-color:#1F56D2; stop-opacity: 1"/>
+		</linearGradient>
+	</defs>
+	<rect x="20" y="10" width="400" height="200" style="fill:url(#D1);"/>
+</svg>

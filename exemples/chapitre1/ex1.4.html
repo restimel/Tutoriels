@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Dessiner avec les méthodes clearRect() et strokeRect() </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="300" height="300">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script type="text/javascript">
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	contexte.fillRect(50,50,200,200);
+	// La méthode clearRect() efface à partir du pixel de coordonnée (60,60) 180 X 180 pixels du carré plein
+	contexte.clearRect(60,60,180,180);
+	// La méthode strokeRect() ajoute un contour à l’intérieur du carré transparent.
+	contexte.strokeRect(70,70,160,160);
+	</script>
+</body>
+</html>

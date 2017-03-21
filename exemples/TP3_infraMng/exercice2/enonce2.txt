@@ -1,0 +1,8 @@
+Infrastructure - Exercice 2
+Thème: LocalStorage
+
+Le but de cet exercice est de garder en mémoire la configuration préalablement construite et de la restaurer.
+
+Objectifs:
+	* Sauvegarder la configuration définie par l'utilisateur.
+	* Restaurer la configuration précédente de l'utilisateur.

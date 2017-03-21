@@ -1,0 +1,10 @@
+Gomoku - Exercice 3
+Thème: LocalStorage
+
+Le but de cet exercice est de sauvegarder une partie et de la rejouer.
+La sauvegarde se fera dans le localStorage.
+
+Objectif:
+	* Ajouter la possibilité de sauvegarder une partie (avec le localStorage).
+	* Ajouter la possibilité de recharger une partie.
+	* Permettre de rejouer la partie chargée.

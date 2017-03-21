@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Tracé d’un carré </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="300" height="300">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script type="text/javascript">
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	contexte.beginPath();
+	contexte.moveTo(50,50);
+	contexte.lineTo(50,200);
+	contexte.lineTo(200,200);
+	contexte.lineTo(200,50);
+	contexte.lineTo(50,50);
+	contexte.stroke();
+	</script>
+</body>
+</html>

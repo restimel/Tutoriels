@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> Géolocalisation avec carte Open Street Map </title>
+	<!--Mise en forme de l’élément div qui va recueillir la carte -->
+	<style>
+	#carte{height:600px; width:800px ; margin : 20px ; }
+	</style>
+
+	<!-- Chargement du style leaflet -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
+
+	<!-- Chargement de l’API Leaflet pour charger les cartes OpenStreetMap -->
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+</head>
+<body>
+
+<h3>Afficher votre position actuelle avec un marqueur sur une carte</h3>
+<!-- Un élément HTML pour recueillir la carte -->
+<div id="carte"></div>
+
+<script>
+
+if (navigator.geolocation) {
+	navigator.geolocation.getCurrentPosition(succesGeo, echecGeo);
+} else {
+	alert("Pas de prise en charge de la géolocalisation.");
+}
+
+// Fonction de callback en cas de succès
+function succesGeo(position) {
+	var lat = position.coords.latitude;
+	var lng = position.coords.longitude;
+	// Initialisation de la carte avec les options
+	var map = L.map("carte").setView([lat, lng], 15);
+	// chargement du fond de carte OpenStreetMap
+	L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '©<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+
+	//Ajout d’un marqueur à la position trouvée
+	L.marker([lat, lng]).addTo(map);
+}
+
+// Fonction de callback en cas d’echec
+function echecGeo(error) {
+	switch(error.code) {
+		case error.PERMISSION_DENIED : alert("La permission de récupérer position n’a pas été accordée")
+			break ;
+		default : alert("Erreur : " + error.message) ;
+	}
+}
+</script>
+</body>
+</html>

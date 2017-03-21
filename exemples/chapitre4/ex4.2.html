@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> Dépôt d’un fichier depuis le système </title>
+    <!--Style interne -->
+    <style>
+        div {
+            margin: 30px auto;
+            text-align: center;
+        }
+        #zone {
+            padding-top: 40px;
+            width: 250px;
+            height: 200px;
+            border: 2px dotted black;
+            background-color: #F5F5F5;
+        }
+    </style>
+    <script>
+    //fonction d’annulation du comportement par défaut
+    function survoler(ev) {
+        ev.preventDefault();
+    }
+    //fonction de traitement de dépôt
+    function deposer(ev) {
+        ev.preventDefault();
+
+        //récupération des fichiers déposés sous forme d’une liste
+        var fichiers = ev.dataTransfer.files;
+
+        // récupération de la taille de la liste
+        var taille_liste = fichiers.length;
+        var nomfichiers = "";
+        
+        for(var i = 0 ; i < taille_liste ; i++) {
+            // récupération des noms des fichiers
+            nomfichiers += "\n" + fichiers[i].name;
+        }
+
+        //affichage des noms des fichiers déposés
+        alert(taille_liste + " fichier(s) déposé(s):\n" + nomfichiers);
+    }
+    </script>
+</head>
+<body>
+    <div id="zone" dropzone="copy f:image/png" ondrop="deposer(event)" ondragover="survoler(event)">
+        Déposer vos fichiers ici
+    </div>
+
+</body>
+</html>

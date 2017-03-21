@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Arrêt d'un worker</title>
+</head>
+<body>
+<script>
+	//préparation pour l'affichage
+	var elem = document.createElement("output");
+	elem.value = "en cours de création";
+	document.body.appendChild(elem);
+
+	// initialisation du worker
+	var w = new Worker("Worker7.7.js");
+
+	//ajout d'un listener
+	w.addEventListener("message", function(event) {
+		elem .value = "Le worker a déjà fait " + event.data + " tours";
+	});
+
+	setTimeout(function() {
+		// Au bout d'une seconde, on arrête le worker
+		w.terminate();
+		document.body.appendChild(document.createTextNode("Worker Éliminé"));
+	}, 1000);
+</script>
+</body>
+</html>

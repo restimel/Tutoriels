@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> Affichage d’un fichier depuis le système </title>
+    <!--Style interne -->
+    <style>
+        div {
+            margin: 30px auto;
+            text-align: center;
+        }
+        #zone {
+            padding-top: 40px;
+            width: 250px;
+            height: 200px;
+            border: 2px dotted black;
+            background-color: #F5F5F5;
+        }
+    </style>
+    <script>
+    //fonction d’annulation du comportement par défaut
+    function survoler(ev) {
+        ev.preventDefault();
+    }
+    function chargeImage(ev) {
+        var el = document.createElement("img");
+        el.src = ev.target.result;
+        document.getElementById("affichage").appendChild(el);
+    }
+    function chargeTexte(ev) {
+        var el = document.createElement("pre");
+        el.textContent = ev.target.result;
+        document.getElementById("affichage").appendChild(el);
+    }
+    //fonction de traitement de dépôt
+    function deposer(ev) {
+        ev.preventDefault();
+        //récupération des fichiers déposés sous forme d’une liste
+        var fichiers = ev.dataTransfer.files;
+        // récupération de la taille de la liste
+        var taille_liste = fichiers.length;
+        for(var i = 0 ; i < taille_liste ; i++) {
+            // création d'un objet FileReader
+            var reader = new FileReader();
+            // charge et affiche le contenu en fonction du type de fichier
+            if (fichiers[i].type.split('/')[0] === "image") {
+                reader.onloadend = chargeImage;
+                reader.readAsDataURL(fichiers[i]);
+            } else {
+                reader.onloadend = chargeTexte;
+                reader.readAsText(fichiers[i]);
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div id="zone" ondrop="deposer(event)" ondragover="survoler(event)">
+        Déposer vos fichiers ici
+    </div>
+    <div id="affichage"></div>
+</body>
+</html>

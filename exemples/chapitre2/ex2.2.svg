@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg" >
+	<title>Elément de groupement</title>
+	<!-- Ajout des attributs de style dans la balise <g>
+	Ces attributs seront traités à la suite de ce chapitre -->
+	<g stroke="blue" fill="red" stroke-width="4">
+	<!-- Tracer de plusieurs rectangle, cette forme sera détaillée dans la suite de ce chapitre-->
+		<rect x="5" y="5" width="20" height="70" />
+		<rect x="25" y="25" width="20" height="70" />
+		<rect x="45" y="45" width="20" height="70" />
+	</g>
+</svg>

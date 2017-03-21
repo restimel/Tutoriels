@@ -1,0 +1,95 @@
+html { padding: 0; }
+body { margin:0; padding: 10px; }
+svg { margin: 0; background-color: #906b3c; }
+
+#ouvrir-configuration {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+#ouvrir-gestion-partie {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+}
+.navigation {
+    position: absolute;
+    top: 90px;
+    right: 10px;
+}
+
+#ia-progression, #gestion-partie, #configuration-form {
+    display: none;
+    position: absolute;
+    top: 20%;
+    left: 40%;
+}
+#configuration-form {
+    background-color: #eff1b1;
+}
+
+#configuration-form label, #configuration-form button {
+    display: block;
+}
+
+#gestion-partie {
+    background-color: #8f9ea0;
+}
+
+.chargement-partie {
+    cursor: pointer;
+    color: blue;
+}
+
+.svg-conteneur {
+    text-align: center;
+}
+
+.lignePlateau {
+    stroke: black;
+    stroke-width: 3;
+}
+
+.joueur1 {
+    fill: black;
+}
+.joueur0 {
+    fill-opacity: 0;
+    cursor: pointer;
+}
+.joueur-1 {
+    fill: white;
+}
+
+#victoire {
+    display: none;
+    font-size: 50px;
+    color: blue;
+}
+#victoire.affiche-noir {
+    display: block;
+    stroke: blue;
+    fill: black;
+}
+#victoire.affiche-blanc {
+    display: block;
+    stroke: blue;
+    fill: white;
+}
+
+#partie-nulle {
+    display: none;
+    font-size: 50px;
+    fill: #6bbce8;
+    stroke: #113ea0;
+}
+
+#partie-nulle.affiche {
+    display: block;
+}
+
+#marques line {
+    stroke: red;
+    stroke-width: 15;
+    stroke-linecap: round;
+}

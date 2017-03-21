@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Promise</title>
+</head>
+<body>
+<script>
+	var A = 10;
+	var B = 10;
+
+	//Déclaration d’une fonction qui sera appelée dans une instance de l’objet promise
+	function p(resolve, reject) {
+		if (A % B === 0) {
+			resolve("succès");
+		} else {
+			reject("échec!!");
+		}
+	}
+
+	//Création d’une instance de l’objet promise
+	var promise = new Promise(p);
+	promise.then(function(value) {
+		//affichage d’un message de succès sur la console du navigateur lorsque la
+		//promesse est réalisée
+		console.log(value);
+	}).catch(function(err) {
+		//affichage d’un message d’échec sur la console du navigateur lorsque la
+		//promesse est rejetée
+		console.log(err);
+	});
+</script>
+<p>Ouvrez la console pour voir le résultat.</p>
+</body>
+</html>

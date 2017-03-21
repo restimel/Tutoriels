@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>importScripts (scope global)</title>
+</head>
+<body>
+<script>
+	//création du worker
+	var w = new Worker("Worker7.13_1.js");
+	
+	//réception des messages
+	w.addEventListener("message", function(event) {
+		alert("résultat : " + event.data);
+	});
+</script>
+</body>
+</html>

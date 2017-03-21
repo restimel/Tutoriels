@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>enchaînement de workers</title>
+</head>
+<body>
+<script>
+	//initialisation du worker
+	var w = new Worker("Worker7.14.js");
+	w.addEventListener("message", function(event) {
+		alert("j'ai reçu le message suivant :\n" + event.data);
+	}, false);
+
+	//on envoie un message
+	w.postMessage("Bonjour");
+</script>
+</body>
+</html>

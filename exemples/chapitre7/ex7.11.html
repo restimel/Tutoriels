@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Gestion d'erreur</title>
+</head>
+<body>
+<script>
+	//création du worker
+	var w = new Worker("Worker7.11.js");
+	
+	//réception des messages
+	w.addEventListener("message", function(event) {
+		alert("Le worker a répondu : " + event.data);
+	}, false);
+
+	//gestion des erreurs
+	w.addEventListener("error", function(event) {
+		alert("Il a planté ! Son excuse est :\n" + event.message + "\n\nfichier :" + event.filename + "\nligne : " + event.lineno);
+	}, false);
+
+	w.postMessage("Bonjour");
+</script>
+</body>
+</html>

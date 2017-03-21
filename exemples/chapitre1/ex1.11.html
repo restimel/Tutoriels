@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Dessiner un cercle </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="300" height="300">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script type="text/javascript">
+	var canvas = document.getElementById("dessin");
+	var contexte = canvas.getContext("2d");
+	contexte.beginPath();
+	contexte.arc(150, 150, 90, 0, 2 * Math.PI, true);
+	contexte.lineWidth = 10;
+	contexte.stroke();
+	</script>
+</body>
+</html>

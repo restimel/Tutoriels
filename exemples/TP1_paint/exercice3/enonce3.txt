@@ -1,0 +1,11 @@
+Paint - Exercice 3
+Thème: SharedWorker
+
+Le but de cet exercice est de compléter l'exercice précédent en plaçant chaque composant dans une fenêtre différente à la manière de Gimp.
+Il devient alors possible d'avoir plusieurs fenêtres de dessin mais une seule barre d'outil.
+Après avoir changé un outil, celui-ci pourra être appliqué sur tous les dessins.
+
+Objectif:
+    * Mettre en place une gestion par Shared-worker.
+    * Créer des pages spécialisées.
+    * Permettre d'ouvrir de nouvelles pages dans de nouvelles fenêtres.

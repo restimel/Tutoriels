@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<g>
+		<title> Ceci est un exemple </title>
+		<circle id="c1" cx="40" cy="30" r="30"/>
+		<desc>
+		Cet exemple contient un cercle noir
+		qui ne sert que d'exemple à la balise desc
+		</desc>
+	</g>
+</svg>

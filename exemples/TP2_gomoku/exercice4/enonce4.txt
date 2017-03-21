@@ -1,0 +1,8 @@
+Gomoku - Exercice 4
+Thème: Drag & drop (système)
+
+Le but de cet exercice est de charger une partie depuis un fichier externe.
+
+Objectif:
+	* Ajouter la possibilité de lire un fichier par drag&drop.
+	* Permettre de rejouer la partie chargée.

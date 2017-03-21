@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Exemple d'utilisation de globalCompositeOperation </title>
+	<style type="text/css">
+		.exemple {
+			display: inline-block;
+			border: 1px solid black;
+			margin: 5px;
+		}
+		canvas {
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	<script>
+	var composition = ["source-over", "source-in", "source-out", "source-atop", "destination-over", "destination-in", "destination-out", "destination-atop", "lighter", "lighten", "copy", "xor", "darker", "darken", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"]
+
+	var i, x, y, el, text, canvas, contexte;
+
+	for (i = 0; i < composition.length; i++) {
+		canvas = document.createElement("canvas");
+		canvas.width = 150;
+		canvas.height = 150;
+		contexte = canvas.getContext("2d");
+
+		// destination
+		contexte.fillStyle = "blue";
+		contexte.fillRect(50, 50, 150, 150);
+
+		// source
+		contexte.globalCompositeOperation = composition[i];
+		contexte.fillStyle = "red";
+		contexte.fillRect(0, 0, 100, 100);
+
+		el = document.createElement("div");
+		el.className = "exemple";
+		el.appendChild(canvas);
+		el.appendChild(document.createTextNode(composition[i]));
+		document.body.appendChild(el);
+	}
+	</script>
+</body>
+</html>

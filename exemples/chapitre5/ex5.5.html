@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Stockage du nombre de clic dans une sessionStorage</title>
+<script>
+function nbClic() {
+//test du support de l'interface Storage
+    var comptage;
+    if (typeof Storage !== "undefined") {
+        //parseInt() convertit le texte en nombre entier et retourne NaN si la valeur n'existe pas
+        //'|| 0' permet de donner une valeur par défaut dans ce cas.
+        comptage = parseInt(sessionStorage.getItem("comptageClic"), 10) || 0;
+        comptage++;
+        //enregistrement du comptage dans une sessionStorage
+        sessionStorage.setItem("comptageClic", comptage);
+
+        document.getElementById("comptage").value = comptage;
+    } else {
+        alert("votre navigateur ne supporte pas le web storage");
+    }
+}
+</script>
+</head>
+<body>
+<button onclick="nbClic()">Cliquez ici</button><br>
+<label for="comptage">nombre de clic</label>
+<input id="comptage" type="text" value="0">
+</body>
+</html>

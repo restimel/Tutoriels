@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> Utilisation des options maximumAge et timeout </title>
+</head>
+<body>
+Attendez 2s avant d'autoriser la géolocalisation.
+<script>
+if (navigator.geolocation) {
+	navigator.geolocation.getCurrentPosition(succesGeo, echecGeo , {
+		enableHighAccuracy: true,
+		maximumAge: 5000,
+		timeout: 2000
+	});
+} else {
+	alert("Votre navigateur ne supporte pas l’API Géolocalisation");
+}
+
+function succesGeo(position){
+	// Traitement en cas de succès de la géolocalisation
+	var lat = position.coords.latitude;
+	var lng = position.coords.longitude;
+	var alt = position.coords.altitude;
+	var acc = position.coords.accuracy;
+	alert("Lat: " + lat + " Lng: " + lng + " Alt: " + alt + "\naccuracy:" + acc);
+}
+
+function echecGeo(error) {
+	// Traitement en cas d’echec de la géolocalisation
+	alert("Erreur:" + error.message);
+}
+</script>
+</body>
+</html>

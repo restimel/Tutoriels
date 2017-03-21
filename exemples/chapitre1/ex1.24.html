@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Exemple de modification de pixels </title>
+</head>
+
+<body>
+	<canvas id="dessin" width="500" height="280">
+		Désolé, votre navigateur ne supporte pas l’élément canvas.
+	</canvas>
+	<script>
+	var canvas=document.getElementById("dessin");
+	var contexte=canvas.getContext("2d");
+	var img = new Image();
+	img.src = "chat.jpg";
+	img.onload = function() {
+		contexte.drawImage(img, 40, 10);
+		var img2 = contexte.getImageData( 10, 10, img.width, img.height);
+		var data = img2.data;
+		for(var i = 0; i < data.length; i += 4) {
+			var b = 255-data[i] + 255-data[i + 1] + 255-data[i + 2];
+			data[i] = b; // Rouge
+			data[i + 1] = b; // Vert
+			data[i + 2] = b; // Bleu
+		}
+		// copie du résultat
+		contexte.putImageData(img2, img.width+50, 10);
+	};
+	</script>
+</body>
+</html>

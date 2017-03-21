@@ -1,0 +1,11 @@
+Gomoku - Exercice1
+Thème: SVG
+
+Le but de cet exercice est de réaliser un jeu de Gomoku.
+Le Gomoku est un jeu de stratégie où le but est d'aligner 5 pions de sa couleur.
+Il faudra d'abord dessiner un plateau en SVG pour jouer les coups et définir le gagnant.
+
+Objectif:
+	* Dessiner un plateau de Gomoku en SVG
+	* Permettre de jouer des coups sur ce plateau
+	* Définir le gagnant.

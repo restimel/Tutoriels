@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title> Animation d’un objet le long d’un chemin</title>
+	<path id="chemin" d="M 10,150 q 50,-60 90,0 t 90,0 t 90,0 t 90,0" fill="none" stroke-width="1" stroke="black" />
+	<g>
+		<circle r="10" cx="0" cy="0" fill="red"/>
+		<animateMotion begin="0s" dur="10s" repeatDur="indefinite">
+			<mpath xlink:href="#chemin"/>
+		</animateMotion>
+	</g>
+</svg>

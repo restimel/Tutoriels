@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="no"?>
+<svg width="500" height="500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title> Animation d’un texte </title>
+	<path id="chemin" d="M 10,180 C 100,0 200,300 300,150 Q 340,100 385,120" fill="none" stroke="blue" stroke-width="1px"/>
+	<text>
+		<textPath xlink:href="#chemin"> BONNE ANNÉE 2017 !!
+			<animate attributeName="startOffset" attributType="XML" from="0" to="100%" begin="0s" dur="7s" repeatCount="indefinite"/>
+		</textPath>
+	</text>
+</svg>

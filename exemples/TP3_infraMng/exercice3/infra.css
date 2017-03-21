@@ -1,0 +1,104 @@
+header {
+	text-align: center;
+	font-size: 1.5em;
+	margin-bottom: 0.5em;
+}
+body.peutDeposer {
+    background-color: rgba(100, 255, 100, 1);
+}
+.dialogue {
+	display: none;
+}
+.masque {
+	position: absolute;
+	z-index: 1;
+	left:0; right: 0; top:0; bottom: 0;
+	background-color: rgba(120,120,120,0.5);
+}
+.contenu-dialogue {
+	position: absolute;
+	z-index: 2;
+	top: 30%;
+	left: 30%;
+	border: 3px double black;
+	background-color: #b9c0b9;
+	padding: 20px;
+}
+.contenu-dialogue > label {
+	display: block;
+	margin-bottom: 1em;
+}
+#carte {
+	height: 300px;
+	width: 500px;
+}
+
+#choix {
+	position: absolute;
+	top: 0; bottom: 0; right: 0; width: 150px;
+	background-color: rgba(200, 190, 150, 0.8);
+	border-left: 4px solid black;
+	text-align: center;
+}
+#choix.peutDeposer {
+	background-color: rgba(250, 100, 100, 0.8);
+}
+
+.serveur {
+	display: inline-block;
+}
+.srv-image {
+	width: 100px;
+}
+
+#message {
+	position: absolute;
+	height: 50px; bottom: 0; left:0; right: 150px;
+	background-color: #ADE;
+}
+#lieux {
+	position: absolute;
+	top: 0; bottom: 50px; left: 0; right: 150px;
+	overflow: auto;
+}
+.lieu {
+	position: relative;
+	display: inline-block;
+	width: 350px;
+	height: 300px;
+	overflow: auto;
+	border: 2px solid rgba(150, 150, 200, 0.6);
+	background-color: rgba(230, 230, 250, 0.1);
+	box-sizing: border-box;
+	margin: 12px;
+}
+.lieu.peutDeposer {
+	background-color: rgba(100, 250, 100, 0.6);
+}
+
+#nouveauLieu {
+	cursor: pointer;
+	background-color: rgba(200, 200, 255, 0.2);
+	padding-top: 120px;
+}
+#nouveauLieu:hover {
+	font-size: 1.5em;
+	color: #c8c000;
+	background-color: rgba(255, 255, 200, 0.2);
+}
+
+.supprimeLieu {
+	position: absolute;
+	top: 0; right: 0;
+	cursor: pointer;
+	color: red;
+}
+.supprimeLieu:hover {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.changePosition {
+	position: absolute;
+	top: 20px; right: 0;
+}

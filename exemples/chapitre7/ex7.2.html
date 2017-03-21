@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>Code en programmation événementielle - Page avec 3 boutons</title>
+</head>
+<body>
+	<button onclick="a = calcul1(a, b);">Calcul 1</button>
+	<button onclick="b = calcul2(a, b);">Calcul 2</button>
+	<br>
+	<button onclick="alert('a=' + a + '\nb=' + b);">Alert</button>
+	
+	<script>
+	var a = 1;
+	var b = 2;
+	
+	function calcul1(c, d){
+		return c * d;
+	}
+	function calcul2(c, d){
+		return c + d;
+	}
+</script>
+</body>
+</html>
