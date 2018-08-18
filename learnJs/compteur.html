@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Compteur</title>
+        <style>
+#counterDisplay {
+    font-size: 7em;
+}
+.time-over {
+    background-color: #FF6600;
+}
+        </style>
+    </head>
+    <body>
+        <div>
+            <div id="counterDisplay">
+                00:00:00
+            </div>
+            <div>
+                <button id="play">Démarrage</button>
+                <button id="pause">Pause</button>
+                <button id="stop">Recommencer</button>
+            </div>
+        </div>
+        <details>
+            <summary>Paramétrage</summary>
+            <label>
+                <input type="checkbox" id="countDown"> Compte à rebour
+            </label>
+            <br>
+            <label>
+                heures: <input type="number" id="hourParam" value="0">
+            </label>
+            <label>
+                minutes: <input type="number" id="minuteParam" value="0">
+            </label>
+            <label>
+                secondes: <input type="number" id="secondParam" value="0">
+            </label>
+        </div>
+
+
+        <script>
+var elCountDown = document.getElementById('countDown');
+var elHourParam = document.getElementById('hourParam');
+var elMinuteParam = document.getElementById('minuteParam');
+var elSecondParam = document.getElementById('secondParam');
+var elCounterDisplay = document.getElementById('counterDisplay');
+var elPlay = document.getElementById('play');
+var elPause = document.getElementById('pause');
+var elStop = document.getElementById('stop');
+
+var counter = 0; // valeur actuelle du compteur
+var countOrder = 1; // sens de comptage (croissant: 1; décroissant: -1)
+var timeOver = false; // si true, le temps alloué est écoulé
+var timer = -1; // référence au timer interval
+
+elCountDown.onchange = function() {
+    if (countOrder === 1) {
+        countOrder = -1;
+    } else {
+        countOrder = 1;
+    }
+};
+elPlay.onclick = play;
+elPause.onclick = pause;
+elStop.onclick = stop;
+
+// sert à ajouter un 0 si le nombre n'a qu'un seul chiffre
+function pad(nb) {
+    if (nb < 10) {
+        return '0' + nb;
+    }
+    return nb;
+}
+
+// remet à jour l'affichage du compteur
+function displayCounter() {
+    var classEnd = '';
+    var timeSecond = counter % 60;
+    var timeMinute = ((counter - timeSecond) / 60) % 60;
+    var timeHour = (counter - timeSecond - timeMinute * 60) / 3600;
+
+    var display = pad(timeHour) + ':' + pad(timeMinute) + ':' + pad(timeSecond);
+
+    if (timeOver) {
+        classEnd = 'time-over';
+    }
+
+    // mise à jour du DOM
+    elCounterDisplay.textContent = display;
+    elCounterDisplay.className = classEnd;
+}
+
+function displayButton() {
+    if (timer === -1) {
+        elPlay.style.display = 'inline-block';
+        elPause.style.display = 'none';
+    } else {
+        elPlay.style.display = 'none';
+        elPause.style.display = 'inline-block';
+    }
+}
+
+// Fait évoluer le compteur (en incrémentant ou décrémentant selon countOrder)
+function count() {
+    counter = counter + countOrder;
+    if (countOrder === -1 && counter <= 0) {
+        timeOver = true;
+        pause();
+    }
+    displayCounter();
+}
+
+// démarre le comptage
+function play() {
+    if (!timeOver) {
+        timer = setInterval(count, 1000);
+    }
+    displayButton();
+}
+
+// Met en pause le comptage
+function pause() {
+    clearInterval(timer);
+    timer = -1;
+    displayButton();
+}
+
+// Réinitialise le comptage
+function stop() {
+    counter = elHourParam.value * 3600 + elMinuteParam.value * 60 + elSecondParam.value * 1; // Note: ce dernier * 1 sert à convertir le résultat en nombre afin que + soit une addition et non une concaténation
+    displayCounter();
+    pause()
+}
+
+displayButton();
+        </script>
+    </body>
+</html>

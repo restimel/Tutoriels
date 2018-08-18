@@ -1,0 +1,1493 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Présenation du JavaScript</title>
+
+        <meta name="description" content="A quick presentation of JS how it works and how to use it">
+        <meta name="author" content="Benoît Mariat">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+            if( window.location.search.match( /print-pdf/gi ) ) {
+                var link = document.createElement( 'link' );
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = 'css/print/pdf.css';
+                document.getElementsByTagName( 'head' )[0].appendChild( link );
+            }
+        </script>
+
+        <style>
+            code {
+                color: rgba(255, 230, 180, 0.8);
+            }
+            q {
+                color: rgba(220, 255, 230, 0.8);
+            }
+            p.attention,
+            p.error {
+                font-size: x-large;
+                background-color: rgba(224, 79, 83, 0.75);
+                border-radius: 1em;
+                padding: 0.5em;
+            }
+            p.info {
+                font-size: x-large;
+                background-color: rgba(154, 177, 226, 0.75);
+                border-radius: 1em;
+                padding: 0.5em;
+            }
+            span.smaller, p.smaller, td.smaller, code.smaller {
+                font-size: 0.8em;
+            }
+            span.key {
+                color: #000;
+                display: inline-block;
+                text-shadow: none;
+                border-radius: 10px;
+                background: #fff;
+                box-shadow: rgba(0, 0, 0, 0.3) 0 2px 5px;
+                padding: 1px 6px 1px;
+            }
+            .help {
+                cursor: help;
+            }
+
+            .reveal table td {
+                vertical-align: top;
+                border-top: 10px solid rgba(0, 0, 0, 0);
+            }
+
+            .grid {
+                display:grid;
+                grid: max-content / auto-flow 1fr;
+            }
+        </style>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h1>JavaScript</h1>
+                    <h3>Présentation de base du langage</h3>
+                    <br><br><br>
+                    <p>Naviguez avec <span class="key">→</span> pour changer de chapitres et <span class="key">↓</span> à l'intérieur d'un chapitre.</p>
+                    <p><small>Et aussi <span class="key">esc</span> si vous êtes pressés.</small></p>
+                </section>
+
+                <section>
+                    <h2>Introduction au Javascript</h2>
+                    <ul>
+                        <li>Qu'est-ce?</li>
+                        <li>Écrire du JavaScript
+                            <ul>
+                                <li>Variables primitives</li>
+                                <li>Débugguer</li>
+                                <li>Opération de base</li>
+                                <li>Conversion de types</li>
+                                <li>Fonctions</li>
+                                <li>Conditions</li>
+                                <li>Boucles</li>
+                                <li>Objets</li>
+                                <li>Listes</li>
+                                <li>HTML</li>
+                                <li>attributs HTML</li>
+                                <li>manipuler le HTML</li>
+                                <li>base du CSS</li>
+                                <li>quelques fonctions utiles</li>
+                            </ul>
+                        </li>
+                        <li>TP</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Qu'est-ce que le JavaScript?</h2>
+                        <small>(ou plus souvent appelé JS)</small>
+                    </section>
+                    <section>
+                        <h3>Principes</h3>
+                        <p>
+                            Le JavaScript est un langage de programmation. Il permet d'exécuter des séquences de codes.
+                        </p><br>
+                        <p>
+                            Il s'agit de faire marcher un script qui est interprété au moment de l'exécution. Il n'est donc pas compilé en source binaire contrairement à d'autres langages.
+                        </p><br>
+                        <p>Il n'a rien à voir avec le Java qui est un autre langage de programmation.</p>
+                    </section>
+                    <section>
+                        <h3>Exécution</h3>
+                        <p>Il faut un interpréteur pour traduire le script en code compréhensible par l'ordinateur.</p>
+                        <br>
+                        <p>Les interpréteurs les plus utilisés sont ceux intégrés dans les navigateurs (Chrome, Firefox, Safari, Opera, Edge, ...). Mais il existe aussi d'autres interpréteurs (comme NodeJs) qui permettent d'exécuter du JS directement sur l'ordinateur.</p>
+                        <br>
+                        <p>L'avantage de l'interpréteur intégré aux navigateurs, c'est qu'il permet de manipuler simplement un document HTML et donc d'obtenir facilement une interface pour l'utilisateur.<br>
+                        Les pages sur internet sont des fichiers HTML qui sont exposées publiquement.</p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Premiers pas en JavaScript</h2>
+                    </section>
+                    <section>
+                        <h3>Première exécution</h3>
+                        <p class="smaller">Les explications arriveront un peu plus tard ☺.</p>
+                        <ul>
+                            <li>Ouvrez un éditeur de texte et entrez le code suivant&nbsp;:<code><pre>
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;script&gt;
+alert('Bonjour');
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+                            </pre></code></li>
+                            <li>Enregistrez ce code dans un fichier nommé <code>bonjour.html</code>.</li>
+                            <li>Ouvrez ce fichier dans votre navigateur préféré.</li>
+                            <li>Une fenêtre avec "Bonjour" est affichée.</li>
+                        </ul>
+                        <p>Le code JavaScript correspond aux lignes entre <code>&lt;script&gt;</code> et <code>&lt;/script&gt;</code></p>
+                        <p class="info">La fonction <code>alert</code> est une fonction de debug, et ne doit normalement pas être utilisée.</p>
+                    </section>
+                    <section>
+                        <p>Vous pourrez utiliser ce fichier, ou une copie de celui-ci, pour tester les instrutions présentées ensuite.</p>
+                    </section>
+                    <section>
+                        <h2>Principes d'exécution</h2>
+                        <p>Les instructions sont exécutées les unes après les autres de haut en bas.</p><br>
+                        <p>Généralement, une instruction tient sur une ligne et se termine par un <code>;</code> (en réalité il est possible de couper une instruction sur plusieurs lignes, mais nous n'en parlerons pas dans cette présentation).</p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Variables</h2>
+                    </section>
+                    <section>
+                        <p>Une variable permet d'enregistrer une valeur. Il sera possible de la réutiliser plus tard.</p>
+                        <br>
+                        <p>Il existe différent type de variables mais en JavaScript on les déclare toutes de la même manière avec un des mots clefs suivant <code>var</code>, <code>let</code> ou <code>const</code>.</p>
+                        <br>
+                        <p>Nous expliquerons les différences entre ces mots clefs plus tard.</p>
+                    </section>
+                    <section>
+                        <h3>Nommer une variable</h3>
+                        <p>Un nom de variable est composé de n'importe quels caractères alphabétique, numérique et les caractères <code>_</code> et <code>$</code>.<br>Mais une variable ne peut pas débuter par un caractère numérique.</p>
+                        <p class="smaller">Il est fortement conseillé de donner un nom de variable explicite pour comprendre à quoi sert cette variable (et il est assez courant d'utiliser des noms en anglais).</p>
+                        <div style="display: grid; grid: min-content 1fr / 1fr 1fr;grid-column-gap: 1em; column-gap:1em;">
+                            <h4>Noms correct</h4>
+                            <h4>Noms Incorrect</h4>
+                            <pre>
+toto
+nombre42
+_underscore
+$dollar
+avecMajuscule
+DebuteParUneMajuscule
+_1$Un_Peu_De_Tout$</pre>
+                            <pre>
+<span class="help" title="Ne doit pas commencer par un nombre">42toto</span>
+<span class="help" title="Ne doit pas avoir d'espace">avec espace</span>
+<span class="help" title="Ne doit pas avoir de traits d'union">avec-traits-unions</span>
+<span class="help" title="Ne doit pas avoir de virgule">avec,virgule</span>
+<span class="help" title="Ne doit pas avoir de point">avec.point</span>
+<span class="help" title="Ne doit pas avoir de point virgule">avec;pointVirgule</span>
+<span class="help" title="Ne doit pas avoir de ponctuation">avec!de:la?ponctuation~en(général)</span></pre>
+                        </div>
+                        <p class="smaller">En réalité, la plupart des caractères UTF8 non blanc sont possibles (comme éèà), mais il est conseillé de ne pas les utiliser pour des soucis de compatibilité.</p>
+
+                    </section>
+                    <section>
+                        <h3>Type: Booléen (Boolean)</h3>
+                        <p>Une variable de type booléenne possède 2 valeurs possible: <code>true</code> (vraie) ou <code>false</code> (fausse).</p>
+                        <code><pre>
+var variable1 = true;
+var variable2 = false;
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Type: Chaîne (String)</h3>
+                        <p>Une variable de type string représente une chaîne de caractères. Une chaîne de caractères est délimitée par les caractères <code>'</code>, <code>"</code> ou <code>`</code>; et doit se terminer avec le même caractère.</p>
+                        <p>Il n'y a pas de différence entre les chaînes construite avec&nbsp;<code>''</code>&nbsp;et&nbsp;<code>""</code>.<br>Nous n'aborderons pas les différences des chaînes délimitées par&nbsp;<code>``</code>.</p>
+                        <p>Pour échapper un caractère (par exemple le caractère de délimitation, il faut le précéder par le caractère <code>\</code> (et lui même doit-être échappé si l'on souhaite l'utiliser)).</p>
+                        <code><pre>
+var variable1 = 'chaine 1';
+var variable2 = "chaine 2";
+var variable3 = `chaine 3`;
+
+var exemple1 = 'c\'est une chaîne qu\'il faut "échapper"';
+var exemple2 = "c'est une chaîne qu'il faut \"échapper\"";
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Type: Nombre (Number)</h3>
+                        <p>Une variable de type number représente un nombre. Celui-ci peut être positif ou négatif, entier ou décimal.</p>
+                        <code><pre>
+var variable1 = 42;
+var variable2 = -234;
+var variable3 = 1234.56789;
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Type: Indéfini (undefined)</h3>
+                        <p>Une variable peut être de type undefined si elle n'a jamais été défini (aucune valeur ne lui a été assignée).</p>
+                        <code><pre>
+var variable1;
+var variable2 = undefined;
+                        </pre></code>
+                        <p class="info">Il est possible d'utiliser le mot clef <code>undefined</code> pour mettre une variable dans cet état. Toutefois il faut faire attention à ne jamais écraser cette valeur (en créant une variable nommée undefined, ce qui est une très mauvaise pratique).</p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Débugger</h2>
+                    </section>
+                    <section>
+                        <p>Avant de se lancer dans le code, nous allons voir comment débugger le code.</p>
+                        <br>
+                        <p>Cela permettra de tester des fonctions simples et vous donnera la possibilité plus tard de comprendre ce qui ne marhce pas</p>
+                    </section>
+                    <section>
+                        <h3>Outils de debugage</h3>
+                        <p>Tous les navigateurs récents possèdent des outils d'aide au débugage.</p>
+                        <p>Vous pouvez ouvrir ces outils en utilisant la touche <span class="key">F12</span> ou <span class="key">ctrl + I</span></p>
+                        <br>
+                        <p>Plusieurs onglets sont disponibles. Ceux qui vont nous intéresser s'appellent (sous Chrome, pour les autres navigateurs les noms peuvent changer légèrement) <b>Elements</b>, <b>Console</b>, <b>Sources</b> et <b>Network</b>. Les autres ongletssont un peu plus complexe à utiliser et sortent du cadre de cette présentation.</p>
+                    </section>
+                    <section>
+                        <h3>Présentations des onglets</h3>
+                        <h5>Elements</h5>
+                        <p class="smaller">Vous pouvez observer tous les éléments du DOM (le résultat du HTML) dans cet outil. Il est également possible de modifier le style de chaque élément à la volée pour observer le résultat souhaité.</p>
+
+                        <h5>Network</h5>
+                        <p class="smaller">Vous pouvez observer toutes les requêtes effectuées par le navigateur depuis cette page. Cela sert à vérifier les demandes faites au serveur leurs résultats.</p>
+
+                        <h5>Sources</h5>
+                        <p class="smaller">Cet outil permet de voir le code source (le JS) tel qu'il sera exécuté. Il est possible de mettre des points d'arrêts (breakpoint), en cliquant sur le numéro de ligne. L'interpréteur s'arrêtera lorsqu'il rencontrera cette ligne, et vous pourrez observer la valeur de toutes les variables à cet instant.</p>
+
+                        <h5>Console</h5>
+                        <p class="smaller">Cet outil permet d'exécuter du code JavaScript directement dans le navigateur. À noter que tous les résultats de l'API <code>console</code> se trouveront dans cet espace.</p>
+
+                    </section>
+                    <section>
+                        <h3>Api: console</h3>
+                        <h4>console.log</h4>
+                        <p>Il est possible d'envoyer un message à la console avec la fonction <code>console.log()</code>.</p>
+                        <p class="info">À noter qu'il est possible d'envoyer plusieurs arguments en même temps. <code>console.log('message 1', 'message 2')</code></p>
+                        <code><pre>
+var test = 42;
+console.log('résultat de la variable:', test);
+                        </pre></code>
+                        <p class="smaller">Si vous testez ce code vous devriez voir s'afficher <q>résultat de la variable: 42</q></p>
+                        <br>
+                        <p class="smaller">Il existe aussi les méthodes <code>info</code>, <code>warn</code> et <code>error</code> qui permettent de marquer les messages différement et la console pourra les trier plus facilement.</p>
+                        <code><pre>
+var test = false;
+console.info('résultat de la variable:', test);
+                        </pre></code>
+                    </section>
+
+                    <section>
+                        <h3>Commentaires</h3>
+                        <p>Les commentaires permettent de mieux comprendre le but des lignes de code. Elles ne servent à rien pour l'ordinateur.</p>
+                        <p class="attention">Il est très important d'en mettre à fin de pouvoir relire son code plus tard surtou quand celui-ci est devenu très gros.</p>
+                        <h4>Commentaire de ligne</h4>
+                        <p>Il s'écrit <code>//</code>. Tout ce qui suit sur la même ligne sera ignoré.</p>
+                        <code><pre>
+// texte ignoré
+console.log('affiché'); // texte ignoré aussi
+                        </pre></code>
+                        <h4>Commentaire de bloc</h4>
+                        <p>Il débute par <code>/*</code> et se finit par <code>*/</code>. Tout ce qui est entre sera ignoré.</p>
+                        <code><pre>
+/* texte ignoré */
+console.log('affiché'); /* texte ignoré
+texte ignoré aussi
+*/
+                        </pre></code>
+
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Opérateurs de base</h2>
+                    </section>
+                    <section>
+                        <p>Un opérateur est une opération sur une ou plusieurs opérandes.</p>
+                        <p>Cela permet de combiner des variables et réaliser des opérations entre elles.</p>
+                    </section>
+                    <section>
+                        <h3>Opérateur d'assignation</h3>
+                        <p>Opérateur: <b><code>=</code></b></p>
+                        <p>Opération: La valeur de droite est assignée à la variable de gauche.</p>
+                        <code><pre>
+var a = 34;
+var b;
+b = 42; // b vaut maintenant 42
+b = a; // b vaut maintenant 34
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Opérateur de type</h3>
+                        <p>Opérateur: <b><code>typeof</code></b></p>
+                        <p>Opération: Retourne le type de l'opérande. Le résultat est une string.</p>
+                        <p class="info">Il n'y a qu'une opérande à droite</p>
+                        <code><pre>
+var a = 12;
+var b = '12';
+var c;
+console.log(typeof true); // 'boolean'
+console.log(typeof a); // 'number'
+console.log(typeof b); // 'string'
+console.log(typeof c); // 'undefined'
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Opérateur de négation</h3>
+                        <p>Opérateur: <b><code>!</code></b></p>
+                        <p>Opération: Converti l'opérande en boolean et retourne son opposé.</p>
+                        <p class="info">Il n'y a qu'une opérande à droite</p>
+                        <code><pre>
+var a = true;
+var b = 1;
+var c = 'text';
+console.log(!false); // true
+console.log(!0); // true
+console.log(!''); // true
+console.log(!a); // false
+console.log(!b); // false
+console.log(!c); // false
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Opérateur de comparaison</h3>
+                        <p>Opérateur: <b><code>==</code></b> et <b><code>===</code></b></p>
+                        <p>Opération: Retourne <code>true</code> si les deux opérandes sont identiques et <code>false</code> sinon.</p>
+                        <p>L'opérateur <code>===</code> vérifie en plus que les types des opérandes sont identiques. Alors que <code>==</code> convertie les 2 opérandes dans le même type avant de comparer.</p>
+                        <code><pre>
+var a = 34;
+var b = '34';
+console.log(true === false ); // false
+console.log(12 === 12); // true
+console.log('texte' === 'texte'); // true
+console.log(a === 34); // true
+console.log(a === b); // false
+console.log(a == b); // true
+                        </pre></code>
+                        <p class="info">Il est conseillé de préférer l'usage de <code>===</code> à <code>==</code> car la comparaison est plus stricte.</p>
+                        <p class="error">Attention à ne pas les confondre avec <code>=</code>.</p>
+                    </section>
+                    <section>
+                        <h3>Opérateur de différence</h3>
+                        <p>Opérateur: <b><code>!=</code></b> et <b><code>!==</code></b></p>
+                        <p>Opération: Retourne <code>true</code> si les deux opérandes sont différents et <code>false</code> sinon.</p>
+                        <p>L'opérateur <code>!==</code> vérifie en plus les types des opérandes. Alors que <code>==</code> convertie les 2 opérandes dans le même type avant de comparer.</p>
+                        <code><pre>
+var a = 34;
+var b = '34';
+console.log(true !== false ); // true
+console.log(12 !== 12); // false
+console.log('texte' !== 'texte'); // false
+console.log('texte' !== 'toto'); // true
+console.log(a !== 34); // false
+console.log(a !== b); // true
+console.log(a != b); // false
+                        </pre></code>
+                        <p class="info">Il est conseillé de préférer l'usage de <code>!==</code> à <code>!=</code> car la comparaison est plus stricte.</p>
+                    </section>
+                    <section>
+                        <h3>Opérateur de comparaison plus petit que</h3>
+                        <p>Opérateur: <b><code>&lt;</code></b></p>
+                        <p>Opération: retourne <code>true</code> si le premier nombre est plus petit que le deuxième. Retourne <code>false</code> sinon</p>
+                        <code><pre>
+console.log(10 < 20); // true
+console.log(10 < -20); // false
+console.log(10 < 10); // false
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Opérateur de comparaison plus grand que</h3>
+                        <p>Opérateur: <b><code>&gt;</code></b></p>
+                        <p>Opération: retourne <code>true</code> si le premier nombre est plus grand que le deuxième. Retourne <code>false</code> sinon</p>
+                        <code><pre>
+console.log(10 > 20); // false
+console.log(10 > -20); // true
+console.log(10 > 10); // false
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Opérateur de comparaison plus petit que ou égal</h3>
+                        <p>Opérateur: <b><code>&lt;=</code></b></p>
+                        <p>Opération: retourne <code>true</code> si le premier nombre est plus petit que le deuxième ou égal à celui-ci. Retourne <code>false</code> sinon</p>
+                        <code><pre>
+console.log(10 <= 20); // true
+console.log(10 <= -20); // false
+console.log(10 <= 10); // true
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Opérateur de comparaison plus grand que ou égal</h3>
+                        <p>Opérateur: <b><code>&gt;=</code></b></p>
+                        <p>Opération: retourne <code>true</code> si le premier nombre est plus grand que le deuxième ou égal à celui-ci. Retourne <code>false</code> sinon</p>
+                        <code><pre>
+console.log(10 >= 20); // false
+console.log(10 >= -20); // true
+console.log(10 >= 10); // true
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Opérateur d'addition</h3>
+                        <p>Opérateur: <b><code>+</code></b></p>
+                        <p>Opération: Réalise la somme des 2 valeurs.</p>
+                        <code><pre>
+var a = 28;
+var b = 14;
+console.log(1 + 2); // 3
+console.log(a + 5.6); // 33.6 et la variable a est inchangée
+console.log(a + b); // 42
+                        </pre></code>
+                        <p class="attention">Attention si une des opérandes est une string alors l'opérateur devient celui de concaténation</p>
+                    </section>
+                    <section>
+                        <h3>Opérateur de soustraction</h3>
+                        <p>Opérateur: <b><code>-</code></b></p>
+                        <p>Opération: La valeur de droite est retirée à celle de gauche.</p>
+                        <code><pre>
+var a = 34;
+var b = 12;
+console.log(5 - 2); // 3
+console.log(5 - 15); // -10
+console.log(a - 5.6); // 28.4 et la variable a est inchangée
+console.log(a - b); // 22
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Opérateur de multiplication</h3>
+                        <p>Opérateur: <b><code>*</code></b></p>
+                        <p>Opération: Réalise la multiplication des 2 valeurs.</p>
+                        <code><pre>
+var a = 5;
+var b = 12;
+console.log(3 * 2); // 6
+console.log(5 * -2); // -10
+console.log(a * 2.5); // 12.5 et la variable a est inchangée
+console.log(a * b); // 60
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Opérateur de concaténation</h3>
+                        <p>Opérateur: <b><code>+</code></b></p>
+                        <p>Opération: Concaténe (regroupe) deux chaînes de caractères.</p>
+                        <code><pre>
+var a = 'alpha';
+var b = 'beta';
+console.log('a' + 'b'); // 'ab'
+console.log(a + ' test'); // 'alpha test' et la variable a est inchangée
+console.log(a + b); // 'alphabeta'
+                        </pre></code>
+                        <p class="attention">
+                            Attention il s'agit du même caractère <code>+</code> qui sert pour l'addition et pour la concaténation.<br>
+                            L'opération est différente en fonction des types des opérandes.
+                        </p>
+                        <code><pre>
+console.log('1' + '2'); // '12'
+console.log(1 + 2); // 3
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Opérateur logique: ET</h3>
+                        <p>Opérateur: <b><code>&&</code></b></p>
+                        <p>Opération: retourne la première opérande si elle est équivalente à false sinon retourne la 2e opérande.</p>
+                        <p class="info">Cela correspond à un opérateur ET logique (retourne vraie si les 2 valeurs sont vraies).</p>
+                        <p class="attention">Cet opérateur ne retourne pas forcément un booléen.</p>
+                        <code><pre>
+var a = 23;
+var b = 42;
+console.log(true && false); // false
+console.log(true && true); // true
+console.log(false && true); // false
+console.log(0 && 12); // 0
+console.log(a && 0); // 0
+console.log(a && b); // 42
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Opérateur logique: OU</h3>
+                        <p>Opérateur: <b><code>||</code></b></p>
+                        <p>Opération: retourne la première opérande si elle est équivalente à true sinon retourne la 2e opérande.</p>
+                        <p class="info">Cela correspond à un opérateur OU logique (retourne vraie si l'une des 2 valeurs est vraie).</p>
+                        <p class="attention">Cet opérateur ne retourne pas forcément un booléen.</p>
+                        <code><pre>
+var a = 23;
+var b = 42;
+console.log(true || false); // true
+console.log(false || true); // true
+console.log(false || false); // false
+console.log(0 || 12); // 12
+console.log(a || 0); // 23
+console.log(a || b); // 23
+                        </pre></code>
+                        <br>
+                        <p class="info">Cet opérateur est souvent utilisé pour initialiser des variables.</p>
+                        <code><pre>
+var toto = a || b;
+                        </pre></code>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Conversion de types</h2>
+                    </section>
+                    <section>
+                        <p>JavaScript est un langage typé faiblement.</p>
+                        <br>
+                        <p>C'est à dire qu'il est possible de changer les types des variables et de réaliser des opérations avec des variables de types différents.</p>
+                        <br>
+                        <p>Nous avons vu lors de quelques opérateurs que des conversions entre les types peuvent se produire implicitement. Nous allons voir ici le principe de ces conversions.</p>
+                    </section>
+                    <section>
+                        <h3>Conversion vers Number</h3>
+                        <table>
+                            <tr><th>Type d'origine</th><th>Résultat</th></tr>
+                            <tr><td>Undefined</td><td><code>NaN</code></td></tr>
+                            <tr><td>Boolean</td><td><ul>
+                                <li><code>false</code> → <code>0</code></li>
+                                <li><code>true</code> → <code>1</code></li>
+                            </ul></td></tr>
+                            <tr><td>String</td><td><ul>
+                                <li><code>''</code> → <code>0</code></li>
+                                <li>chaîne représentant un nombre (par exemple <code>'-12.3'</code>) → le nombre représenté</li>
+                                <li>chaîne possédant des caractères (par exemple <code>'12px'</code>) → <code>NaN</code></li>
+                            </ul></td></tr>
+                        </table>
+                        <p class="info"><code>NaN</code> (Not A Number) est un nombre qui représente une valeur qui n'est pas un nombre.</p>
+                    </section>
+                    <section>
+                        <h3>Conversion vers Boolean</h3>
+                        <table>
+                            <tr><th>Type d'origine</th><th>Résultat</th></tr>
+                            <tr><td>Undefined</td><td><code>false</code></td></tr>
+                            <tr><td>Number</td><td><ul>
+                                <li><code>0</code> ou <code>NaN</code> → <code>false</code></li>
+                                <li>tous les autres → <code>true</code></li>
+                            </ul></td></tr>
+                            <tr><td>String</td><td><ul>
+                                <li><code>''</code> → <code>false</code></li>
+                                <li>toutes les autres (y compris <code>'0'</code>) → true</li>
+                            </ul></td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>Conversion vers String</h3>
+                        <table>
+                            <tr><th>Type d'origine</th><th>Résultat</th></tr>
+                            <tr><td>Undefined</td><td><code>'undefined'</code></td></tr>
+                            <tr><td>Boolean</td><td><ul>
+                                <li><code>false</code> → <code>'false'</code></li>
+                                <li><code>true</code> → <code>'true'</code></li>
+                            </ul></td></tr>
+                            <tr><td>Number</td><td>Le nombre sous forme de string. Et <code>NaN</code> donne <code>'NaN'</code>.</td></tr>
+                        </table>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Fonctions</h2>
+                    </section>
+                    <section>
+                        <p>Les fonctions sont des morceaux de code qu'on peut réutiliser.</p>
+                        <br>
+                        <p>Il est possible d'utiliser des arguments afin de modifier le résultat des fonctions.</p>
+                        <br>
+                        <p>Une fonction doit d'abord être déclarée, puis ensuite être appelée. Elle peut être appelée plusieurs fois.</p>
+                    </section>
+                    <section>
+                        <h3>Déclaration</h3>
+                        <p>Une fonction est déclarée en utilisant le mot clef <code>function</code></p>
+                        <code><pre>
+// création d'une fonction appelée test1
+function test1() {
+    console.log('la fonction test1 a été appelée');
+}
+
+// assignation d'une fonction à une variable nommée test2
+var test2 = function() {
+    console.log('la fonction test2 a été appelée');
+};
+                        </pre></code>
+                        <p>Le code situé entre les caractères <code>{</code> et <code>}</code> ne sera appelé que lorsque la fonction est appelée.</p>
+                    </section>
+                    <section>
+                        <h3>Appel</h3>
+                        <p>Une fonction est une variable de type "function".</p>
+                        <p>On peut appeler une fonction en ajoutant <code>()</code> derrière le nom de la fonction qu'on souhaite appelé.</p>
+                        <code><pre>
+test1();
+test2();
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Retour d'une fonction</h3>
+                        <p>Une fonction peut retourner une valeur avec le mot clef <code>return</code>.</p>
+                        <p>Lorsque l'interpréteur rencontre ce mot clef, il met fin à la fonction.</p>
+                        <code><pre>
+function test1() {
+    return 'valeur retournée';
+}
+
+console.log(test1()); // affiche "valeur retournée"
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Arguments</h3>
+                        <p>Les arguments sont des variables interne à la fonction, leurs valeurs initiales sont définies à l'extérieur de celle-ci.</p>
+                        <code><pre>
+function somme(a, b) {
+    return a + b;
+}
+
+console.log(somme(1, 4)); // 5
+console.log(somme(30, 8)); // 38
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Portée des variables</h3>
+                        <p>Une variable déclarée à l'intérieur d'une fonction n'est utilisable qu'à l'intérieur de celle-ci.</p>
+                        <code><pre>
+var a = 1;
+function test() {
+    var a = 2;
+    console.log(a); // affiche 2
+}
+test();
+console.log(a); // affiche 1
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Opérateur modulo</h3>
+                        <p>Opérateur: <b><code>%</code></b></p>
+                        <p>Opération: retourne le reste de la division euclidienne de la première valeur par la deuxième.</p>
+                        <code><pre>
+console.log(4 % 10); // 4
+console.log(18 % 10); // 8
+console.log(10 % 10); // 0
+console.log(8 % 5); // 3
+console.log(12345 % 2); // 1
+                        </pre></code>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Conditions</h2>
+                    </section>
+                    <section>
+                        <h3>if</h3>
+                        <p>On peut choisir d'exécuter seulement certaines lignes de code en fonction de certaines condition.</p>
+                        <p>Pour cela on utilise le mot clef <code>if</code> suivit de la condition (entourée de parenthèses) et suivit d'accolade <code>{}</code> qui contiendront le code a exécuter si la condition est vraie.</p>
+                        <code><pre>
+if (true) {
+    console.log('le code est exécuté');
+}
+if (false) {
+    console.log('le code est n'est pas exécuté');
+}
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>else</h3>
+                        <p>On peut exécuter un autre bloc de code dans le cas ou la condition est fausse.</p>
+                        <p>Pour cela on utilise le mot clef <code>else</code> après le bloc du if.</p>
+                        <code><pre>
+var a = 5;
+if (a < 0) {
+    console.log('a est négatif');
+} else {
+    console.log('a est positif (ou vaut 0)');
+}
+                        </pre></code>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Boucles</h2>
+                    </section>
+                    <section>
+                        <p>Les boucles permettent de répéter plusieurs fois les mêmes lignes de code.</p>
+                    </section>
+                    <section>
+                        <h3>while</h3>
+                        <p>Les boucles <code>while</code> permettent de répéter un code tant que la condition donnée est vraie.</p>
+                        <p>On commence par écrire le mot clef <code>while</code> suivit de la condition entre parenthèses, puis du bloc d'instructions à répéter.</p>
+                        <p class="info">Attention à bien écrire une condition qui deviendra fausse au bout d'un certain temps.<br>Sinon la boucle ne s'arrêtera jamais.</p>
+                        <code><pre>
+var compteur = 0;
+while (compteur < 10) {
+    compteur = compteur + 1;
+    console.log(compteur);
+}
+/* Il va s'afficher les nombres de 1 à 10 */
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>for</h3>
+                        <p>Les boucles <code>for</code> permettent de créer des boucles incrémentales.</p>
+                        <p>On commence par écrire le mot clef <code>if</code> suivit (entre parenthèses) de 3 instructions séparées par un <code>;</code>: l'initialisation, la condition et l'incrémentation.</p>
+                        <ul>
+                            <li>initialisation: cette instruction est appelée 1 seule fois au début de la boucle</li>
+                            <li>condition: cette instruction est vérifiée avant chaque itération. Si elle est fausse, la boucle s'arrête</li>
+                            <li>incrémentation: cette instruction est appelée à chaque fin d'itération</li>
+                        </ul>
+                        <code><pre>
+var compteur;
+for (compteur = 1; compteur <= 10; compteur = compteur + 1) {
+    console.log(compteur);
+}
+/* Il va s'afficher les nombres de 1 à 10 */
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Portée des variables dans les blocs</h3>
+                        <p>Les variables déclarées avec <code>var</code> sont visible dans toute la fonction et sont donc visible à l'extérieur du bloc.</p>
+                        <p>Les variables déclarées avec <code>let</code> ou <code>const</code> ne sont visible que dans le bloc.</p>
+                        <p class="info">La seule différence entre <code>let</code> et <code>const</code>, c'est qu'une variable déclarée avec <code>const</code> ne peut pas être modifiée.</p>
+                        <div class="grid">
+                            <code><pre>
+var a = 1;
+let b = 2;
+if (true) {
+    a = 10;
+    b = 20;
+    var c = 100;
+    let d = 200;
+}
+console.log(a); // 10
+console.log(b); // 20
+console.log(c); // 100
+console.log(d); // Erreur
+                            </pre></code>
+                            <code><pre>
+var a = 1;
+let b = 2;
+while (a < 5) {
+    a = 10;
+    b = 20;
+    var c = 100;
+    let d = 200;
+}
+console.log(a); // 10
+console.log(b); // 20
+console.log(c); // 100
+console.log(d); // Erreur
+                            </pre></code>
+                            <div><code><pre>
+var a = 1;
+let b = 2;
+for (let i = 0; i < 1; i = i + 1) {
+    a = 10;
+    b = 20;
+    var c = 100;
+    let d = 200;
+}
+console.log(a); // 10
+console.log(b); // 20
+console.log(c); // 100
+console.log(d); // Erreur
+console.log(i); // Erreur
+                            </pre></code>
+                            Vous pouvez remarquer que <code>i</code> a servi d'incrément au sein de la boucle mais n'est pas disponible à l'extérieur.
+                        </div>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Objets</h2>
+                    </section>
+                    <section>
+                        <p>Les objets sont des variables de type "object".</p>
+                        <p>Ils permettent de regrouper plusieurs variables en une seule entitée.</p>
+                    </section>
+                    <section>
+                        <h3>Crétation simple</h3>
+                        <p>Il est possible de créer un objet en utilisant les caractères <code>{}</code>.</p>
+                        <p>Les propriétés de l'objet sont crées en mettant le nom de la propriété suivit de <code>:</code> puis de sa valeur.</p>
+                        <p>Les propriétés sont séparées par le caractère <code>,</code></p>
+                        <code><pre>
+var objet1 = {};
+var objet2 = {
+    attribut1: true,
+    attribut2: 'chaine',
+    attribut3: 100,
+    attribut4: function() {return 42;},
+};
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Utiliser les propriétés</h3>
+                        <p>Nous pouvons accéder aux propriétés d'un objet en mettant le nom de l'objet suivit d'un <code>.</code> et suivit du nom de la propriété.</p>
+                        <code><pre>
+var obj1 = {
+    bool: false,
+    nb: 20,
+};
+console.log(obj1.bool); // false
+console.log(obj1.nb); // 20
+                        </pre></code>
+                        <p class="smaller">Il est possible d'enchainer les propriétés de plusieurs objets.</p>
+                        <code><pre>
+var obj2 = {
+    name: 'objet parent',
+    obj: {
+        name: 'objet enfant';
+    },
+};
+console.log(obj2.obj.name); // 'objet enfant'
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Méthode</h3>
+                        <p>On appelle <q>méthode</q>, une fonction qui est attachée à un objet.</p>
+                        <p>Les méthodes ont un contexte qui correspond à l'environnement dans lequel elles sont appelées.</p>
+                        <p>On accède à ce contexte avec la variable <code>this</code>.</p>
+                        <div class="grid">
+                            <code><pre>
+function test() {
+    return this.name;
+}
+var o1 = {
+    name: 'objet 1',
+    getName: test,
+};
+var o2 = {
+    name: 'objet 2',
+    getName: test,
+};
+console.log(o1.getName()); // 'objet 1'
+console.log(o2.getName()); // 'objet 2'</pre></code>
+                            <div>
+                                <p class="attention">Lors de la création de l'objet, nous n'avons passé que la variable <code>test</code> et nous n'avons pas exécuté la fonction à ce moment. C'est pourquoi il n'y a pas de <code>()</code> ici.</p>
+                            </div>
+                        </div>
+                        <p class="smaller">Bien qu'il s'agit de la même fonction, le résultat n'est pas le même.<br>Car dans le 1<sup>er</sup> appel, le context (<code>this</code>) vaut <code>o1</code>. Et dans le 2<sup>e</sup> il vaut <code>o2</code>.</p>
+                    </section>
+                    <section>
+                        <h3>Création d'une instance</h3>
+                        <p>On peut aussi créer des objets similaires qui suivent une même logique.</p>
+                        <p>Il suffit d'utiliser le mot clef <code>new</code> devant l'appel d'une fonction.<br>Cette fonction fera office de constructeur.</p>
+                        <code><pre>
+function Example(value) {
+    this.value = value;
+    this.isPositive = value > 0;
+}
+var ex1 = new Example(7);
+var ex2 = new Example(-5);
+console.log(ex1.isPositive); // true
+console.log(ex2.isPositive); // false
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>prototype</h3>
+                        <p>Lorsqu'un objet est crée à partir d'un constructeur, il bénéficie de toutes les valeurs du <code>prototype</code> de ce constructeur.</p>
+                        <code><pre>
+function Example(value) {
+    this.value = value;
+}
+Example.prototype.limit = 10;
+Example.prototype.isOverLimit = function() {
+    return this.value > this.limit;
+};
+var ex1 = new Example(5);
+var ex2 = new Example(15);
+var ex3 = new Example(7);
+console.log(ex1.isOverLimit()); // false
+console.log(ex2.isOverLimit()); // true
+ex1.limit = 1;
+console.log(ex1.isOverLimit()); // true
+console.log(ex3.isOverLimit()); // false
+ex3.value = 12;
+console.log(ex3.isOverLimit()); // true
+                        </pre></code>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Array</h2>
+                    </section>
+                    <section>
+                        <h3>Liste</h3>
+                        <p>On peut créer des listes de valeurs (<q>Array</q>) en javascript.</p>
+                        <p>On crée facilement un array avec les caractères <code>[]</code> et on peut mettre les valeurs du tableau entre ces caractères.</p>
+                        <code><pre>
+var liste = [1, 2, 3, 4, 10, 4];
+var liste2 = ['chaine', 'toto', 'dr', 'who'];
+console.log(liste);
+console.log(liste2);
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Accéder aux valeurs d'une liste</h3>
+                        <p>On peut accéder à un élément d'un array en utilisant les caractères <code>[]</code> et en précisant à l'intérieur l'index de la valeur à récupérer.</p>
+                        <p class="info">Les indexes commencent toujours par <code>0</code>.</p>
+                        <code><pre>
+var liste = [5, 42, 7, -23];
+console.log(liste[0]); // 5
+console.log(liste[3]); // -23
+liste[2] = 1;
+console.log(liste); // [5, 42, 1, -23]
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>length</h3>
+                        <p>Pour connaitre la longueur d'un tableau, il faut utiliser <code>length</code>.</p>
+                        <code><pre>
+var liste1 = [0, 2, -34, 'toto', false];
+var liste2 = ['chaine', 'un message'];
+var liste3 = [];
+console.log(liste1); // 5
+console.log(liste2); // 2
+console.log(liste3); // 0
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Ajouter des éléments</h3>
+                        <p><code>push</code> permet d'ajouter un élément à la fin de la liste.</p>
+                        <p><code>unshift</code> permet d'ajouter un élément au début de la liste.</p>
+                        <code><pre>
+var values = [30, 20];
+values.push(50);
+values.unshift(10);
+console.log(values); // [10, 30, 20, 50]
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Retirer des éléments</h3>
+                        <p><code>pop</code> permet de retirer le dernier élément de la liste.</p>
+                        <p><code>shift</code> permet de retirer le premier élément de la liste.</p>
+                        <code><pre>
+var values = [10, 30, 20, 50];
+values.pop();
+values.shift();
+console.log(values); // [30, 20]
+                        </pre></code>
+                    </section>
+                    <section>
+                        <p>Il y a beaucoup de fonctions qui aident à utiliser les arrays (splice, slice, join, sort, filter, indexOf, includes, find, reverse, some, every, reduce, ...), on ne les regardera pas toutes.</p>
+                        <p>Nous allons nous intéresser seulement à <code>forEach</code> et <code>map</code></p>
+                    </section>
+                    <section>
+                        <h3>forEach</h3>
+                        <p><code>forEach</code> permet de parcourrir toutes les valeurs de la liste.</p>
+                        <p>Cette fonction accepte 2 arguments: le premier est une fonction (callback) qui sera appelée pour chaque valeur, le deuxième (optionnel) est le contexte dans lequel la fonction sera appelée.</p>
+                        <p>La fonction callback propose 3 arguments: la valeur, l'index et la liste sur laquelle on est en train d'itérer.</p>
+                        <code><pre>
+var countries = ['Austria', 'Italia', 'France', 'Spain'];
+countries.forEach(function(value, index) {
+    console.log(index + ': ' + value);
+});
+/* Affiche:
+'0: Austria'
+'1: Italia'
+'2: France'
+'3: Spain'
+*/
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>map</h3>
+                        <p><code>map</code> permet de recréer une autre liste à partir de chaque valeur de cette liste.</p>
+                        <p>Cette fonction accepte 2 arguments: le premier est une fonction (callback) qui sera appelée pour chaque valeur, le deuxième (optionnel) est le contexte dans lequel la fonction sera appelée.</p>
+                        <p>La fonction callback propose 3 arguments: la valeur, l'index et la liste sur laquelle on est en train d'itérer. Le résultat final dépend de ce que retourne cette fonction.</p>
+                        <code><pre>
+var values = [10, -23, 24, 2.5];
+var result1 = values.map(function(value) {
+    return value > 5;
+});
+console.log(result1); // [true, false, true, false]
+var result2 = values.map(function(value) {
+    return value * 2;
+});
+console.log(result2); // [20, -46, 48, 5]
+                        </pre></code>
+                    </section>
+                </section>
+
+
+                <section>
+                    <section>
+                        <h2>Base du HTML</h2>
+                    </section>
+                    <section>
+                        <p>Vu que le JavaScript s'exécute souvent dans les pages HTML. Une présentation rapide de ce langage s'avère nécessaire.</p>
+                        <br>
+                        <p>Le principe du HTML (Hyper Text Markup Language) est un langage descriptif, qui sert à mettre en page en décrivant les éléments de cette page.</p>
+                        <p>Chaque élément est décrit par des tags <code>&lt;&gt;</code>. Et on peut les imbriquer pour décrire chaque sous-partie.</p>
+                        <p>Les tags doivent être fermés en répétant le tag, précédé de<code>/</code>. Le contenu est situé entre ces 2 tags. Chaque tag peut avoir des attributs pour modifier son comportement.</p>
+                        <code><pre>
+&lt;div&gt;contenu&lt;/div&gt;
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>&lt;html&gt;</h3>
+                        <p><code>&lt;html&gt;</code> est l'élément de base. Tous les autres éléments seront placé à l'intérieur de lui et de ses enfants.</p>
+                        <p>Il possède 2 enfants: <code>&lt;head&gt;</code> et <code>&lt;body&gt;</code></p>
+                        <br>
+                        <p>Un seul élément est placé avant lui, un tag indiquant le type du document: <code>&lt;!doctype HTML&gt;</code> (pour indiquer que le document est décrit en HTML5).</p>
+                    </section>
+                    <section>
+                        <h3>&lt;head&gt;</h3>
+                        <p><code>&lt;head&gt;</code> décrit les données générales du document.</p>
+                        <p>Les 2 enfants principaux de <code>&lt;head&gt;</code> sont <code>&lt;meta&gt;</code> et <code>&lt;title&gt;</code></p>
+                        <p><code>&lt;meta&gt;</code> décrit les meta-données du document. Principalement <code>&lt;meta charset="utf-8"&gt;</code> qui permet de dire que le document est encodé en UTF8. (ce tag ne se ferme pas il n'y donc pas de <code>&lt;/meta&gt;</code>)</p>
+                        <p><code>&lt;title&gt;</code> décrit le titre du document. Celui-ci est visible en haut de la fenêtre du navigateur ou dans l'onglet.</p>
+                        <code><pre>
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Titre du document&lt;/title&gt;
+&lt;/head&gt;
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>&lt;body&gt;</h3>
+                        <p><code>&lt;body&gt;</code> va contenir tout ce qui s'affiche à l'écran.</p>
+                        <p>Ses enfants seront affichés les uns après les autres selon leur ordre d'écriture.</p>
+                        <code><pre>
+&lt;body&gt;
+  &lt;div&gt;un peu de texte.&lt;/div&gt;
+  &lt;div&gt;un autre contenu.&lt;/div&gt;
+&lt;/body&gt;
+                        </pre></code>
+                        <p class="info">À noter que dans le texte en HTML, tous les caractères blancs (espaces, tabulation, saut de lignes), sont remplacés par un seul espace.</p>
+                    </section>
+                    <section>
+                        <h3>&lt;div&gt; et &lt;span&gt;</h3>
+                        <p><code>&lt;div&gt;</code> et <code>&lt;span&gt;</code> sont des éléments génériques sans auncun effet particulier ni aucune sémantique.</p>
+                        <p>Ils servent souvent pour structurer le document.</p>
+                        <p>La différence entre ces deux éléments est que <code>&lt;div&gt;</code> est un block alors que <code>&lt;span&gt;</code> est inline.</p>
+                        <p>Un élément block essaiera de s'afficher sur toute la ligne et pourra être redimensionné.</p>
+                        <p>Un élément inline s'intègre de le texte.</p>
+                        <p class="attention">Il est déconseillé de mettre un élément block dans un élément inline.</p>
+                        <code><pre>
+&lt;body&gt;
+  &lt;div&gt;un peu de texte.&lt;/div&gt;
+  &lt;div&gt;un autre contenu qui contient un autre &lt;span&gt;contenu&lt;/span&gt;.&lt;/div&gt;
+&lt;/body&gt;
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>&lt;script&gt;</h3>
+                        <p><code>&lt;script&gt;</code> permet d'exécuter du code JavaScript.</p>
+                        <p class="info">Il est fortement conseillé de mettre cette balise à la fin de <code>&lt;body&gt;</code> pour d'ordre de chargement et la performance.</p>
+                        <p>Il est possible d'utiliser l'attribut <code>src</code> pour exécuter le code contenu dans un fichier. Ce qui est très recommandé pour des raisons de lisibilité et de maintenance.</p>
+                        <code><pre>
+&lt;script&gt;
+console.log('code JavaScript exécuté');
+&lt;/script&gt;
+                        </pre></code>
+                        <code><pre>
+&lt;script src="monCode.js"&gt;&lt;/script&gt;
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>&lt;a&gt;</h3>
+                        <p><code>&lt;a&gt;</code> permet de créer un lien vers une autre page.</p>
+                        <p>L'attribut <code>href</code> permet de définir la destination.</p>
+                        <br>
+                        <p>Le chemin peut être absolu (une URL de type <q>https://restimel.github.io/Tutoriels/learnJS/learnJS.html</q>) ou relatif à la position de la page actuelle (<q>./learnJS.html)</q>)</p>
+                        <p class="smaller">Remarque: si le chemin commence par <code>#</code> alors le lien redirige à l'intérieur de cette page (vers la balise qui possède un <code>id</code> correspondant au nom suivent ce caractère). En anglais cette partie est appelée hash.</p>
+                        <div class="grid">
+                            <code><pre>
+&lt;a href="https://google.com"&gt;Lien externe&lt;/a&gt;
+&lt;a href="../index.html"&gt;Lien relatif à la page&lt;/a&gt;
+&lt;a href="#/1"&gt;Lien interne&lt;/a&gt;</pre></code>
+                        <p class="smaller">
+                            <a href="https://google.com">Lien externe</a><br>
+                            <a href="../index.html">Lien relatif à la page</a><br>
+                            <a href="#/1">Lien interne</a>
+                        </p>
+                        </div>
+                        <p class="info">Il est possible d'ajouter l'attribut: <code>target="_blank"</code> pour que le lien s'ouvre dans un nouvel onglet.</p>
+                    </section>
+                    <section>
+                        <h3>&lt;button&gt;</h3>
+                        <p><code>&lt;button&gt;</code> permet de créer un bouton.</p>
+                        <p>Un bouton sert à réaliser une action, la plupart du temps cette action sera réalisée en JavaScript.</p>
+                        <div class="grid">
+                            <code><pre>
+&lt;button&gt;Un bouton&lt;/button&gt;
+                            </pre></code>
+                            <div>
+                                <button>Un bouton</button>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>&lt;input&gt;</h3>
+                        <p><code>&lt;input&gt;</code> permet de créer un champs que l'utilisateur pourra remplir.</p>
+                        <p class="info"><code>&lt;input&gt;</code> est une balise qui ne se ferme pas.</p>
+                        <p>Il existe de nombreux attributs qui vont changer son comportement.</p>
+                        <p>L'attribut <code>value</code> correspond à la valeur du champ.</p>
+                        <p>L'attribut <code>disabled</code> permet de rendre le champ non modifiable.</p>
+                        <div class="grid">
+                            <code><pre>
+&lt;input&gt;
+&lt;input value="Bonjour"&gt;
+&lt;input value="Hello" disabled&gt;
+                            </pre></code>
+                            <div>
+                                <input><br>
+                                <input value="Bonjour"><br>
+                                <input value="Hello" disabled>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>&lt;input type&gt;</h3>
+                        <p>L'attribut <code>type</code> de la balise <code>&lt;input&gt;</code> permet de changer son type.</p>
+                        <p>Par défault, il vaut <q>text</q> mais vous pouvez utiliser <q>number</q>, <q>checkbox</q>, <q>range</q>, <q>date</q>, <q>color</q>, ...</p>
+                        <div class="grid">
+                            <code><pre>
+&lt;input type="number"&gt;
+&lt;input type="checkbox"&gt;
+&lt;input type="range"&gt;
+&lt;input type="date"&gt;
+&lt;input type="color"&gt;
+                            </pre></code>
+                            <div>
+                                <input type="number"><br>
+                                <input type="checkbox"><br>
+                                <input type="range"><br>
+                                <input type="date"><br>
+                                <input type="color">
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>Select</h3>
+                        <p>Il est possible de créer des champs à valeurs multiple nommé <code>&lt;select&gt;</code>.</p>
+                        <p>Comme pour <code>&lt;input&gt;</code>, il possède un attribut <code>value</code></p>
+                        <p>Ses valeurs possibles sont définits avec la balise <code>&lt;option&gt;</code></p>
+                        <div class="grid">
+                            <code><pre>
+&lt;select&gt;
+    &lt;option&gt;toto&lt;/option&gt;
+    &lt;option&gt;tata&lt;/option&gt;
+    &lt;option&gt;tete&lt;/option&gt;
+    &lt;option&gt;titi&lt;/option&gt;
+    &lt;option&gt;tutu&lt;/option&gt;
+&lt;/select&gt;
+                            </pre></code>
+                            <div>
+                                <select>
+                                    <option>toto</option>
+                                    <option>tata</option>
+                                    <option>tete</option>
+                                    <option>titi</option>
+                                    <option>tutu</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>label</h3>
+                        <p><code>&lt;label&gt;</code> is a text linked to a field.</p>
+                        <p>You can put the field inside the label or linked it with the attribute <code>for</code> (the value should be the id of the field)</p>
+                        <br>
+                        <div class="grid">
+                            <code><pre>
+&lt;label&gt;
+    label 1
+    &lt;input type="checkbox"&gt;
+&lt;/label&gt;
+&lt;label for="test-label2"&gt;label 2&lt;/label&gt;
+&lt;input id="test-label2" type="checkbox"&gt;
+                            </pre></code>
+                            <p class="smaller">
+                                <label>
+                                    label 1
+                                    <input type="checkbox">
+                                </label><br>
+                                <label for="test-label2">label 2</label>
+                                <input id="test-label2" type="checkbox">
+                            </p>
+                        </div>
+                        <p class="smaller">Cliquez sur le label pour voir son effet sur l'input</p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Attributs HTML</h2>
+                        <p>Présentation de quelques attributs utilisable sur tous les éléments HTML.</p>
+                    </section>
+                    <section>
+                        <h3>id</h3>
+                        <p><code>id</code> sert à identifier un élément.</p>
+                        <p class="important">L'identifiant doit être unique dans tout le document.</p>
+                        <code><pre>
+&lt;div id="unIdentifiant"&gt;texte1&lt;/div&gt;
+&lt;div id="identifiantTexte2"&gt;texte2&lt;/div&gt;
+                        </pre></code>
+                        <p>En JavaScript, on peut trouver un élément à partir son id avec <code>document.getElementById</code> et <code>document.querySelector</code></p>
+                        <code><pre>
+document.getElementById('identifiant');
+document.querySelector('#identifiant');
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>class</h3>
+                        <p><code>class</code> sert à donner une référence à un élément.</p>
+                        <p>Il est fréquent d'utiliser <code>class</code> pour formatter les éléments avec du CSS.</p>
+                        <p>On peut donner plusieurs classe à un élément en les séparant par des espaces.</p>
+                        <code><pre>
+&lt;div class="texte1"&gt;texte1&lt;/div&gt;
+&lt;div class="exemple texte2"&gt;texte2&lt;/div&gt;
+&lt;div class="exemple"&gt;texte3&lt;/div&gt;
+                        </pre></code>
+                        <p>En JavaScript, on peut trouver un élément à partir sa classe avec <code>document.querySelector</code></p>
+                        <code><pre>
+document.querySelector('.classe');
+                        </pre></code>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Manipuler le HTML</h2>
+                    </section>
+                    <section>
+                        <h3>Attributs HTML</h3>
+                        <p>Tous les attributs peuvent être lus ou modifiés et utilisant leur nom</p>
+                        <code><pre>
+element.id = 'nouvelId';
+console.log(element.id);
+console.log(element.value);
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Modifier le texte</h3>
+                        <p>Grâce à <code>textContent</code>, il est possible de modifier le texte d'un élément.</p>
+                        <code><pre>
+element.textContent = 'nouveau texte';
+                        </pre></code>
+                        <p>Grâce à <code>innerHTML</code>, il est possible de modifier la structure HTML d'un élément.</p>
+                        <code><pre>
+element.innerHTML = '&lt;button&gt;Bouton&lt;/button&gt;';
+                        </pre></code>
+                        <p class="info">Si vous ne souhaitez modifier que le texte, il est très fortement conseillé de n'utiliser que <code>textContent</code> (il est plus rapide et évite des problèmes potentiels de sécurité).</p>
+                    </section>
+                    <section>
+                        <h3>Événements</h3>
+                        <p>Il est possible d'écouter des événements sur des éléments. Il existe 2 manière d'ajouter ces écouteurs: avec <code>addEventListener</code> et avec <code>on...</code> (par exemple <code>onclick</code>).</p>
+                        <p>Il est possible d'ajouter plusieurs effets sur un même événement avec <code>addEventListener</code> mais pas avec les <code>on...</code> (le dernier appliquer est celui qui sera exécuté).</p>
+                        <code><pre>
+element.addEventListener('click', function() {
+    console.log('événement déclenché par click avec addEventListener');
+});
+element.onclick = function() {
+    console.log('événement déclenché par click avec onclick');
+};
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>Type d'événements</h3>
+                        <p>Il existe de nombreux type d'événements en fonction de ce qu'on souhaite écouter. En voici une trés courte liste:</p>
+                        <table>
+                            <tr><th>Nom</th><th>Se déclenche quand</th></tr>
+                            <tr><td>click</td><td>quand l'utilisateur clique avec la souris (avec n'importe quel bouton)</td></tr>
+                            <tr><td>mouseover</td><td>quand la souris passe au-dessus de l'élément</td></tr>
+                            <tr><td>mouseleft</td><td>quand la souris quitte l'élément</td></tr>
+                            <tr><td>mousemove</td><td>quand la souris bouge au-dessus de l'élément</td></tr>
+                            <tr><td>load</td><td>Quand l'élément a fini de charger (sur une image ou un script par exemple)</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>Type d'événements (suite)</h3>
+                        <table>
+                            <tr><th>Nom</th><th>Se déclenche quand</th></tr>
+                            <tr><td>focus</td><td>quand l'élément devient actif.</td></tr>
+                            <tr><td>change</td><td>quand l'utilisateur a fini de changer la valeur de l'élément (d'un input par exemple). Se déclenche quand l'utilisateur quitte l'élément.</td></tr>
+                            <tr><td>input</td><td>quand l'utilisateur vient de changer la valeur de l'élément (d'un input par exemple). Se déclenche immédiatement.</td></tr>
+                            <tr><td>keydown</td><td>quand l'utilisateur appui sur une touche (et que l'élément a le focus)</td></tr>
+                            <tr><td>keypressed</td><td>quand l'utilisateur a fini d'appuyer sur une touche (et que l'élément a le focus)</td></tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>Event</h3>
+                        <p>Dans la fonction qui est déclenchée par l'événement, il est possible de le récupérer pour avoir plus d'informations et récupérant la valeur du premier argument.</p>
+                        <p>Il s'agit d'un objet. Quelques attributs sont intéressants:</p>
+                        <ul>
+                            <li>type: le nom de l'event qui a été déclenché</li>
+                            <li>target: l'élément qui a déclenché l'event</li>
+                            <li>currentTarget: l'élément sur lequel l'écouteur était placé (il peut être différent de target)</li>
+                            <li>key: la valeur de la touche qui a été utilisée</li>
+                        </ul>
+                        <code><pre>
+element.onchange = function (evt) {
+    console.log(evt.type);
+    evt.target.textContent = 'cliqué';
+};
+                        </pre></code>
+                    </section>
+                    <section>
+                        <h3>document</h3>
+                        <p>L'élément principal de la page s'appelle <code>document</code>. Il contient les éléments <code>body</code> et <code>head</code>.</p>
+                        <p>Il est possible de lui ajouter des événements. Cela est pratique pour ajouter des événements claviers quand on veut juste écouter sur toutes la page (et pas lorsque le focus est sur un élément précis).</p>
+                        <code><pre>
+document.onkeydown = function(evt) {
+    if (evt.key === 'enter') {
+        console.log('la touche entrée a été pressée');
+    }
+};
+                        </pre></code>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Base du CSS</h2>
+                    </section>
+                    <section>
+                        <p>Le CSS permet de mettre en forme les éléments HTML.</p>
+                        <p>On peut modifier le style d'un élément avec l'attribut <code>style</code> ou alors modifier le style de l'ensemble du document avec la balise <code>&lt;style&gt;&lt;/style&gt;</code></p>
+                        <code><pre>
+&lt;style&gt;
+    div {
+        color: red;
+    }
+&lt;/style&gt;
+&lt;div style="color: green"&gt;toto&lt;/div&gt;
+                        </pre></code>
+                    </section>
+                    <section></section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Quelques fonctions utiles</h2>
+                    </section>
+                    <section>
+                        <h3>setTimeout</h3>
+                    </section>
+                    <section>
+                        <h3>setInterval</h3>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>TP</h2>
+                        <h4>Créer un compteur/chronomètre</h4>
+                    </section>
+                    <section>
+                        <h3>Objectif</h3>
+                        <ul>
+                            <li>Afficher le temps passé/restant</li>
+                            <li>Faire évoluer le compteur</li>
+                            <li>Créer des boutons permettant de démarrer et arrêter le chronomètre</li>
+                            <li>Pouvoir configurer le chronomètre (sens du comptage, valeur initiale)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Afficher le temps</h3>
+                        <p>Il faudra une variable pour garder en mémoire la valeur du comptage (par exemple le nombre de secondes écoulées)</p>
+                        <p>Il faudra créer une fonction pour convertir ce nombre de seconde en format <q>hh:mm:ss</q>.</p>
+                        <p>Il faudra un espace où afficher ce résulat (et une fonction pour mettre à jour cet affichage).</p>
+                    </section>
+                    <section>
+                        <h3>Faire évoluer le compteur</h3>
+                        <p>Il faudra une fonction pour incrémenter/décrémenter la valeur de comptage toutes les secondes.</p>
+                        <p>Il faudra une fonction pour arrêter ce comptage.</p>
+                        <p class="info">Ne pas oublier d'appeler la fonction d'affichage</p>
+                    </section>
+                    <section>
+                        <h3>Créer l'interface</h3>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Questions ?</h2>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>Quelques liens utiles</h2>
+                    <ul>
+                        <li><a href="https://developer.mozilla.org/fr/">MDN: document de Mozilla (pour tout savoir sur une méthode, un attribut, ...)</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>Merci</h1>
+                    <h3>By Restimel / restimel@gmail.com</h3>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+    </body>
+</html>
