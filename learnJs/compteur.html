@@ -54,7 +54,7 @@ var elStop = document.getElementById('stop');
 var counter = 0; // valeur actuelle du compteur
 var countOrder = 1; // sens de comptage (croissant: 1; décroissant: -1)
 var timeOver = false; // si true, le temps alloué est écoulé
-var timer = -1; // référence au timer interval
+var timer = -1; // référence au timer interval, s'il vaut -1 le compteur est arrêté
 
 elCountDown.onchange = function() {
     if (countOrder === 1) {
@@ -131,11 +131,29 @@ function pause() {
 // Réinitialise le comptage
 function stop() {
     counter = elHourParam.value * 3600 + elMinuteParam.value * 60 + elSecondParam.value * 1; // Note: ce dernier * 1 sert à convertir le résultat en nombre afin que + soit une addition et non une concaténation
+    timeOver = false;
     displayCounter();
     pause()
 }
 
 displayButton();
+
+// gestion des événments clavier
+document.onkeydown = function(evt) {
+    /* on vérifie que l'événement a bien lieu dans le document
+    (et qu'on est pas dans un input) */
+    if (evt.target === document.body) {
+        if (evt.key === ' ') {
+            if (timer === -1) {
+                play();
+            } else {
+                pause();
+            }
+        } else if (evt.key === 'Escape' || evt.key === 'Enter') {
+            stop();
+        }
+    }
+};
         </script>
     </body>
 </html>
