@@ -1147,7 +1147,7 @@ console.log(ex3.isOverLimit()); // true
                     <section>
                         <h3>Objectifs</h3>
                         <p>En reprenant l'exercice précédent.</p>
-                        <p>Nous voudrions pouvoir gérer le compte de plusieur personnes.</p>
+                        <p>Nous voudrions pouvoir gérer le compte de plusieurs personnes.</p>
                         <ul>
                             <li>Créer un constructeur permettant de créer un compte</li>
                             <li>Pouvoir effectuer des opérations sur un compte (sans modifier les autres comptes)</li>
@@ -1171,7 +1171,7 @@ console.log(compte2.compte); // affiche 0
                     </section>
                     <section>
                         <h3>Exemple de solution</h3>
-                        <code class="smaller"><pre>
+                        <pre><code class="smaller">
 function Compte(nom, solde) {
     this.nom = nom; // nom du titulaire
     this.compte = solde; // somme restant sur le compte
@@ -1346,10 +1346,11 @@ console.log(compte.compte); // affiche 100
                     </section>
                     <section>
                         <h3>Exemple de solution</h3>
-                        <div style="height: 600px; overflow: auto">
-                        <code class="smaller"><pre>
-<details>
-    <summary>// ... Même code que l'exercice précédent ...</summary>
+                        <pre><code class="hljs javascript smaller">
+/* --------------------------
+ ... Même code que l'exercice précédent ...
+ (l'ajout est fait après)
+ */
 function Compte(nom, solde) {
     this.nom = nom; // nom du titulaire
     this.compte = solde; // somme restant sur le compte
@@ -1384,7 +1385,7 @@ Compte.prototype.gain = function (taux, repetition) {
     this.nbOperation = this.nbOperation + 1;
     this.affichageCompte();
 };
-</details>
+/* -------------------------- */
 
 var listeComptes = [];
 
@@ -1395,15 +1396,17 @@ function ajoutCompte(nom, soldeInitiale) {
 function trouveCompte(nom) {
     var compte;
     var index;
-    for (index = 0; index &lt; listeComptes.length); index = index + 1) {
+    for (index = 0; index < listeComptes.length); index = index + 1) {
         if (listeComptes[index].nom === nom) {
             compte = listeComptes[index];
         }
     }
     return compte;
 }
-<details>
-    <summary>// ... another way to get the name  (with forEach) ...</summary>
+
+/* --------------------------
+... Une autre manière d'écrire trouveCompte (avec forEach) ...
+*/
 function trouveCompte(nom) {
     var compteRecherche;
     listeComptes.forEach(function(compte) {
@@ -1413,17 +1416,18 @@ function trouveCompte(nom) {
     });
     return compte;
 }
-    <details>
-        <summary>// ... another way to get the name (with find which was not presented here) ... </summary>
+
+/* --------------------------
+... Encore une autre manière d'écrire trouveCompte (avec find) ...
+ --------------------------
+*/
+
 function trouveCompte(nom) {
     return listeComptes.find(function(compte) {
         return compte.nom === nom;
     });
 }
-    </details>
-</details>
                         </code></pre>
-                        </div>
                     </section>
                 </section>
 
@@ -1847,6 +1851,38 @@ document.onkeydown = function(evt) {
                     </section>
                     <section>
                         <h3>setTimeout</h3>
+                        <p>Sert à appeler une fonction plus tard.</p>
+                        <h4>Syntaxe</h4>
+                        <pre><code>
+setTimeout(callback, time);
+                        </code></pre>
+                        <ul class="smaller">
+                            <li><u>callback</u>: une fonction qui sera exécutée dans "<q>time</q>" millisecondes</li>
+                            <li><u>time</u>: un nombre en milliseconde, indiquant la durée avant d'appeler la callback.</li>
+                        </ul>
+                        <br><br>
+                        <h4>Exemple:</h4>
+                        <pre><code>
+// affichage dans 2s
+setTimeout(function() {
+    console.log('affichage différé');
+}, 2000);
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>clearTimeout</h3>
+                        <p>Pour arrêter un <code>setTimeout</code>, il faut utiliser <code>clearTimeout</code>.</p>
+                        <p><code>clearTimeout</code> prend en argument l'id du timeout qu'on veut arrêter.</p>
+                        <p>L'id du timeout peut être récupérer par le retour de l'appel de la fonction <code>setTimeout</code>.</p>
+                        <pre><code>
+// démarrage de la fonction différée
+var timerId = setTimeout(function() {
+    console.log('code appélé plus tard');
+}, 500);
+
+// arrêt de l'appel différé
+clearTimeout(timerId);
+                        </code></pre>
                     </section>
                     <section>
                         <h3>setInterval</h3>
@@ -1859,7 +1895,7 @@ setInterval(callback, time);
                             <li><u>callback</u>: une fonction qui sera exécutée toutes les "<q>time</q>" millisecondes</li>
                             <li><u>time</u>: un nombre en milliseconde, indiquant la durée avant de répétée l'action.</li>
                         </ul>
-                        <br><br>
+                        <br>
                         <h4>Exemple:</h4>
                         <pre><code>
 // affichage toutes les 1/2s
@@ -1889,9 +1925,6 @@ var timerId = setInterval(function() {
 // arrêt de la répétition
 clearInterval(timerId);
                         </code></pre>
-                    </section>
-                    <section>
-
                     </section>
                 </section>
 
@@ -1935,12 +1968,14 @@ clearInterval(timerId);
                 <section>
                     <h2>Quelques liens utiles</h2>
                     <ul>
-                        <li><a href="https://developer.mozilla.org/fr/">MDN: document de Mozilla (pour tout savoir sur une méthode, un attribut, ..., que ce soit JavaScript, HTml ou CSS)</a></li>
-                    </ul>
-                    <p>Éditeurs de texte:</p>
-                    <ul>
-                        <li><a href="https://code.visualstudio.com">Visual Studio Code</a></li>
-                        <li><a href="https://www.sublimetext.com">Sublime Text</a></li>
+                        <li><a target="_blank" href="https://developer.mozilla.org/fr/">MDN: document de Mozilla</a><span class="smaller">(pour tout savoir sur une méthode, un attribut, ..., que ce soit JavaScript, HTml ou CSS)</span></li>
+                        <br>
+                        <li>Éditeurs de texte:
+                        <ul>
+                            <li><a target="_blank" href="https://code.visualstudio.com">Visual Studio Code</a></li>
+                            <li><a target="_blank" href="https://www.sublimetext.com">Sublime Text</a></li>
+                        </ul>
+                        </li>
                     </ul>
                 </section>
 
