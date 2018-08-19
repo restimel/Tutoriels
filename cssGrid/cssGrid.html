@@ -280,12 +280,12 @@
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid {
     display: grid;
     grid-template: 40% 60% / 20% 60% 20%;
 }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid">
                             <div class="item-empty item1"></div>
                             <div class="item-empty item2"></div>
@@ -314,19 +314,19 @@
                         </p>
                         <br>
                         <h4>Syntax (simplified)</h4>
-                        <code><pre>
+                        <pre><code>
 grid-template-rows: &lt;height-value&gt; &lt;height-value&gt; ...
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>height-value</u> can be any value with a unit or a percent</p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
                 .grid {
                     display: grid;
                     grid-template-rows: 50px 2em 50%;
                 }
-                                        </pre></code>
+                                        </code></pre>
                         <div class="grid" style="grid-template-rows: 50px 2em 50%;">
                             <div class="item-empty item1"></div>
                             <div class="item-empty item2"></div>
@@ -340,21 +340,21 @@ grid-template-rows: &lt;height-value&gt; &lt;height-value&gt; ...
                         </p>
                         <br>
                         <h4>Syntax (simplified)</h4>
-                        <code><pre>
+                        <pre><code>
 grid-template-columns: &lt;width-value&gt; &lt;width-value&gt; ...
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>width-value</u> can be any value with a unit or a percent
                         </p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid {
     display: grid;
     grid-template-columns: 150px 5em 50%;
 }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid" style="grid-template-columns: 150px 5em 50%;">
                             <div class="item-empty item1"></div>
                             <div class="item-empty item2"></div>
@@ -368,9 +368,9 @@ grid-template-columns: &lt;width-value&gt; &lt;width-value&gt; ...
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 grid-template-columns: &lt;grid-template-rows-value&gt; / &lt;grid-template-columns-value&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>grid-template-rows-value</u> is any value we can use with <code class="inline">grid-template-rows</code><br>
                             <u>grid-template-columns-value</u> is any value we can use with <code class="inline">grid-template-columns</code>
@@ -378,12 +378,12 @@ grid-template-columns: &lt;grid-template-rows-value&gt; / &lt;grid-template-colu
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid {
     display: grid;
     grid-template: 2em 130px / 150px 5em 50%;
 }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid" style="grid-template: 2em 130px / 150px 5em 50%;">
                             <div class="item-empty item1"></div>
                             <div class="item-empty item2"></div>
@@ -423,12 +423,12 @@ grid-template-columns: &lt;grid-template-rows-value&gt; / &lt;grid-template-colu
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid {
     display: grid;
     grid-template: 40% 1fr / 2fr 4em 1fr;
 }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid" style="grid-template: 40% 1fr / 2fr 4em 1fr;">
                             <div class="item-empty item1"></div>
                             <div class="item-empty item2"></div>
@@ -442,9 +442,9 @@ grid-template-columns: &lt;grid-template-rows-value&gt; / &lt;grid-template-colu
                         <h3>Function: <code class="inline">repeat</code></h3>
                         <p><code class="inline">repeat</code> is to repeat the same instructions several times.</p>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 repeat(&lt;nb occurrence&gt;, &lt;value&gt;)
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>nb occurrence</u> is the number of time to repeat the instruction.<br>
                             <u>value</u> is any value to repeat.
@@ -452,12 +452,12 @@ repeat(&lt;nb occurrence&gt;, &lt;value&gt;)
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid {
     display: grid;
     grid-template: repeat(3, 1fr) 2fr / 1fr repeat(2, 40%);
 }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid" style="grid-template: repeat(3, 1fr) 2fr / 1fr repeat(2, 40%);">
                             <div class="item-empty item1"></div>
                             <div class="item-empty item2"></div>
@@ -478,9 +478,9 @@ repeat(&lt;nb occurrence&gt;, &lt;value&gt;)
                         <p>Using with <code class="inline">repeat</code>, it is worth the number of occurrence needed to fill the grid.</p>
                         <br>
                         <h4>Example</h4>
-                        <code><pre>
+                        <pre><code>
                             repeat(auto-fill, 10%);
-                        </pre></code>
+                        </code></pre>
                         <p class="small">In this example, <code class="inline">auto-fill</code> is worth 10</p>
                         <br>
                         <h3>Value: auto-fit</h3>
@@ -488,12 +488,12 @@ repeat(&lt;nb occurrence&gt;, &lt;value&gt;)
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid {
     display: grid;
     grid-template: repeat(auto-fill, 25%) / 3em repeat(auto-fill, 20%);
 }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid" style="grid-template: repeat(auto-fill, 25%) / 10em repeat(auto-fill, 20%);">
                             <div class="item-empty item1"></div>
                             <div class="item-empty item2"></div>
@@ -520,9 +520,9 @@ repeat(&lt;nb occurrence&gt;, &lt;value&gt;)
                             This is a little bit similar to min-width and max-width.
                         </p>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 minmax(&lt;min-value&gt;, &lt;max-value&gt;)
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>min-value</u> is the minimal value and can be of any value type.<br>
                             <u>max-value</u> is the maximal value and can be of any value type.
@@ -530,12 +530,12 @@ minmax(&lt;min-value&gt;, &lt;max-value&gt;)
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid {
     display: grid;
     grid-template: 1fr 1fr / 1fr minmax(200px, 40%);
 }
-                        </pre></code>
+                        </code></pre>
                         <div style="display:grid; grid-template: 1.5em 1fr / 300px 800px; grid-column-gap:1em;column-gap:1em;">
                             <div>
                                 width = 300px
@@ -570,13 +570,13 @@ minmax(&lt;min-value&gt;, &lt;max-value&gt;)
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: min-content max-content min-content;
 }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid" style="grid-template: 1fr 1fr 1fr / min-content max-content min-content;">
                             <div class="item-empty">small text</div>
                             <div class="item-empty">small text</div>
@@ -604,20 +604,20 @@ minmax(&lt;min-value&gt;, &lt;max-value&gt;)
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 row-gap: &lt;height-value&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>height-value</u> can be any value with a unit or a percent</p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid {
     display: grid;
     grid-template: 40% 60% / 20% 60% 20%;
     row-gap: 20px;
 }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid" style="grid-row-gap: 20px; row-gap: 20px;">
                             <div class="item-empty item1"></div>
                             <div class="item-empty item2"></div>
@@ -634,20 +634,20 @@ row-gap: &lt;height-value&gt;
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 column-gap: &lt;width-value&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>width-value</u> can be any value with a unit or a percent</p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid {
     display: grid;
     grid-template: 40% 60% / 20% 60% 20%;
     column-gap: 5%;
 }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid" style="grid-column-gap: 5%; column-gap: 5%;">
                             <div class="item-empty item1"></div>
                             <div class="item-empty item2"></div>
@@ -664,10 +664,10 @@ column-gap: &lt;width-value&gt;
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 gap: &lt;row-gap-value&gt; &lt;column-gap-value&gt;
 gap: &lt;gap-value&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>row-gap-value</u> is any value wich can be used by row-gap.</p>
                         <p class="smaller"><u>column-gap-value</u> is any value wich can be used by column-gap.</p>
                         <p class="smaller"><u>gap-value</u> is any value wich can be used by row-gap or column-gap. This value will be used by both.</p>
@@ -675,20 +675,20 @@ gap: &lt;gap-value&gt;
                     <section>
                         <h3>Example</h3>
                         <div style="display:grid; grid-template: min-content 1fr / 1fr 1fr;grid-gap: 1em; gap: 1em;">
-                            <code><pre>
+                            <pre><code>
 .grid {
     display: grid;
     grid-template: 40% 60% / 20% 60% 20%;
     gap: 20px 20%;
 }
-                            </pre></code>
-                            <code><pre>
+                            </code></pre>
+                            <pre><code>
 .grid {
     display: grid;
     grid-template: 40% 60% / 20% 60% 20%;
     gap: 1em;
 }
-                            </pre></code>
+                            </code></pre>
                             <div class="grid default-grid" style="grid-gap: 20px 20%; gap: 20px 20%;">
                                 <div class="item-empty item1"></div>
                                 <div class="item-empty item2"></div>
@@ -722,12 +722,12 @@ gap: &lt;gap-value&gt;
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 align-items: &lt;position&gt;
 align-items: &lt;overflow-position&gt; &lt;position&gt;
 align-items: &lt;baseline-position&gt; baseline
 align-items: baseline
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>position</u> can be any of <code class="inline">normal</code>, <code class="inline">stretch</code>, <code class="inline">center</code>, <code class="inline">start</code>, <code class="inline">end</code>, <code class="inline">self-start</code>, <code class="inline">self-end</code>, <code class="inline">flex-start</code>, <code class="inline">flex-end</code></p>
                         <p class="smaller"><u>overflow-position</u> can be <code class="inline">safe</code> or <code class="inline">unsafe</code></p>
                         <p class="smaller"><u>baseline-position</u> can be <code class="inline">first</code> or <code class="inline">last</code></p>
@@ -760,13 +760,13 @@ align-items: baseline
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid {
     display: grid;
     grid-template: 40% 60% / 20% 60% 20%;
     align-items: <span id="testExAlign"></span>;
 }
-                        </pre></code>
+                        </code></pre>
                         <select id="testChoiceAlign">
                             <option>normal</option>
                             <option>stretch</option>
@@ -829,13 +829,13 @@ align-items: baseline
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 justify-items: &lt;position&gt;
 justify-items: &lt;overflow-position&gt; &lt;position&gt;
 justify-items: legacy &lt;left | center | right&gt;
 justify-items: &lt;baseline-position&gt; baseline
 justify-items: baseline
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>position</u> can be any of <code class="inline">normal</code>, <code class="inline">stretch</code>, <code class="inline">center</code>, <code class="inline">start</code>, <code class="inline">end</code>, <code class="inline">self-start</code>, <code class="inline">self-end</code>, <code class="inline">flex-start</code>, <code class="inline">flex-end</code></p>
                         <p class="smaller"><u>overflow-position</u> can be <code class="inline">safe</code> or <code class="inline">unsafe</code></p>
                         <p class="smaller"><u>baseline-position</u> can be <code class="inline">first</code> or <code class="inline">last</code></p>
@@ -848,13 +848,13 @@ justify-items: baseline
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid {
     display: grid;
     grid-template: 40% 60% / 20% 60% 20%;
     justify-items: <span id="testExJustify"></span>;
 }
-                        </pre></code>
+                        </code></pre>
                         <select id="testChoiceJustify">
                             <option>normal</option>
                             <option>stretch</option>
@@ -919,23 +919,23 @@ justify-items: baseline
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 place-items: &lt;align-items-value&gt; &lt;justify-items-value&gt;
 place-items: &lt;align-items-value&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>align-items-value</u> is any value accepted by <code class="inline">align-items</code></p>
                         <p class="smaller"><u>justify-items-value</u> is any value accepted by <code class="inline">justify-items</code></p>
                         <p class="info">If only one value is set, it applies for both.</p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid {
     display: grid;
     grid-template: 40% 60% / 20% 60% 20%;
     place-items: <span id="testEx1Place"></span> <span id="testEx2Place"></span>;
 }
-                        </pre></code>
+                        </code></pre>
                         <select id="testChoice1Place">
                             <option>normal</option>
                             <option>stretch</option>
@@ -1006,11 +1006,11 @@ place-items: &lt;align-items-value&gt;
                         <p>By default, elements are set inside the first rows by columns then it fills the next row.</p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 grid-auto-flow: &lt;value&gt;
 grid-auto-flow: &lt;value&gt; dense
 grid-auto-flow: dense
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>value</u> is either "row" either "column".</p>
                     </section>
@@ -1027,13 +1027,13 @@ grid-auto-flow: dense
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid {
     display: grid;
     grid-template: 40% 60% / 20% 60% 20%;
     grid-auto-flow: <span id="testExFlow"></span>;
 }
-                        </pre></code>
+                        </code></pre>
                         <select id="testChoiceFlow">
                             <option>row</option>
                             <option selected>column</option>
@@ -1080,9 +1080,9 @@ grid-auto-flow: dense
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 grid-auto-rows: &lt;row-size&gt; ...
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>row-size</u> is any value to define the size of rows.</p>
                             <p class="info">The value is a pattern.<br>So if there are several <em>row-size</em>. The first added row, will use the first value. Then it will use the next one. If there are no more value the first one is used again. etc...</p>
@@ -1090,13 +1090,13 @@ grid-auto-rows: &lt;row-size&gt; ...
                     <section>
                         <h3>Example</h3>
                         <div style="display: grid; grid: min-content max-content / auto-flow max-content; grid-column-gap: 0.5em; column-gap: 0.5em;">
-                            <code><pre>
+                            <pre><code>
 .grid {
     display: grid;
     grid-template: 2em 4em / repeat(3, 1fr);
     grid-auto-rows: 1em;
 }
-                            </pre></code>
+                            </code></pre>
                             <div class="grid" style="grid-template: 2em 4em / repeat(3, 1fr); grid-auto-rows: 1em;">
                                 <div class="item-empty item1"></div>
                                 <div class="item-empty item2"></div>
@@ -1114,13 +1114,13 @@ grid-auto-rows: &lt;row-size&gt; ...
                                 <div class="item-empty item14"></div>
                                 <div class="item-empty item15"></div>
                             </div>
-                            <code><pre>
+                            <pre><code>
 .grid {
     display: grid;
     grid-template: 10fr / 1fr;
     grid-auto-rows: 20px 40px 60px;
 }
-                            </pre></code>
+                            </code></pre>
                             <div class="grid" style="grid-template: 2em / 1fr; grid-auto-rows: 20px 40px 60px;">
                                 <div class="item-empty item1"></div>
                                 <div class="item-empty item2"></div>
@@ -1147,9 +1147,9 @@ grid-auto-rows: &lt;row-size&gt; ...
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 grid-auto-columns: &lt;col-size&gt; ...
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>col-size</u> is any value to define the size of columns.</p>
                             <p class="info">The value is a pattern.<br>So if there are several <em>col-size</em>. The first added column, will use the first value. Then it will use the next one. If there are no more value the first one is used again. etc...</p>
@@ -1157,14 +1157,14 @@ grid-auto-columns: &lt;col-size&gt; ...
                     <section>
                         <h3>Example</h3>
                         <div style="display: grid; grid: min-content max-content / auto-flow 1fr; grid-column-gap: 0.5em; column-gap: 0.5em;">
-                            <code><pre>
+                            <pre><code>
 .grid {
     display: grid;
     grid-template: repeat(2, 1fr) / 30%;
     grid-auto-flow: column;
     grid-auto-columns: 4em;
 }
-                            </pre></code>
+                            </code></pre>
                             <div class="grid" style="grid-template: repeat(2, 1fr) / 30%; grid-auto-flow: column; grid-auto-columns: 10%;">
                                 <div class="item-empty item1"></div>
                                 <div class="item-empty item2"></div>
@@ -1182,14 +1182,14 @@ grid-auto-columns: &lt;col-size&gt; ...
                                 <div class="item-empty item14"></div>
                                 <div class="item-empty item15"></div>
                             </div>
-                            <code><pre>
+                            <pre><code>
 .grid {
     display: grid;
     grid-template: 2em 1fr / 3em;
     grid-auto-flow: column;
     grid-auto-columns: 30px 60px 90px;
 }
-                            </pre></code>
+                            </code></pre>
                             <div class="grid" style="grid-template: 2em 1fr / 3em; grid-auto-flow: column; grid-auto-columns: 30px 60px 90px;">
                                 <div class="item-empty item1"></div>
                                 <div class="item-empty item2"></div>
@@ -1226,20 +1226,20 @@ grid-auto-columns: &lt;col-size&gt; ...
                         <p>By default, all elements have the <code class="inline">order</code> set to value <code class="inline">0</code>.</p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 order: &lt;value&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>value</u> is any integer number (which can be negative).</p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .item1 { order: 5; }
 .item2 { order: -1; }
 .item3 { order: 4; }
 .item4 { order: 5; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid">
                             <div class="item item1" style="order: 5;"></div>
                             <div class="item item2" style="order: -1;"></div>
@@ -1268,19 +1268,19 @@ order: &lt;value&gt;
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 grid-row-start: &lt;value&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>value</u> is any integer number (which can be negative).</p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .item1 { grid-row-start: 2; }
 .item2 { grid-row-start: 1; }
 .item3 { grid-row-start: -2; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid">
                             <div class="item item1" style="grid-row-start: 2;"></div>
                             <div class="item item2" style="grid-row-start: 1;"></div>
@@ -1302,19 +1302,19 @@ grid-row-start: &lt;value&gt;
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 grid-row-end: &lt;value&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>value</u> is any integer number (which can be negative).</p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .item1 { grid-row-end: 3; }
 .item2 { grid-row-end: 2; }
 .item3 { grid-row-end: -1; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid">
                             <div class="item item1" style="grid-row-end: 3;"></div>
                             <div class="item item2" style="grid-row-end: 2;"></div>
@@ -1327,11 +1327,11 @@ grid-row-end: &lt;value&gt;
                     <section>
                         <p>It is possible to combine <code class="inline">grid-row-start</code> and <code class="inline">grid-row-end</code> to have an element over several rows.</p>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .item1 { grid-row-start: 1; grid-row-end: 3; }
 .item2 { grid-row-start: -2; grid-row-end: -1; }
 .item3 { grid-row-start: 1; grid-row-end: -1; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid">
                             <div class="item item1" style="grid-row-start: 1; grid-row-end: 3;"></div>
                             <div class="item item2" style="grid-row-start: -2; grid-row-end: -1;"></div>
@@ -1348,10 +1348,10 @@ grid-row-end: &lt;value&gt;
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 grid-row: &lt;grid-row-start-value&gt; / &lt;grid-row-end-value&gt;
 grid-row: &lt;grid-row-start-value&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>grid-row-start-value</u> is any accepted value by <code class="inline">grid-row-start</code>.<br>
                             <u>grid-row-end-value</u> is any accepted value by <code class="inline">grid-row-end</code>.
@@ -1359,11 +1359,11 @@ grid-row: &lt;grid-row-start-value&gt;
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .item1 { grid-row: 1; }
 .item2 { grid-row: 1 / 2; }
 .item3 { grid-row: 1 / -1; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid">
                             <div class="item item1" style="grid-row: 1;"></div>
                             <div class="item item2" style="grid-row: 1 / 2;"></div>
@@ -1392,19 +1392,19 @@ grid-row: &lt;grid-row-start-value&gt;
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 grid-column-start: &lt;value&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>value</u> is any integer number (which can be negative).</p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .item1 { grid-column-start: 2; }
 .item2 { grid-column-start: 1; }
 .item3 { grid-column-start: -2; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid">
                             <div class="item item1" style="grid-column-start: 2;"></div>
                             <div class="item item2" style="grid-column-start: 1;"></div>
@@ -1426,19 +1426,19 @@ grid-column-start: &lt;value&gt;
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 grid-column-end: &lt;value&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>value</u> is any integer number (which can be negative).</p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .item1 { grid-column-end: 4; }
 .item2 { grid-column-end: 2; }
 .item3 { grid-column-end: -1; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid">
                             <div class="item item1" style="grid-column-end: 4;"></div>
                             <div class="item item2" style="grid-column-end: 2;"></div>
@@ -1451,10 +1451,10 @@ grid-column-end: &lt;value&gt;
                     <section>
                         <p>It is possible to combine <code class="inline">grid-column-start</code> and <code class="inline">grid-column-end</code> to have an element over several rows.</p>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .item1 { grid-column-start: 1; grid-column-end: 3; }
 .item2 { grid-column-start: 2; grid-column-end: -1; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid">
                             <div class="item item1" style="grid-column-start: 1; grid-column-end: 3;"></div>
                             <div class="item item2" style="grid-column-start: 2; grid-column-end: -1;"></div>
@@ -1471,10 +1471,10 @@ grid-column-end: &lt;value&gt;
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 grid-column: &lt;grid-column-start-value&gt; / &lt;grid-column-end-value&gt;
 grid-column: &lt;grid-column-start-value&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>grid-column-start-value</u> is any accepted value by <code class="inline">grid-column-start</code>.<br>
                             <u>grid-column-end-value</u> is any accepted value by <code class="inline">grid-column-end</code>.
@@ -1482,10 +1482,10 @@ grid-column: &lt;grid-column-start-value&gt;
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .item1 { grid-column: 2; }
 .item3 { grid-column: 1 / -1; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid">
                             <div class="item item1" style="grid-column: 2;"></div>
                             <div class="item item2" style="grid-column: 1 / -1;"></div>
@@ -1509,11 +1509,11 @@ grid-column: &lt;grid-column-start-value&gt;
                         </p>
                         <br>
                         <h4>Syntax (simplified)</h4>
-                        <code><pre>
+                        <pre><code>
 grid-area: &lt;grid-row-start-value&gt; / &lt;grid-column-start-value&gt; / &lt;grid-row-end-value&gt; / &lt;grid-column-end-value&gt;
 grid-area: &lt;grid-row-start-value&gt; / &lt;grid-column-start-value&gt;
 grid-area: &lt;grid-row-start-value&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>grid-row-start-value</u> is any accepted value by <code class="inline">grid-row-start</code>.<br>
                             <u>grid-row-end-value</u> is any accepted value by <code class="inline">grid-row-end</code>.<br>
@@ -1522,13 +1522,13 @@ grid-area: &lt;grid-row-start-value&gt;
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid { grid-template: repeat(5, 1fr) / repeat(5, 1fr); }
 .item1 { grid-area: 3; }
 .item2 { grid-area: 2 / 2; }
 .item3 { grid-area: 1 / 3 / 5 / 6; }
 .item4 { grid-area: 4 / 2 / 6 / 4; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-gt-grid">
                             <div class="item item1" style="grid-area: 3;"></div>
                             <div class="item item2" style="grid-area: 2 / 2;"></div>
@@ -1572,23 +1572,23 @@ grid-area: &lt;grid-row-start-value&gt;
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 span &lt;value&gt;
 &lt;value&gt; span
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller">
                             <u>value</u> is an integer which represents length in number of cell.
                         </p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid { grid-template: repeat(5, 1fr) / repeat(5, 1fr); grid-auto-flow: dense; }
 .item1 { grid-column: 2 / span 2; }
 .item2 { grid-row-end: 3 span; }
 .item3 { grid-area: 3 / span 3 / span 2 / 6; }
 .item4 { grid-column-start: 2 span; grid-column-end: 5; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-gt-grid dense">
                             <div class="item item1" style="grid-column: 2 / span 2;"></div>
                             <div class="item item2" style="grid-row-end: 3 span"></div>
@@ -1624,12 +1624,12 @@ span &lt;value&gt;
                         <p class="info">It overrides any rules set by <code class="inline">align-items</code> on the parent container.</p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 align-self: &lt;position&gt;
 align-self: &lt;overflow-position&gt; &lt;position&gt;
 align-self: &lt;baseline-position&gt; baseline
 align-self: baseline
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>position</u> can be any of <code class="inline">normal</code>, <code class="inline">stretch</code>, <code class="inline">center</code>, <code class="inline">start</code>, <code class="inline">end</code>, <code class="inline">self-start</code>, <code class="inline">self-end</code>, <code class="inline">flex-start</code>, <code class="inline">flex-end</code></p>
                         <p class="smaller"><u>overflow-position</u> can be <code class="inline">safe</code> or <code class="inline">unsafe</code></p>
                         <p class="smaller"><u>baseline-position</u> can be <code class="inline">first</code> or <code class="inline">last</code></p>
@@ -1637,12 +1637,12 @@ align-self: baseline
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .item1 { align-self: end; }
 .item2 { align-self: start; }
 .item3 { align-self: stretch; }
 .item4 { align-self: center; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid">
                             <div class="item item1" style="align-self: end;"></div>
                             <div class="item item2" style="align-self: start;"></div>
@@ -1662,24 +1662,24 @@ align-self: baseline
                         <br>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 justify-self: &lt;position&gt;
 justify-self: &lt;overflow-position&gt; &lt;position&gt;
 justify-self: &lt;baseline-position&gt; baseline
 justify-self: baseline
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>position</u> can be any of <code class="inline">normal</code>, <code class="inline">stretch</code>, <code class="inline">center</code>, <code class="inline">start</code>, <code class="inline">end</code>, <code class="inline">self-start</code>, <code class="inline">self-end</code>, <code class="inline">flex-start</code>, <code class="inline">flex-end</code></p>
                         <p class="smaller"><u>overflow-position</u> can be <code class="inline">safe</code> or <code class="inline">unsafe</code></p>
                         <p class="smaller"><u>baseline-position</u> can be <code class="inline">first</code> or <code class="inline">last</code></p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .item1 { justify-self: end; }
 .item2 { justify-self: start; }
 .item3 { justify-self: stretch; }
 .item4 { justify-self: center; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid">
                             <div class="item item1" style="justify-self: end;"></div>
                             <div class="item item2" style="justify-self: start;"></div>
@@ -1696,24 +1696,24 @@ justify-self: baseline
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 place-self: &lt;align-self-value&gt; &lt;justify-self-value&gt;
 place-self: &lt;align-self-value&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>align-self-value</u> is any value accepted by <code class="inline">align-self</code></p>
                         <p class="smaller"><u>justify-self-value</u> is any value accepted by <code class="inline">justify-self</code></p>
                         <p class="info">If only one value is set, it applies for both.</p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .item1 { place-self: center center; }
 .item2 { place-self: start end; }
 .item3 { place-self: end; }
 .item4 { place-self: stretch center; }
 .item5 { place-self: center stretch; }
 .item6 { place-self: center; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid">
                             <div class="item item1" style="place-self: center center;"></div>
                             <div class="item item2" style="place-self: start end;"></div>
@@ -1740,16 +1740,16 @@ place-self: &lt;align-self-value&gt;
                         <p>Those areas can then be referenced by grid placement propertie.</p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 grid-template-areas: "&lt;row-area-definition&gt;" ...
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>row-area-definition</u> are any alpha-numeric string to define the area name.</p>
                         <p class="smaller">A row area definition is enclosed by double quotes, names are separated by space.</p>
                         <br>
                         <h4>Example</h4>
-                        <code><pre>
+                        <pre><code>
 grid-template-areas: "row1column1 row2column2" "row2column1 row2column2";
-                        </pre></code>
+                        </code></pre>
                     </section>
                     <section>
                         <h3>grid placement properties</h3>
@@ -1758,23 +1758,23 @@ grid-template-areas: "row1column1 row2column2" "row2column1 row2column2";
                         <p>The grid placement properties can use the area name to reference a specific area</p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 grid-row-start: &lt;name&gt;
 grid-row-end: &lt;name&gt;
 grid-column-start: &lt;name&gt;
 grid-column-end: &lt;name&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>name</u> are the ones given in grid-template-area.</p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid { grid-template-areas: "cell1 cell2 cell3" "lowerCell1 lowerCell2 lowerCell3"; }
 .item1 { grid-row-start: cell2; }
 .item2 { grid-row-end: lowerCell3; }
 .item3 { grid-column-start: lowerCell3; }
 .item4 { grid-column-end: cell2; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid" style="grid-template-areas: 'cell1 cell2 cell3' 'lowerCell1 lowerCell2 lowerCell3';">
                             <div class="item item1" style="grid-row-start: cell2;"></div>
                             <div class="item item2" style="grid-row-end: lowerCell3;"></div>
@@ -1800,13 +1800,13 @@ grid-column-end: &lt;name&gt;
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid { grid-template-areas: "cell1 cell2 cell3" "lowerCell1 lowerCell2 lowerCell3"; }
 .item1 { grid-row-start: cell2-end; }
 .item2 { grid-row-end: lowerCell3-start; }
 .item3 { grid-column-start: lowerCell1-end; }
 .item4 { grid-column-end: cell3-start; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid" style="grid-template-areas: 'cell1 cell2 cell3' 'lowerCell1 lowerCell2 lowerCell3';">
                             <div class="item item1" style="grid-row-start: cell2-end;"></div>
                             <div class="item item2" style="grid-row-end: lowerCell3-start;"></div>
@@ -1826,7 +1826,7 @@ grid-column-end: &lt;name&gt;
                         </p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 grid-row: &lt;name&gt; / &lt;name&gt;;
 grid-row: &lt;name&gt;;
 grid-column: &lt;name&gt; / &lt;name&gt;;
@@ -1834,17 +1834,17 @@ grid-column: &lt;name&gt;;
 grid-area: &lt;name&gt; / &lt;name&gt; / &lt;name&gt; / &lt;name&gt;;
 grid-area: &lt;name&gt; / &lt;name&gt;;
 grid-area: &lt;name&gt;;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>name</u> are the ones given in grid-template-area.</p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid { grid-template-areas: "cell1 cell2 cell3" "lowerCell1 lowerCell2 lowerCell3"; }
 .item1 { grid-area: lowerCell2; }
 .item2 { grid-column: cell2 / lowerCell3; }
 .item3 { grid-row: cell2; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid" style="grid-template-areas: 'cell1 cell2 cell3' 'lowerCell1 lowerCell2 lowerCell3';">
                             <div class="item item1" style="grid-area: lowerCell2;"></div>
                             <div class="item item2" style="grid-column: cell2 / lowerCell3;"></div>
@@ -1862,12 +1862,12 @@ grid-area: &lt;name&gt;;
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid { grid-template-areas: "header header menu" "footer footer menu"; }
 .item1 { grid-area: menu; }
 .item2 { grid-area: footer; }
 .item3 { grid-area: header; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid" style="grid-template-areas: 'header header menu' 'footer footer menu';">
                             <div class="item item1" style="grid-area: menu;"></div>
                             <div class="item item2" style="grid-area: footer;"></div>
@@ -1884,11 +1884,11 @@ grid-area: &lt;name&gt;;
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid { grid-template-areas: "header content content" ". content content"; }
 .item1 { grid-area: content; }
 .item2 { grid-area: header; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid default-grid" style="grid-template-areas: 'header content content' '. content content';">
                             <div class="item item1" style="grid-area: content;"></div>
                             <div class="item item2" style="grid-area: header;"></div>
@@ -1904,15 +1904,15 @@ grid-area: &lt;name&gt;;
                         <p>It is also possible to use the shorthand <code class="inline">grid-template</code> to define areas while defining the grid.</p>
                         <br>
                         <h4>Syntax (simplified)</h4>
-                        <code><pre>
+                        <pre><code>
 grid-template: "&lt;row-area-definition&gt;" &lt;row-size&gt; ... / &lt;column-size&gt;...
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>row-area-definition</u> are any alpha-numeric string to define the area name.</p>
                         <p class="smaller"><u>row-size</u> and <u>column-size</u> are accepted values by <code class="inline">grid-template-rows</code> and <code class="inline">grid-template-columns</code>.</p>
                     </section>
                     <section>
                         <h3>Example</h3>
-                        <code><pre>
+                        <pre><code>
 .grid {
     grid-template: "header header header" 2em
                    "menu content content" 1fr
@@ -1923,7 +1923,7 @@ grid-template: "&lt;row-area-definition&gt;" &lt;row-size&gt; ... / &lt;column-s
 .item2 { grid-area: header; }
 .item3 { grid-area: menu; }
 .item4 { grid-area: footer; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid" style="grid-template: 'header header header' 2em 'menu content content' 1fr '. footer .' 2em / 20% 1fr 20%;">
                             <div class="item item1" style="grid-area: content;"></div>
                             <div class="item item2" style="grid-area: header;"></div>
@@ -1940,11 +1940,11 @@ grid-template: "&lt;row-area-definition&gt;" &lt;row-size&gt; ... / &lt;column-s
                         <p>All template properties accepts them (<code class="inline">grid-template-rows</code>, <code class="inline">grid-template-columns</code>, <code class="inline">grid-template</code>).</p>
                         <br>
                         <h4>Syntax (simplified)</h4>
-                        <code><pre>
+                        <pre><code>
 grid-template-rows: [&lt;grid-line-name&gt;] &lt;height-value&gt; [&lt;grid-line-name&gt;] ...
 grid-template-columns: [&lt;grid-line-name&gt;] &lt;width-value&gt; [&lt;grid-line-name&gt;] ...
 grid-template: [&lt;grid-line-name&gt;] &lt;height-value&gt; [&lt;grid-line-name&gt;] ... / [&lt;grid-line-name&gt;] &lt;width-value&gt; [&lt;grid-line-name&gt;] ...
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>grid-line-name</u> can be any alpha-numeric string to define the grid line name.</p>
                         <p class="smaller"><u>height-value</u> can be any value to define the height of rows.</p>
                         <p class="smaller"><u>width-value</u> can be any value to define the width of columns.</p>
@@ -1966,7 +1966,7 @@ grid-template: [&lt;grid-line-name&gt;] &lt;height-value&gt; [&lt;grid-line-name
 }
 .item2 { grid-column: alternate-name / last-col-line; }
 .item3 { grid-area: first-row-line / middle-col-line1 / middle-row-line2 / middle-col-line2; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid" style="grid-template: [first-row-line] 2em [middle-row-line1] 1fr [middle-row-line2] 2em [last-row-line] / [first-col-line] 20% [middle-col-line1] 1fr [middle-col-line2 alternate-name] 20% [last-col-line];">
                             <div class="item item1" style="grid-row-start: middle-row-line1; grid-row-end: last-row-line;"></div>
                             <div class="item item2" style="grid-column: alternate-name / last-col-line;"></div>
@@ -1995,7 +1995,7 @@ grid-template: [&lt;grid-line-name&gt;] &lt;height-value&gt; [&lt;grid-line-name
 }
 .item2 { grid-column: logo; }
 .item3 { grid-area: content-start / content-start / middle-row-line2 / middle-col-line2; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid" style="grid-template: [first-row-line] '. content logo' 2em [middle-row-line1] 'menu content .' 1fr [middle-row-line2] 'menu . .' 2em [last-row-line] / [first-col-line] 20% [middle-col-line1] 1fr [middle-col-line2] 20% [last-col-line];">
                             <div class="item item1" style="grid-row-start: middle-row-line1; grid-row-end: last-row-line;"></div>
                             <div class="item item2" style="grid-column: logo;"></div>
@@ -2012,11 +2012,11 @@ grid-template: [&lt;grid-line-name&gt;] &lt;height-value&gt; [&lt;grid-line-name
                         <p class="smaller">All placements properties accepts them (<code class="inline">grid-row-start</code>, <code class="inline">grid-row-end</code>, <code class="inline">grid-row</code>, <code class="inline">grid-column-start</code>, <code class="inline">grid-column-end</code>,  <code class="inline">grid-column</code>, <code class="inline">grid-area</code>).</p>
                         <br>
                         <h4>Syntax (simplified)</h4>
-                        <code><pre>
+                        <pre><code>
 grid-row-start: &lt;grid-line-name&gt; &lt;index&gt;
 grid-row-start: &lt;index&gt; &lt;grid-line-name&gt;
 ...
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>grid-line-name</u> a reference to a grid line name.</p>
                         <p class="smaller"><u>index</u> an integer to identify the correct grid line.<br>
                             By default, it is worth 1.<br>
@@ -2043,7 +2043,7 @@ grid-row-start: &lt;index&gt; &lt;grid-line-name&gt;
 }
 .item2 { grid-column: col-line 2 / border-line 2; }
 .item3 { grid-area: border-line / col-line / row-line -1 / col-line -1; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid" style="grid-template: [border-line] 2em [row-line] 1fr [row-line] 2em [border-line] / [border-line] 20% [col-line] 1fr [col-line] 20% [border-line];">
                             <div class="item item1" style="grid-row-start: 1 row-line; grid-row-end: -1 border-line;"></div>
                             <div class="item item2" style="grid-column: col-line 2 / border-line 2;"></div>
@@ -2059,11 +2059,11 @@ grid-row-start: &lt;index&gt; &lt;grid-line-name&gt;
                         <p>It is possible to create custom grid line with <code class="inline">repeat</code>.</p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 repeat(&lt;nb occurrence&gt;, [&lt;grid-line-name&gt;] &lt;value&gt;)
 repeat(&lt;nb occurrence&gt;, &lt;value&gt; [&lt;grid-line-name&gt;])
 repeat(&lt;nb occurrence&gt;, [&lt;grid-line-name&gt;] &lt;value&gt; [&lt;grid-line-name&gt;])
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>nb occurrence</u> is the number of time to repeat the instruction.</p>
                         <p class="smaller"><u>value</u> is any value to repeat.</p>
                         <p class="smaller"><u>grid-line-name</u> is any grid line to repeat.</p>
@@ -2080,7 +2080,7 @@ repeat(&lt;nb occurrence&gt;, [&lt;grid-line-name&gt;] &lt;value&gt; [&lt;grid-l
 }
 .item2 { grid-column: before-col -2 / col-line -1; }
 .item3 { grid-area: row-line / col-line / row-line 5 / col-line 3; }
-                        </pre></code>
+                        </code></pre>
                         <div class="grid" style="grid-template: repeat(auto-fill, [row-line] 2em) / repeat(auto-fill, [before-col] 20% [col-line]);">
                             <div class="item item1" style="grid-row-start: 2 row-line; grid-row-end: -2 row-line;"></div>
                             <div class="item item2" style="grid-column: before-col -2 / col-line -1;"></div>
@@ -2111,11 +2111,11 @@ repeat(&lt;nb occurrence&gt;, [&lt;grid-line-name&gt;] &lt;value&gt; [&lt;grid-l
                         <p>The <code class="inline">grid</code> property is a shorthand for <code class="inline">grid-template</code> and <code class="inline">grid-auto-rows</code>/<code class="inline">grid-auto-columns</code>.</p>
                         <br>
                         <h4>Syntax</h4>
-                        <code><pre>
+                        <pre><code>
 grid: &lt;grid-template-rows-value&gt; / &lt;grid-auto-columns-value&gt;;
 grid: &lt;grid-auto-rows-value&gt; / &lt;grid-template-columns-value&gt;
 grid: &lt;grid-template-value&gt;
-                        </pre></code>
+                        </code></pre>
                         <p class="smaller"><u>grid-template-rows-value</u> can be any value of <code class="inline">grid-template-rows</code></p>
                         <p class="smaller"><u>grid-template-columns-value</u> can be any value of <code class="inline">grid-template-columns</code></p>
                         <p class="smaller"><u>grid-auto-rows-value</u> can be any value of <code class="inline">grid-auto-rows</code></p>
@@ -2129,7 +2129,7 @@ grid: &lt;grid-template-value&gt;
 .grid {
     grid: repeat(2, 50%) / auto-flow 25%;
 }
-                            </pre></code>
+                            </code></pre>
                             <div class="grid" style="grid: repeat(2, 50%) / auto-flow 25%;">
                                 <div class="item-empty item1"></div>
                                 <div class="item-empty item2"></div>
@@ -2151,7 +2151,7 @@ grid: &lt;grid-template-value&gt;
 .grid {
     grid: auto-flow 1fr / repeat(3, 1fr);
 }
-                            </pre></code>
+                            </code></pre>
                             <div class="grid" style="grid: auto-flow 1fr / repeat(3, 1fr);">
                                 <div class="item-empty item1"></div>
                                 <div class="item-empty item2"></div>
