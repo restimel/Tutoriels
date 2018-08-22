@@ -1842,7 +1842,9 @@ document.onkeydown = function(evt) {
 &lt;div style="color: green"&gt;toto&lt;/div&gt;
                         </code></pre>
                     </section>
-                    <section></section>
+                    <section>
+                        <i>À écrire ...</i>
+                    </section>
                 </section>
 
                 <section>
@@ -1956,6 +1958,37 @@ clearInterval(timerId);
                     </section>
                     <section>
                         <h3>Créer l'interface</h3>
+                        <p>Il faudra ajouter les boutons pour déclencher toutes les fonctions:</p>
+                        <ul>
+                            <li>démarrage</li>
+                            <li>arrêt</li>
+                            <li>remise à zéro</li>
+                        </ul>
+                        <p>Écouter des événements claviers, pour déclencher le chronomètre depuis des touches du clavier (comme espace)</p>
+                    </section>
+                    <section>
+                        <h3>Créer l'interface de paramétrage</h3>
+                        <p>Il faudra permettre de choisir une heure de départ</p>
+                        <p>Il faudra permettre de changer de sens de comptage</p>
+                    </section>
+                    <section>
+                        <h3>Exemple de solution</h3>
+                        <a href="./compteur.html">Compteur.html</a>
+                    </section>
+                    <section>
+                        <h3>Aller plus loin</h3>
+                        <p>
+                            Vous pouvez améliorer ce programme de plein de manières possible.<br>
+                            Il est temps maintenant d'apprendre d'autres techniques ou détails qui n'ont pas été expliqués ici.
+                        </p>
+                        <p>Quelques idées d'amélioration:</p>
+                        <ul>
+                            <li>Utiliser <code>Date</code> ou <code>performance.now()</code> pour afficher un temps plus précis</li>
+                            <li>Utiliser <code>&lt;audio&gt;</code> pour jouer des sons quand le compteur change ou quand le temps est écoulé.</li>
+                            <li>Sauvegarder les temps pour pouvoir les comparer (et éventuellement les sauvegarder avec <code>localStorage</code> pour les réafficher au prochain raffraichissement de la page)</li>
+                        </ul>
+                        <br>
+                        <p>Laissez parler votre imagination et codez la :)</p>
                     </section>
                 </section>
 
