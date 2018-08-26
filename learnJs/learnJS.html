@@ -51,7 +51,7 @@
                 border-radius: 1em;
                 padding: 0.5em;
             }
-            span.smaller, p.smaller, ul.smaller, code.smaller {
+            span.smaller, p.smaller, ul.smaller, code.smaller, table.smaller, td.smaller {
                 font-size: 0.8em;
             }
             code.very-small {
@@ -103,26 +103,30 @@
                 <section>
                     <h2>Introduction au Javascript</h2>
                     <ul>
-                        <li>Qu'est-ce?</li>
+                        <li><a href="#/2">Qu'est-ce?</a></li>
+                        <li><a href="#/3">Premiers pas</a></li>
                         <li>Écrire du JavaScript
-                            <ul>
-                                <li>Variables primitives</li>
-                                <li>Débugguer</li>
-                                <li>Opération de base</li>
-                                <li>Conversion de types</li>
-                                <li>Fonctions</li>
-                                <li>Conditions</li>
-                                <li>Boucles</li>
-                                <li>Objets</li>
-                                <li>Listes</li>
-                                <li>HTML</li>
-                                <li>attributs HTML</li>
-                                <li>manipuler le HTML</li>
-                                <li>base du CSS</li>
-                                <li>quelques fonctions utiles</li>
-                            </ul>
+                            <div class="grid">
+                                <ul>
+                                    <li><a href="#/4">Variables primitives</a></li>
+                                    <li><a href="#/5">Débugguer</a></li>
+                                    <li><a href="#/6">Opération de base</a></li>
+                                    <li><a href="#/7">Conversion de types</a></li>
+                                    <li><a href="#/8">Fonctions</a></li>
+                                    <li><a href="#/9">Conditions</a></li>
+                                    <li><a href="#/10">Boucles</a></li>
+                                    <li><a href="#/11">Objets</a></li>
+                                    <li><a href="#/12">Listes (Array)</a></li>
+                                </ul><ul>
+                                    <li><a href="#/13">HTML</a></li>
+                                    <li><a href="#/14">attributs HTML</a></li>
+                                    <li><a href="#/15">manipuler le HTML</a></li>
+                                    <li><a href="#/16">base du CSS</a></li>
+                                    <li><a href="#/17">quelques fonctions utiles</a></li>
+                                </ul>
+                            </div>
                         </li>
-                        <li>TP</li>
+                        <li><a href="#/18">TP: chronomètre</a></li>
                     </ul>
                 </section>
 
@@ -1494,7 +1498,7 @@ function trouveCompte(nom) {
                         </code></pre>
                     </section>
                     <section>
-                        <h3>br</h3>
+                        <h3>&lt;br&gt;</h3>
                         <p><code>&lt;br&gt;</code> sert à afficher un saut de ligne.</p>
                         <p class="info"><code>&lt;br&gt;</code> est une balise qui ne se ferme pas.</p>
                         <br>
@@ -1831,7 +1835,7 @@ document.onkeydown = function(evt) {
                         <h2>Base du CSS</h2>
                     </section>
                     <section>
-                        <p>Le CSS permet de mettre en forme les éléments HTML.</p>
+                        <p>Le CSS (Cascading Style Sheet) permet de mettre en forme les éléments HTML.</p>
                         <p>On peut modifier le style d'un élément avec l'attribut <code>style</code> ou alors modifier le style de l'ensemble du document avec la balise <code>&lt;style&gt;&lt;/style&gt;</code></p>
                         <pre><code>
 &lt;style&gt;
@@ -1843,7 +1847,398 @@ document.onkeydown = function(evt) {
                         </code></pre>
                     </section>
                     <section>
-                        <i>À écrire ...</i>
+                        <h3>Structure du CSS</h3>
+                        <p>Le CSS est composé d'un ensemble de règles. Chaque règle les modifications à apporter aux éléments.</p>
+                        <p>Une règle est composé d'un <q>Selecteur</q> et de <q>propriétés</q>.</p>
+                        <p class="info">Quand on utilise l'attribut <code>style</code> d'un élément HTML, on ne précise que les propriétés CSS (il n'y a pas de sélecteur).</p>
+                        <p>Chaque propriété est séparée par un <code>;</code></p>
+                        <h4>Exemple</h4>
+                        <pre><code>
+.une-classe {
+    color: green;
+    background-color: blue;
+}
+                        </code></pre>
+                        <p>
+                            <style>
+                                .une-classe {
+                                    color: green;
+                                    background-color: blue;
+                                }
+                            </style>
+                            <span class="une-classe">Résultat</span>
+                        </p>
+                    </section>
+                    <section>
+                        <h3>Sélecteur</h3>
+                        <p>Les sélecteurs (ou <q>selector</q> en anglais) peremttent de dire quels sont les éléments sur lesquels il faudra appliquer les changements de valeur des propriétés.</p>
+                        <p class="info">Tous les éléments qui correspondent au selecteur seront impactés. Un élément peut être affecté par plusieurs règles (et une règle peut affecter plusieurs éléments).</p>
+                        <br>
+                        <p>Tous les sélecteurs CSS, peuvent être utilisés dans les fonctions <code>document.querySelector</code> et <code>document.querySelectorAll</code> qui servent à trouver des éléments HTML en JavaScript.</p>
+                        <br>
+                        <p class="smaller">Nous ne présenterons ici que les instructions les plus simples.</p>
+                    </section>
+                    <section>
+                        <h3>Sélecteur: tag</h3>
+                        <p>Pour sélectionner un élément à partir de son type de balise, il suffit de mettre le nom de la balise dans le selecteur.</p>
+                        <pre><code>
+/* Tous les &lt;div&gt; s'écriront en jaune */
+div {
+    color: yellow;
+}
+
+/* Tous les &lt;button&gt; s'écriront avec un fond violet */
+button {
+    background-color: purple;
+}
+                        </code></pre>
+                        <p class="smaller">Un bouton qui se trouve dans un <code>&lt;div&gt;</code> s'écrira donc en jaune sur fond violet.</p>
+                    </section>
+                    <section>
+                        <h3>Sélecteur: class</h3>
+                        <p>Pour sélectionner un élément à partir d'une de ses classes, il suffit de mettre le nom de la classe préfixé par <code>.</code></p>
+                        <pre><code>
+/* Tous les éléments ayant la classe erreur s'écriront en rouge */
+.erreur {
+    color: red;
+}
+
+/* Tous les éléments ayant la classe titre s'écriront deux fois plus gros */
+.titre {
+    font-size: 2em;
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Sélecteur: id</h3>
+                        <p>Pour sélectionner un élément à partir de son id, il suffit de mettre le nom de l'id préfixé par <code>#</code></p>
+                        <p class="attention">Rappel: un même id ne peut peut être donné qu'à un seul élément dans la page.</p>
+                        <pre><code>
+/* L'élément ayant l'id user-name s'écrira en gras */
+#user-name {
+    font-weight: bold;
+}
+
+/* L'élément ayant l'id save-form s'écrira avec un fond orange */
+#save-form {
+    background-color: orange;
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Sélecteur: combinaison d'instruction</h3>
+                        <p>Il est possible d'utiliser plusieurs instructions au sein d'un même sélecteur afin de rendre la recherche plus précise.</p>
+                        <br>
+                        <p>Quand toutes les instructions sont accolées, elles font références au même élément.</p>
+                        <pre><code>
+/* met en rouge seulement les &lt;div&gt; qui ont une classe important */
+div.important {
+    color: red;
+}
+/* met un fond bleu pour tous les éléments qui ont une classe field
+   et une classe user */
+.field.user {
+    background-color: blue;
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Sélecteur: éléments contenus</h3>
+                        <p>Les instructions séparées par un espace signifie une appartenance à un élément.</p>
+                        <pre><code>
+/* met en rouge les éléments ayant une classe important et contenu dans
+   un élément &lt;div&gt; */
+div .important {
+    color: red;
+}
+/* met un fond bleu sur les éléments ayant une classe user et contenu
+   dans un élément ayant une classe field */
+.field .user {
+    background-color: blue;
+}
+                        </code></pre>
+                        <p class="info">Il peut y avoir un ou plusieurs éléments entre l'élement sélectionné et son parent.</p>
+                    </section>
+                    <section>
+                        <h3>Sélecteur: éléments strictement contenus</h3>
+                        <p>Les instructions séparées par un <code>&gt;</code> signifie une appartenance directe à un élément.</p>
+                        <p class="info">Il ne peut pas y avoir d'éléments entre l'élement sélectionné et son parent.</p>
+                        <pre><code>
+/* met en rouge les éléments ayant une classe important et
+   enfant direct d'un élément &lt;div&gt; */
+div > .important {
+    color: red;
+}
+/* met un fond bleu sur les éléments ayant une classe user et
+   enfant direct d'un élément ayant une classe field */
+.field > .user {
+    background-color: blue;
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Propriétés CSS</h3>
+                        <p>Les propriétés CSS s'écrivent en deux parties séparées par un <code>:</code></p>
+                        <p>La première partie est le nom de la propriété.</p>
+                        <p>La deuxième partie est la valeur de la propriété.</p>
+                        <pre><code>
+div {
+     /* color est le nom de la propriété,
+        blue est la valeur à affecter */
+    color: blue;
+    /* font-size est le nom de la propriété,
+        20px est la valeur à affecter */
+    font-size: 20px;
+}
+                        </code></pre>
+                        <br>
+                        <p class="info">Il existe beaucoup de propriétés CSS, nous n'en verrons ici que quelques unes.</p>
+                    </section>
+                    <section>
+                        <h3>Valeur: color</h3>
+                        <p>Les valeurs de type <q>color</q> peuvent s'écrire de différente manière:</p>
+                        <table class="smaller">
+                            <tr>
+                                <th>Manière</th>
+                                <th>Explication</th>
+                                <th width="30%">Exemples</th>
+                            </tr>
+                            <tr>
+                                <td>color name</td>
+                                <td class="smaller">Écrire directement le nom de la couleur (en anglais)</td>
+                                <td><code class="smaller">orange</code>, <code class="smaller">black</code>, <code class="smaller">white</code>, ...</td>
+                            </tr>
+                            <tr>
+                                <td>code hexadécimal</td>
+                                <td class="smaller">Écrire les valeurs hexadécimal des couleurs Rouge, Vert, Bleu préfixée par <code>#</code>. <span class="smaller">Chacune des couleurs va de 00 à FF.</span></td>
+                                <td><code class="smaller">#FFCC00</code>, <code class="smaller">#000000</code>, <code class="smaller">#FFFFFF</code>, ...</td>
+                            </tr>
+                            <tr>
+                                <td>code rgb décimal</td>
+                                <td class="smaller">Écrire les valeurs des couleurs Rouge, Vert, Bleu dans la fonction <code>rgb</code>. <span class="smaller">Chacune des couleurs va de 0 à 255.</span></td>
+                                <td><code class="smaller">rgb(255, 60, 0)</code>, <code class="smaller">rgb(100, 200, 155)</code>, ...</td>
+                            </tr>
+                            <tr>
+                                <td>code rgba</td>
+                                <td class="smaller">Écrire les valeurs des couleurs Rouge, Vert, Bleu et alpha dans la fonction <code>rgba</code>. <span class="smaller">Chacune des couleurs va de 0 à 255. Alpha va de 0 à 1 (0 étant complétement transparent)</span></td>
+                                <td><code class="smaller">rgba(255, 90, 0, 0.5)</code>, <code class="smaller">rgba(0, 0, 0, 1)</code>, ...</td>
+                            </tr>
+                            <tr>
+                                <td>code hsl / hsla</td>
+                                <td class="smaller">Écrire les valeurs de hub (couleur), saturation et luminance (et alpha) dans la fonction <code>hsl</code> (ou <code>hsla</code>). <span class="smaller">h varie de 0 à 60, s et l sont des pourcentages. Alpha va de 0 à 1</span></td>
+                                <td><code class="smaller">hsl(55, 50%, 70%)</code>, <code class="smaller">hsla(320, 60%, 40%, 0.6)</code>, ...</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>Valeur: Unités</h3>
+                        <p>Certaines valeurs (comme <code>width</code> ou <code>height</code>) s'expriment avec des unités.</p>
+                        <table>
+                            <tr>
+                                <th>unité</th>
+                                <th>Explication</th>
+                                <th>Exemple</th>
+                            </tr>
+                            <tr>
+                                <td><code>px</code></td>
+                                <td>la valeur en pixel</td>
+                                <td><code>12px</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>em</code></td>
+                                <td>une valeur relatif à la taille de la police</td>
+                                <td><code>2em</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>%</code></td>
+                                <td>une valeur en pourcentage du parent</td>
+                                <td><code>100%</code></td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section>
+                        <h3>Propriété: color</h3>
+                        <p><code>color</code> sert à définir la couleur du texte.</p>
+                        <p><code>background-color</code> sert à définir la couleur de fond de l'élément.</p>
+                        <br>
+                        <div class="grid">
+                            <pre><code>
+.with-color {
+    color: #FF66FF;
+}
+.with-bg-color {
+    background: rgb(255, 102, 255);
+}
+                            </code></pre>
+                            <div>
+                                <p>Résultats:</p>
+                                <div>Style par défaut</div>
+                                <div style="color: #FF66FF">Avec style color</div>
+                                <div style="background-color: rgb(255, 102, 255)">Avec style background-color</div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>Propriété: width/height</h3>
+                        <p><code>width</code> sert à changer la largeur de l'élément.</p>
+                        <p><code>height</code> sert à changer la hauteur de l'élément. <span class="smaller">(fonctionne seulement pour les éléments de type block)</span></p>
+                        <br>
+                        <div class="grid">
+                            <pre><code>
+.tier-width {
+    width: 33%;
+    background-color: #006600;
+}
+.large-height {
+    height: 100px
+    background-color: #000033;
+}
+                            </code></pre>
+                            <div>
+                                <p>Résultats:</p>
+                                <div style="background-color: rgba(100, 100, 100, 0.5);">Style par défaut</div>
+                                <div style="width: 33%;background-color: #006600;margin-left:auto;margin-right:auto;">Avec width</div>
+                                <div style="height: 100px;background-color: #000033;">Avec height</div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>Propriété: border</h3>
+                        <p><code>border</code> sert à définir le cadre autour de l'élément.</p>
+                        <p>Il prend 2 valeurs séparées par des espaces: la largeur du cadre, le type de trait (<code>solid</code>,<code>dashed</code>, <code>dotted</code>, <code>double</code>, ...), et la couleur</p>
+                        <br>
+                        <div class="grid">
+                            <pre><code>
+.cadre-noir {
+    border: 15px solid black;
+}
+.pointille-cyan {
+    border: 2px dotted #00FFFF;
+}
+                            </code></pre>
+                            <div>
+                                <p>Résultats:</p>
+                                <div>Style par défaut</div>
+                                <div style="border: 15px solid black;">Cadre noir</div>
+                                <div style="border: 2px dotted #00FFFF;">Cadre pointillé</div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>Propriété: padding/margin</h3>
+                        <p><code>padding</code> sert à ajouter une marge intérieur à l'élément.</p>
+                        <p><code>margin</code> sert à ajouter une marge à l'extérieur de l'élément.</p>
+                        <br>
+                        <div class="grid">
+                            <pre><code>
+.marge-interieure {
+    padding: 10px;
+    background-color: #006600;
+}
+.marge-exterieure {
+    margin: 30px;
+    background-color: #000033;
+}
+                            </code></pre>
+                            <div>
+                                <p>Résultats:</p>
+                                <div style="border: 1px dotted black">
+                                    <div style="background-color: rgba(100, 100, 100, 0.5);">Style par défaut</div>
+                                    <div style="padding: 10px;background-color: #006600;">Avec width</div>
+                                    <div style="margin: 30px;background-color: #000033;">Avec height</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>Propriété: display</h3>
+                        <p><code>display</code> sert à changer le type d'affichage de l'élément.</p>
+                        <p>Les valeurs possibles sont <code>block</code> (affichage sur toute la ligne), <code>inline</code> (l'affichage se fait dans le flux du texte et la hauteur dépend du texte), <code>inline-block</code> (l'affichage se fait dans le flux du texte mais la hauteur est indépendante), <code>none</code> (l'élément n'est pas affiché).</p>
+                        <p class="smaller">Il existe d'autres valeurs que nous n'étudierons pas ici.</p>
+                        <p class="info">Chaque élément à un type par défaut (<code>&lt;div&gt;</code> est de type <q>block</q>, alors que <code>&lt;span&gt;</code> est de type <q>inline</q>)</p>
+                        <div class="grid">
+                            <pre><code>
+.inline {
+    display: inline;
+}
+                            </code></pre>
+                            <div>
+                                <p>Résultats:</p>
+                                <div style="border: 1px dotted black">
+                                    <div>div par défaut</div>
+                                    <div style="display: inline;">div1 en inline</div>
+                                    <div style="display: inline;">div2 en inline</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="info">Il est assez fréquent de changer la valeur display entre <q>block</q>/<q>none</q> pour afficher ou non un élément.</p>
+                    </section>
+                    <section>
+                        <h3>Propriété: font-size</h3>
+                        <p><code>font-size</code> sert à changer la taille du texte.</p>
+                        <br>
+                        <div class="grid">
+                            <pre><code>
+.normal-size {
+    font-size: 15px;
+}
+.big-size {
+    font-size: 2em;
+}
+                            </code></pre>
+                            <div>
+                                <p>Résultats:</p>
+                                <div>Style par défaut</div>
+                                <div style="font-size: 15px">Avec style 15px</div>
+                                <div style="font-size: 2em">Avec style 2em</div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h3>font</h3>
+                        <p>Il existe plusieurs autres propriétés pour changer l'apparence du texte.</p>
+                        <p><code>font-family</code> sert à changer la police d'écriture.</p>
+                        <p><code>font-weight</code> sert à changer la largeur du trait <span class="smaller">(mettre en gras)</span>.</p>
+                        <p><code>font-style</code> sert à changer l'inclinaison du texte <span class="smaller">(mettre en italique)</span>.</p>
+                        <div class="grid">
+                            <pre><code>
+.family {
+    font-family: monospace;
+}
+.bold {
+    font-weight: bold;
+}
+.italic {
+    font-style: italic;
+}
+                            </code></pre>
+                            <div>
+                                <div>texte par défaut</div>
+                                <div style="font-family: monospace;">police differente</div>
+                                <div style="font-weight: bold;">texte en gras</div>
+                                <div style="font-style: italic;">texte en italique</div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <p>Si plusieurs règles s'appliquent à un même élément et qu'elles changent la même propriété, c'est l'instruction la plus précise qui aura le dernier mot.</p>
+                        <pre><code>
+&lt;style&gt;
+.important {
+    color: red;
+}
+div.important {
+    color: blue;
+}
+div {
+    color: black;
+}
+&lt;/style&gt;
+
+&lt;div class="important"&gt;texte&lt;/div&gt;
+                        </code></pre>
+                        <p>Le texte s'affichera en bleu.</p>
+
                     </section>
                 </section>
 
@@ -1973,41 +2368,40 @@ clearInterval(timerId);
                     </section>
                     <section>
                         <h3>Exemple de solution</h3>
-                        <a href="./compteur.html">Compteur.html</a>
+                        <a href="./compteur.html" target="_blank">Compteur.html</a><br>
+                        <iframe src="./compteur.html" style="width: 100%;height:400px; border: 1px solid black;"></iframe>
                     </section>
                     <section>
                         <h3>Aller plus loin</h3>
                         <p>
                             Vous pouvez améliorer ce programme de plein de manières possible.<br>
-                            Il est temps maintenant d'apprendre d'autres techniques ou détails qui n'ont pas été expliqués ici.
+                            Il est temps maintenant d'apprendre par vous-même d'autres techniques ou détails qui n'ont pas été expliqués ici.
                         </p>
                         <p>Quelques idées d'amélioration:</p>
-                        <ul>
+                        <ul class="smaller">
                             <li>Utiliser <code>Date</code> ou <code>performance.now()</code> pour afficher un temps plus précis</li>
                             <li>Utiliser <code>&lt;audio&gt;</code> pour jouer des sons quand le compteur change ou quand le temps est écoulé.</li>
                             <li>Sauvegarder les temps pour pouvoir les comparer (et éventuellement les sauvegarder avec <code>localStorage</code> pour les réafficher au prochain raffraichissement de la page)</li>
                         </ul>
-                        <br>
+                        <br><br>
                         <p>Laissez parler votre imagination et codez la :)</p>
-                    </section>
-                </section>
-
-                <section>
-                    <section>
-                        <h2>Questions ?</h2>
                     </section>
                 </section>
 
                 <section>
                     <h2>Quelques liens utiles</h2>
                     <ul>
-                        <li><a target="_blank" href="https://developer.mozilla.org/fr/">MDN: document de Mozilla</a><span class="smaller">(pour tout savoir sur une méthode, un attribut, ..., que ce soit JavaScript, HTml ou CSS)</span></li>
+                        <li><a target="_blank" href="https://developer.mozilla.org/fr/">MDN: document de Mozilla</a><span class="smaller">(pour tout savoir sur une méthode, un attribut, ..., que ce soit JavaScript, HTML ou CSS)</span></li>
                         <br>
                         <li>Éditeurs de texte:
                         <ul>
                             <li><a target="_blank" href="https://code.visualstudio.com">Visual Studio Code</a></li>
                             <li><a target="_blank" href="https://www.sublimetext.com">Sublime Text</a></li>
                         </ul>
+                        </li>
+                        <br>
+                        <li>
+                            <a href="https://www.codingame.com" target="_blank">Coding game</a> <span class="smaller">Un site pour pratiquer différents langages de programmation en s'appuyant sur des mini-jeux</span>
                         </li>
                     </ul>
                 </section>
